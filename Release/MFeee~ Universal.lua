@@ -768,17 +768,26 @@ end
 Cloneref = cloneref or function(x) return x end
 Players = Cloneref(game:GetService("Players"))
 Speaker = Players.LocalPlayer
-ExecutorName, ExecutorVersion = identifyexecutor()
 Arsenal = (game.PlaceId == 286090429 and true) or false
+ExecutorName, ExecutorVersion = identifyexecutor()
+QueueTeleport = (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) or queue_on_teleport
+Setclipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
 
-Setclipboard = function(String)
-    if setclipboard then
-        setclipboard(String)
-    elseif toclipboard then
-        toclipboard(String)
+Toclipboard = function(Text)
+    if Setclipboard then
+        Setclipboard(tostring(Text))
     else
         Library:Notify(GlobalText.CantSetClipBoard, 5)
+        warn(GlobalText.CantSetClipBoard)
     end
+end
+
+if not MFeeeQueueTPSeted and QueueTeleport then
+    getgenv().MFeeeQueueTPSeted = true
+    QueueTeleport([[
+    if readfile("MFeee~ Project/ExecuteOnTeleport.txt") == "true" then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/MaiFengYXD/MFeee-Project/main/Release/MFeee%7E%20Universal"))()
+    end]])
 end
 
 --|| Main Window ||--
@@ -2026,6 +2035,19 @@ ShowCustomCursorToggle = MenuGroup:AddToggle("ShowCustomCursorToggle", {
         Library.ShowCustomCursor = Enabled
     end
 })
+ExecuteOnTeleportToggle = MenuGroup:AddToggle("ExecuteOnTeleportToggle", {
+    Text = GlobalText.ExecuteOnTeleportToggle,
+    Default = false,
+    Disabled = QueueTeleport and false or true,
+    Callback = function(Enabled)
+        makefolder("MFeee~ Project")
+        if Enabled then
+            writefile("MFeee~ Project/ExecuteOnTeleport.txt", "true")
+        else
+            writefile("MFeee~ Project/ExecuteOnTeleport.txt", "false")
+        end
+    end
+})
 NotifySideToggle = MenuGroup:AddToggle("NotifySideToggle", {
     Text = GlobalText.NotifySideToggle,
     Default = false,
@@ -2138,14 +2160,14 @@ LinksGroupbox = Tabs.About:AddRightGroupbox(GlobalText.LinksGroupbox)
 JoinDiscordButton = LinksGroupbox:AddButton({
     Text = "Discord",
     Func = function()
-        setclipboard("https://discord.gg/YBQUd8X8PK")
+        Toclipboard("https://discord.gg/YBQUd8X8PK")
         Library:Notify(GlobalText.DiscordLink, 3)
     end
 })
 ViewMyGithubButton = JoinDiscordButton:AddButton({
     Text = "Github",
     Func = function()
-        setclipboard("https://github.com/MaiFengYXD")
+        Toclipboard("https://github.com/MaiFengYXD")
         Library:Notify(GlobalText.GithubLink, 3)
     end
 })

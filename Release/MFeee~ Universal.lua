@@ -267,7 +267,8 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     LinksGroupbox = "相关链接",
     DiscordLink = "Discord邀请已复制!",
     GithubLink = "Github主页链接已复制!",
-    CantSetClipBoard = "你的执行器不支持Setclipboard或Toclipboard函数!"
+    CantSetClipBoard = "你的执行器不支持Setclipboard或Toclipboard函数!",
+    ExecuteOnTeleportToggle = "传送时执行",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -494,7 +495,8 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     LinksGroupbox = "Links",
     DiscordLink = "Discord Invite Copied!",
     GithubLink = "Github Page Copied!",
-    CantSetClipBoard = "Your Executor Doesn't Support Setclipboard or Toclipboard Function!"
+    CantSetClipBoard = "Your Executor Doesn't Support Setclipboard or Toclipboard Function!",
+    ExecuteOnTeleportToggle = "Execute On Teleport",
 }
 
 --|| Oaklands Check ||--
@@ -785,9 +787,14 @@ end
 if not MFeeeQueueTPSeted and QueueTeleport then
     getgenv().MFeeeQueueTPSeted = true
     QueueTeleport([[
-    if readfile("MFeee~ Project/ExecuteOnTeleport.txt") == "true" then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/MaiFengYXD/MFeee-Project/main/Release/MFeee%7E%20Universal"))()
-    end]])
+        makefolder("MFeee~ Project")
+        local TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
+        if isfile(TPFilePath) then
+            if readfile(TPFilePath) == "true" then
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/MaiFengYXD/MFeee-Project/main/Release/MFeee%7E%20Universal"))()
+            end
+        end
+    ]])
 end
 
 --|| Main Window ||--
@@ -936,7 +943,21 @@ QuickLanguageChange = MFeeeIAMNEW and MainOthersGroupbox:AddDropdown("QuickLangu
         writefile(LanguageFilePath, Language == "English" and "English" or "Chinese")
         Library:Notify(Language == "English" and "You Need to Restart to Apply the Change" or "重启脚本后生效", 5)
     end
-})        
+})
+QuickLanguageChangeDivider = MFeeeIAMNEW and QuickLanguageChange:AddDivider()
+local TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
+ExecuteOnTeleportToggle = QueueTeleport and MainOthersGroupbox:AddToggle("ExecuteOnTeleportToggle", {
+    Text = GlobalText.ExecuteOnTeleportToggle,
+    Default = (isfile(TPFilePath) and readfile(TPFilePath) == "true" and true) or false,
+    Callback = function(Enabled)
+        makefolder("MFeee~ Project")
+        if Enabled then
+            writefile(TPFilePath, "true")
+        else
+            writefile(TPFilePath, "false")
+        end
+    end
+})
 AntiKickToggle = MainOthersGroupbox:AddToggle("AntiKickToggle", {
     Text = GlobalText.AntiKickToggleText,
     Default = false,
@@ -2033,19 +2054,6 @@ ShowCustomCursorToggle = MenuGroup:AddToggle("ShowCustomCursorToggle", {
     Default = Library.ShowCustomCursor,
     Callback = function(Enabled)
         Library.ShowCustomCursor = Enabled
-    end
-})
-ExecuteOnTeleportToggle = MenuGroup:AddToggle("ExecuteOnTeleportToggle", {
-    Text = GlobalText.ExecuteOnTeleportToggle,
-    Default = false,
-    Disabled = QueueTeleport and false or true,
-    Callback = function(Enabled)
-        makefolder("MFeee~ Project")
-        if Enabled then
-            writefile("MFeee~ Project/ExecuteOnTeleport.txt", "true")
-        else
-            writefile("MFeee~ Project/ExecuteOnTeleport.txt", "false")
-        end
     end
 })
 NotifySideToggle = MenuGroup:AddToggle("NotifySideToggle", {

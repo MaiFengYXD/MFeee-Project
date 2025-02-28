@@ -14,7 +14,7 @@ License  | CC0-1.0
 Version  | 0.3.7 (Alpha)
 
 # Project Started on 2024-11-13 #
-# This Version was Last Edited on 2025-02-28 #
+# This Version was Last Edited on 2025-03-01 #
 
 Issues Report on Github or https://discord.gg/YBQUd8X8PK
 QQ: 3607178523
@@ -269,6 +269,15 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     GithubLink = "Github主页链接已复制!",
     CantSetClipBoard = "你的执行器不支持Setclipboard或Toclipboard函数!",
     ExecuteOnTeleportToggle = "传送时执行",
+    LoadFaild = "❌ 加载线程超时, 加载失败!",
+    ESPMeToggle = "透视自己",
+    ESPTeamCheckToggle = "队伍检测",
+    ESPTeamColorToggle = "队伍颜色",
+    ESPTracerColorLabel = "追踪线颜色",
+    ESPTracerColorPicker = "追踪线颜色",
+    ESPArrowColorLabel = "箭头颜色",
+    ESPArrowColorPicker = "箭头颜色",
+    UseUpVectorFlyToggle = "使用上向量控制垂直",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -497,6 +506,15 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     GithubLink = "Github Page Copied!",
     CantSetClipBoard = "Your Executor Doesn't Support Setclipboard or Toclipboard Function!",
     ExecuteOnTeleportToggle = "Execute On Teleport",
+    LoadFaild = "❌ Load Thread Time Out, Load Faild!",
+    ESPMeToggle = "Self ESP",
+    ESPTeamCheckToggle = "Team Check",
+    ESPTeamColorToggle = "Team Color",
+    ESPTracerColorLabel = "Tracer Color",
+    ESPTracerColorPicker = "Tracer Color",
+    ESPArrowColorLabel = "Arrow Color",
+    ESPArrowColorPicker = "Arrow Color",
+    UseUpVectorFlyToggle = "Use Up Vector to Control Vertical",
 }
 
 --|| Oaklands Check ||--
@@ -753,6 +771,14 @@ end)
 
 repeat
     wait(0.016)
+    LoadTimer = (LoadTimer or 0) + 0.016
+    if LoadTimer >= 15 then
+        getgenv().MFeeeLoaded = false
+        getgenv().MFeeeLoading = false
+        warn(GlobalText.LoadFaild)
+        error("load thread time out, time limit: 15s")
+        break
+    end
 until Library and ThemeManager and SaveManager and Universals and ESPLibrary and Aimbot
 print(GlobalText.AssetsLoaded)
 
@@ -769,6 +795,7 @@ end
 
 Cloneref = cloneref or function(x) return x end
 Players = Cloneref(game:GetService("Players"))
+Teams = Cloneref(game:GetService("Teams"))
 Speaker = Players.LocalPlayer
 Arsenal = (game.PlaceId == 286090429 and true) or false
 ExecutorName, ExecutorVersion = identifyexecutor()
@@ -916,7 +943,7 @@ FPSCapToggle = MainAFKGroupbox:AddToggle("FPSCapToggle", {
 })
 FPSCapSlider = MainAFKGroupbox:AddSlider("FPSCapSlider", {
     Text = GlobalText.FPSCapSlider,
-    Default = math.round(Universals.CurrentFPS),
+    Default = getfpscap() or 240,
     Min = 1,
     Max = 240,
     Rounding = 0,
@@ -945,7 +972,7 @@ QuickLanguageChange = MFeeeIAMNEW and MainOthersGroupbox:AddDropdown("QuickLangu
     end
 })
 QuickLanguageChangeDivider = MFeeeIAMNEW and QuickLanguageChange:AddDivider()
-local TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
+TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
 ExecuteOnTeleportToggle = QueueTeleport and MainOthersGroupbox:AddToggle("ExecuteOnTeleportToggle", {
     Text = GlobalText.ExecuteOnTeleportToggle,
     Default = (isfile(TPFilePath) and readfile(TPFilePath) == "true" and true) or false,
@@ -1171,6 +1198,13 @@ FlyModeDropdown = FlyGruopbox:AddDropdown("FlyModeDropdown", {
     end
 })
 FlyGruopbox:AddDivider()
+UseUpVectorFlyToggle = FlyGruopbox:AddToggle("UseUpVectorFlyToggle", {
+    Text = GlobalText.UseUpVectorFlyToggle,
+    Default = false,
+    Callback = function(Enabled)
+        UseUpVectorFly = Enabled
+    end
+})
 FlyGyroToggle = FlyGruopbox:AddToggle("FlyGyroToggle", {
     Text = GlobalText.FlyGyroToggle,
     Default = true,
@@ -1622,10 +1656,12 @@ TechnologyDropdown = AmbientCustomGruopbox:AddDropdown("TechnologyDropdown", {
 --// Variables \\--
 
 --/ Color \--
-ESPColor = Color3.fromRGB(255, 255, 255)
+ESPSurfaceColor = Color3.fromRGB(255, 255, 255)
 ESPTextColor = Color3.fromRGB(255, 255, 255)
 ESPFillColor = Color3.fromRGB(255, 255, 255)
 ESPOutlineColor = Color3.fromRGB(255, 255, 255)
+ESPTracerColor = Color3.fromRGB(255, 255, 255)
+ESPArrowColor = Color3.fromRGB(255, 255, 255)
 
 --/ Numbers \--
 ESPStudsOffset = Vector3.new()
@@ -1645,56 +1681,56 @@ ESPRandomColor = false
 TracerEnabled = false
 ArrowEnabled = false
 ESPDisplayName = true
+ESPElement = nil
 
 --/ Strings \--
 ESPType = (Arsenal and "SelectionBox") or "Highlight"
 TracerFrom = "Bottom"
 
---/ Others \--
-ESPElement = nil
-RandomColor = BrickColor.random().Color
+--/ Table \--
+ESPPlayerConnections = {}
 
 --// Functions \\--
 function ESPPlayerAdded(Player)
-    if Player == Speaker and not ESPMe then
-        return
-    end
-    if not AllowESP or not MFeeeLoaded then
-        return
-    end
+    local TeamColor = Player.TeamColor.Color
     local function OnCharacterAdded(Character)
-        Character:WaitForChild("HumanoidRootPart", math.huge)
+        if not AllowESP or not MFeeeLoaded then
+            return
+        end
+        if (Player == Speaker and not ESPMe) or (Player.TeamColor == Speaker.TeamColor and #Teams:GetTeams() > 1 and ESPTeamCheck) then
+            return
+        end
+        Character:WaitForChild("HumanoidRootPart", 1e308)
         ESPElement = ESPLibrary:Add({
             Name = ESPDisplayName and Player.DisplayName or Player.Name,
             Model = Character,
-            Color = ESPRandomColor and RandomColor or ESPTextColor,
+            Color = (ESPTeamColor and TeamColor) or ESPTextColor,
             MaxDistance = ESPMaxDistance,
             StudsOffset = ESPStudsOffset,
             TextSize = ESPTextSize,
             ESPType = ESPType,
-            Thickness = ESPThickness,
-            FillColor = ESPRandomColor and RandomColor or ESPFillColor,
-            OutlineColor = ESPRandomColor and RandomColor or ESPOutlineColor,
+            SurfaceColor = (ESPTeamColor and TeamColor) or ESPSurfaceColor,
+            FillColor = (ESPTeamColor and TeamColor) or ESPFillColor,
+            OutlineColor = (ESPTeamColor and TeamColor) or ESPOutlineColor,
             FillTransparency = ESPFillTransparency,
             OutlineTransparency = ESPOutlineTransparency,
-            SurfaceColor = ESPRandomColor and RandomColor or ESPColor,
             Transparency = ESPTransparency,
             Tracer = {
                 Enabled = TracerEnabled,
                 From = TracerFrom,
-                Color = ESPRandomColor and RandomColor or ESPColor,
+                Color = (ESPTeamColor and TeamColor) or ESPTracerColor,
                 Thickness = ESPTracerThickness,
                 Transparency = ESPOutlineTransparency,
             },
             Arrow = {
                 Enabled = ArrowEnabled,
-                Color = ESPRandomColor and RandomColor or ESPColor,
+                Color = (ESPTeamColor and TeamColor) or ESPArrowColor,
                 CenterOffset = ESPArrowCenterOffset,
             }
         })
     end
     OnCharacterAdded(Player.Character or Player.CharacterAdded:Wait())
-    Player.CharacterAdded:Connect(OnCharacterAdded)
+    ESPPlayerConnections[Player] = (ESPPlayerConnections[Player] and ESPPlayerConnections[Player]:Disconnect()) or Player.CharacterAdded:Connect(OnCharacterAdded)
 end
 
 Players.PlayerAdded:Connect(ESPPlayerAdded)
@@ -1713,6 +1749,45 @@ ESPAllToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPAllToggle", {
             end
         else
             ESPLibrary:Clear()
+        end
+    end
+})
+ESPMeToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPMeToggle", {
+    Text = GlobalText.ESPMeToggle,
+    Default = false,
+    Callback = function(Enabled)
+        ESPMe = Enabled
+        if AllowESP then
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+        end
+    end
+})
+ESPTeamCheckToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPTeamCheckToggle", {
+    Text = GlobalText.ESPTeamCheckToggle,
+    Default = false,
+    Callback = function(Enabled)
+        ESPTeamCheck = Enabled
+        if AllowESP then
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+        end
+    end
+})
+ESPTeamColorToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPTeamColorToggle", {
+    Text = GlobalText.ESPTeamColorToggle,
+    Default = false,
+    Callback = function(Enabled)
+        ESPTeamColor = Enabled
+        if AllowESP then
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
         end
     end
 })
@@ -1750,88 +1825,42 @@ ESPTypeDropdown = ESPGlobalSettingsGroupbox:AddDropdown("ESPTypeDropdown", {
         end
     end
 })
-ESPMaxDistanceSlider = ESPGlobalSettingsGroupbox:AddSlider("ESPMaxDistanceSlider", {
-    Text = GlobalText.ESPMaxDistanceSlider,
-    Default = ESPMaxDistance,
-    Min = 100,
-    Max = 3000,
-    Rounding = 0,
-    Suffix = " studs",
-    Compact = true,
-    HideMax = true,
-    Callback = function(Number)
-        repeat
-            wait(0.016)
-        until not ESPHugeDistance
-        ESPMaxDistance = Number
-        if AllowESP then
-            ESPElement.CurrentSettings.MaxDistance = Number
-        end
-    end
-})
+Heartbeat = Cloneref(game:GetService("RunService")).Heartbeat
 ESPHugeDistanceToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPHugeDistanceToggle", {
     Text = GlobalText.ESPHugeDistanceToggle,
     Default = false,
     Callback = function(Enabled)
-        ESPHugeDistance = Enabled
         if Enabled then
-            CurrentMaxDistance = ESPMaxDistance
             ESPMaxDistance = 1e308
             if AllowESP then
-                ESPElement.CurrentSettings.MaxDistance = ESPMaxDistance
+                ESPLibrary:Clear()
+                for i,v in pairs(Players:GetPlayers()) do
+                    ESPPlayerAdded(v)
+                end
             end
         else
-            ESPMaxDistance = CurrentMaxDistance
+            ESPMaxDistance = 1000
             if AllowESP then
-                ESPElement.CurrentSettings.MaxDistance = ESPMaxDistance
+                ESPLibrary:Clear()
+                for i,v in pairs(Players:GetPlayers()) do
+                    ESPPlayerAdded(v)
+                end
             end
         end
     end
 })
 ESPGlobalSettingsGroupbox:AddDivider()
-ESPTracerToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPTracerToggle", {
-    Text = GlobalText.ESPTracerToggle,
-    Default = false,
-    Callback = function(Enabled)
-        TracerEnabled = Enabled
-        if AllowESP then
-            ESPElement.CurrentSettings.Tracer.Enabled = Enabled
-        end
-    end
-})
-ESPArrowToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPArrowToggle", {
-    Text = GlobalText.ESPArrowToggle,
-    Default = false,
-    Callback = function(Enabled)
-        ArrowEnabled = Enabled
-        if AllowESP then
-            ESPElement.CurrentSettings.Arrow.Enabled = Enabled
-        end
-    end
-})
-ESPGlobalSettingsGroupbox:AddDivider()
-ESPRandomColorToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPRandomColorToggle", {
-    Text = GlobalText.ESPRandomColorToggle,
-    Default = false,
-    Callback = function(Enabled)
-        ESPRandomColor = Enabled
-        if AllowESP then
+ESPColorLabel = ESPGlobalSettingsGroupbox:AddLabel(GlobalText.ESPColorLabel):AddColorPicker("ESPColorPicker", {
+    Title = GlobalText.ESPColorPicker,
+    Default = ESPSurfaceColor,
+    Callback = function(Color)
+        ESPSurfaceColor = Color
+        if AllowESP and not ESPTeamColor then
             ESPLibrary:Clear()
             for i,v in pairs(Players:GetPlayers()) do
                 ESPPlayerAdded(v)
             end
-        end
-    end
-})
-ESPColorLabel = ESPGlobalSettingsGroupbox:AddLabel(GlobalText.ESPColorLabel):AddColorPicker("ESPColorPicker", {
-    Title = GlobalText.ESPColorPicker,
-    Default = ESPColor,
-    Callback = function(Color)
-        ESPColor = Color
-        if AllowESP then
-            ESPElement.CurrentSettings.SurfaceColor = Color
-            ESPElement.CurrentSettings.Tracer.Color = Color
-            ESPElement.CurrentSettings.Arrow.Color = Color
+            Heartbeat:Wait()
         end
     end
 })
@@ -1847,7 +1876,11 @@ ESPTransparencySlider = ESPGlobalSettingsGroupbox:AddSlider("ESPTransparencySlid
     Callback = function(Number)
         ESPTransparency = Number / 100
         if AllowESP then
-            ESPElement.CurrentSettings.Transparency = ESPTransparency
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
         end
     end
 })
@@ -1860,8 +1893,12 @@ ESPFillColorLabel = ESPHighlightGroupbox:AddLabel(GlobalText.ESPFillColorLabel):
     Default = ESPFillColor,
     Callback = function(Color)
         ESPFillColor = Color
-        if AllowESP then
-            ESPElement.CurrentSettings.FillColor = Color
+        if AllowESP and not ESPTeamColor then
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
         end
     end
 })
@@ -1870,8 +1907,12 @@ ESPOutlineColorLabel = ESPHighlightGroupbox:AddLabel(GlobalText.ESPOutlineColorL
     Default = ESPOutlineColor,
     Callback = function(Color)
         ESPOutlineColor = Color
-        if AllowESP then
-            ESPElement.CurrentSettings.OutlineColor = Color
+        if AllowESP and not ESPTeamColor then
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
         end
     end
 })
@@ -1888,7 +1929,11 @@ ESPFillTransparencySlider = ESPHighlightGroupbox:AddSlider("ESPFillTransparencyS
     Callback = function(Number)
         ESPFillTransparency = Number / 100
         if AllowESP then
-            ESPElement.CurrentSettings.FillTransparency = ESPFillTransparency
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
         end
     end
 })
@@ -1904,7 +1949,11 @@ ESPOutlineTransparencySlider = ESPHighlightGroupbox:AddSlider("ESPOutlineTranspa
     Callback = function(Number)
         ESPOutlineTransparency = Number / 100
         if AllowESP then
-            ESPElement.CurrentSettings.OutlineTransparency = ESPOutlineTransparency
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
         end
     end
 })
@@ -1937,23 +1986,11 @@ ESPTextSizeSlider = ESPTextGroupbox:AddSlider("ESPTextSizeSlider", {
     Callback = function(Number)
         ESPTextSize = Number
         if AllowESP then
-            ESPElement.CurrentSettings.TextSize = Number
-        end
-    end
-})
-ESPThicknessSlider = ESPTextGroupbox:AddSlider("ESPThicknessSlider", {
-    Text = GlobalText.ESPThicknessSlider,
-    Default = ESPThickness * 10,
-    Min = 1,
-    Max = 10,
-    Rounding = 0,
-    Suffix = " px",
-    Compact = false,
-    HideMax = true,
-    Callback = function(Number)
-        ESPThickness = Number / 10
-        if AllowESP then
-            ESPElement.CurrentSettings.Thickness = ESPThickness
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
         end
     end
 })
@@ -1961,6 +1998,33 @@ ESPThicknessSlider = ESPTextGroupbox:AddSlider("ESPThicknessSlider", {
 --|| ESP Tracer Groupbox ||--
 
 ESPTracerGroupbox = Tabs.ESP:AddRightGroupbox(GlobalText.ESPTracerGroupbox)
+ESPTracerToggle = ESPTracerGroupbox:AddToggle("ESPTracerToggle", {
+    Text = GlobalText.ESPTracerToggle,
+    Default = false,
+    Callback = function(Enabled)
+        TracerEnabled = Enabled
+        if AllowESP then
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+        end
+    end
+})
+ESPTracerColorLabel = ESPTracerGroupbox:AddLabel(GlobalText.ESPTracerColorLabel):AddColorPicker("ESPTracerColorPicker", {
+    Title = GlobalText.ESPTracerColorPicker,
+    Default = ESPTracerColor,
+    Callback = function(Color)
+        ESPTracerColor = Color
+        if AllowESP and not ESPTeamColor then
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
+        end
+    end
+})
 ESPTracerFromDropdown = ESPTracerGroupbox:AddDropdown("ESPTracerFromDropdown", {
     Text = GlobalText.ESPTracerFromDropdown,
     Values = {
@@ -1982,7 +2046,10 @@ ESPTracerFromDropdown = ESPTracerGroupbox:AddDropdown("ESPTracerFromDropdown", {
             TracerFrom = "Mouse"
         end
         if AllowESP then
-            ESPElement.CurrentSettings.Tracer.From = TracerFrom
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
         end
     end
 })
@@ -1998,7 +2065,11 @@ ESPTracerThicknessSlider = ESPTracerGroupbox:AddSlider("ESPTracerThicknessSlider
     Callback = function(Number)
         ESPTracerThickness = Number
         if AllowESP then
-            ESPElement.CurrentSettings.Tracer.Thickness = Number
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
         end
     end
 })
@@ -2014,7 +2085,11 @@ ESPTracerTransparencySlider = ESPTracerGroupbox:AddSlider("ESPTracerTransparency
     Callback = function(Number)
         ESPTracerTransparency = Number / 100
         if AllowESP then
-            ESPElement.CurrentSettings.Tracer.Transparency = ESPTracerTransparency
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
         end
     end
 })
@@ -2022,6 +2097,33 @@ ESPTracerTransparencySlider = ESPTracerGroupbox:AddSlider("ESPTracerTransparency
 --|| ESP Arrow Groupbox ||--
 
 ESPArrowGroupbox = Tabs.ESP:AddRightGroupbox(GlobalText.ESPArrowGroupbox)
+ESPArrowToggle = ESPArrowGroupbox:AddToggle("ESPArrowToggle", {
+    Text = GlobalText.ESPArrowToggle,
+    Default = false,
+    Callback = function(Enabled)
+        ArrowEnabled = Enabled
+        if AllowESP then
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+        end
+    end
+})
+ESPArrowColorLabel = ESPArrowGroupbox:AddLabel(GlobalText.ESPArrowColorLabel):AddColorPicker("ESPArrowColorPicker", {
+    Title = GlobalText.ESPArrowColorPicker,
+    Default = ESPArrowColor,
+    Callback = function(Color)
+        ESPArrowColor = Color
+        if AllowESP and not ESPTeamColor then
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
+        end
+    end
+})
 ESPArrowCenterOffsetSlider = ESPArrowGroupbox:AddSlider("ESPArrowCenterOffsetSlider", {
     Text = GlobalText.ESPArrowCenterOffsetSlider,
     Default = ESPArrowCenterOffset,
@@ -2034,7 +2136,11 @@ ESPArrowCenterOffsetSlider = ESPArrowGroupbox:AddSlider("ESPArrowCenterOffsetSli
     Callback = function(Number)
         ESPArrowCenterOffset = Number
         if AllowESP then
-            ESPElement.CurrentSettings.Arrow.CenterOffset = Number
+            ESPLibrary:Clear()
+            for i,v in pairs(Players:GetPlayers()) do
+                ESPPlayerAdded(v)
+            end
+            Heartbeat:Wait()
         end
     end
 })

@@ -232,7 +232,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     ESPFillTransparencySlider = "填充透明度",
     ESPOutlineTransparencySlider = "轮廓透明度",
     ESPTextGroupbox = "文字设置",
-    ESPDisplayNameToggle = "使用玩家昵称",
+    ESPDisplayNameToggle = "使用玩家昵称而不是用户名",
     ESPTextSizeSlider = "文字大小",
     ESPThicknessSlider = "粗细",
     ESPTracerGroupbox = "追踪线设置",

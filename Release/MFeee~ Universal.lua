@@ -1274,6 +1274,7 @@ DoHipHeightAfterMeRespawnToggle = WeirdGruopbox:AddToggle("DoHipHeightAfterMeRes
         DoHipHeightAfterMeRespawn = Enabled
     end
 })
+WeirdGruopbox:AddDivider()
 MaxSlopeAngleToggle = WeirdGruopbox:AddToggle("MaxSlopeAngleToggle", {
     Text = GlobalText.MaxSlopeAngleToggle,
     Default = false,

@@ -1200,7 +1200,7 @@ FlyModeDropdown = FlyGruopbox:AddDropdown("FlyModeDropdown", {
 FlyGruopbox:AddDivider()
 UseUpVectorFlyToggle = FlyGruopbox:AddToggle("UseUpVectorFlyToggle", {
     Text = GlobalText.UseUpVectorFlyToggle,
-    Default = false,
+    Default = true,
     Callback = function(Enabled)
         UseUpVectorFly = Enabled
     end

@@ -520,7 +520,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     ESPTracerColorPicker = "Tracer Color",
     ESPArrowColorLabel = "Arrow Color",
     ESPArrowColorPicker = "Arrow Color",
-    UseUpVectorFlyToggle = "Use Up Vector to Control Vertical",
+    UseUpVectorFlyToggle = "Use Up Vector",
     WeirdGruopbox = "Weird",
     HipHeightToggle = "Hip Height Override",
     HipHeightSlider = "Hip Height",
@@ -809,6 +809,8 @@ Cloneref = cloneref or function(x) return x end
 Players = Cloneref(game:GetService("Players"))
 Teams = Cloneref(game:GetService("Teams"))
 Speaker = Players.LocalPlayer
+Character = Speaker.Character
+Humanoid = Character:FindFirstChild("Humanoid")
 Arsenal = (game.PlaceId == 286090429 and true) or false
 ExecutorName, ExecutorVersion = identifyexecutor()
 QueueTeleport = (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) or queue_on_teleport
@@ -1051,7 +1053,7 @@ PlayerWalkSpeedToggle = PlayerMovementGroupbox:AddToggle("PlayerWalkSpeedToggle"
 })
 PlayerWalkSpeedSlider = PlayerMovementGroupbox:AddSlider("PlayerWalkSpeedSlider", {
     Text = GlobalText.PlayerWalkSpeedSlider,
-    Default = math.round(Speaker.Character:FindFirstChild("Humanoid").WalkSpeed) or 16,
+    Default = math.round(Character and Humanoid and Humanoid.WalkSpeed) or 16,
     Min = 0,
     Max = 200,
     Rounding = 0,
@@ -1071,7 +1073,7 @@ PlayerJumpPowerToggle = PlayerMovementGroupbox:AddToggle("PlayerJumpPowerToggle"
 })
 PlayerJumpPowerSlider = PlayerMovementGroupbox:AddSlider("PlayerJumpPowerSlider", {
     Text = GlobalText.PlayerJumpPowerSlider,
-    Default = math.round(Speaker.Character:FindFirstChild("Humanoid").JumpPower) or 50,
+    Default = math.round(Character and Humanoid and Humanoid.JumpPower) or 50,
     Min = 0,
     Max = 625,
     Rounding = 0,
@@ -1214,7 +1216,7 @@ UseUpVectorFlyToggle = FlyGruopbox:AddToggle("UseUpVectorFlyToggle", {
     Text = GlobalText.UseUpVectorFlyToggle,
     Default = true,
     Callback = function(Enabled)
-        UseUpVectorFly = Enabled
+        UseUpVector = Enabled
     end
 })
 FlyGyroToggle = FlyGruopbox:AddToggle("FlyGyroToggle", {
@@ -1256,10 +1258,10 @@ HipHeightToggle = WeirdGruopbox:AddToggle("HipHeightToggle", {
 })
 HipHeightSlider = WeirdGruopbox:AddSlider("HipHeightSlider", {
     Text = GlobalText.HipHeightSlider,
-    Default = 0,
+    Default = Character and Humanoid and Humanoid.HipHeight or 2.25,
     Min = -1,
     Max = 69,
-    Rounding = 1,
+    Rounding = 2,
     Suffix = "",
     Compact = true,
     HideMax = true,
@@ -1284,7 +1286,7 @@ MaxSlopeAngleToggle = WeirdGruopbox:AddToggle("MaxSlopeAngleToggle", {
 })
 MaxSlopeAngleSlider = WeirdGruopbox:AddSlider("MaxSlopeAngleSlider", {
     Text = GlobalText.MaxSlopeAngleSlider,
-    Default = 0,
+    Default = Character and Humanoid and Humanoid.MaxSlopeAngle or 89,
     Min = 0,
     Max = 89.9,
     Rounding = 1,

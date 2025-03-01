@@ -154,7 +154,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     MenuKeyLabel = "打开界面按键",
     MenuKeybind = "",
     UnloadButton = "卸载脚本",
-    UnloadButtonToolTip = "可能无法完全卸载",
+    UnloadButtonToolTip = "99%完全卸载",
     Unloaded = "😇 已卸载脚本",
     ClickToMoveToggle = "点击移动",
     CameraCommonGruopbox = "常用",
@@ -278,6 +278,12 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     ESPArrowColorLabel = "箭头颜色",
     ESPArrowColorPicker = "箭头颜色",
     UseUpVectorFlyToggle = "使用上向量控制垂直",
+    WeirdGruopbox = "奇葩",
+    HipHeightToggle = "臀部高度覆写",
+    HipHeightSlider = "臀部高度",
+    DoHipHeightAfterMeRespawnToggle = "复活后继续执行臀部高度覆写",
+    MaxSlopeAngleToggle = "最大坡度角度覆写",
+    MaxSlopeAngleSlider = "最大坡度角度",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -391,7 +397,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     MenuKeyLabel = "Open Menu Keybind",
     MenuKeybind = "",
     UnloadButton = "Unload",
-    UnloadButtonToolTip = "May Not Fully Unload",
+    UnloadButtonToolTip = "99% Fully Unload",
     Unloaded = "😇 Script Unloaded",
     ClickToMoveToggle = "Click To Move",
     CameraCommonGruopbox = "Common",
@@ -515,6 +521,12 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     ESPArrowColorLabel = "Arrow Color",
     ESPArrowColorPicker = "Arrow Color",
     UseUpVectorFlyToggle = "Use Up Vector to Control Vertical",
+    WeirdGruopbox = "Weird",
+    HipHeightToggle = "Hip Height Override",
+    HipHeightSlider = "Hip Height",
+    DoHipHeightAfterMeRespawnToggle = "Do Hip Height After Me Respawn",
+    MaxSlopeAngleToggle = "Max Slope Angle Override",
+    MaxSlopeAngleSlider = "Max Slope Angle",
 }
 
 --|| Oaklands Check ||--
@@ -1229,6 +1241,57 @@ StopFlyOnDiedToggle = FlyGruopbox:AddToggle("StopFlyOnDiedToggle", {
     Default = true,
     Callback = function(Enabled)
         StopFlyOnDied = Enabled
+    end
+})
+
+--|| Weird Groupbox ||--
+
+WeirdGruopbox = Tabs.Player:AddRightGroupbox(GlobalText.WeirdGruopbox)
+HipHeightToggle = WeirdGruopbox:AddToggle("HipHeightToggle", {
+    Text = GlobalText.HipHeightToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.HipHeight(Enabled)
+    end
+})
+HipHeightSlider = WeirdGruopbox:AddSlider("HipHeightSlider", {
+    Text = GlobalText.HipHeightSlider,
+    Default = 0,
+    Min = -1,
+    Max = 69,
+    Rounding = 1,
+    Suffix = "",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        Universals.HipHeightValue(Number)
+    end
+})
+DoHipHeightAfterMeRespawnToggle = WeirdGruopbox:AddToggle("DoHipHeightAfterMeRespawnToggle", {
+    Text = GlobalText.DoHipHeightAfterMeRespawnToggle,
+    Default = false,
+    Callback = function(Enabled)
+        DoHipHeightAfterMeRespawn = Enabled
+    end
+})
+MaxSlopeAngleToggle = WeirdGruopbox:AddToggle("MaxSlopeAngleToggle", {
+    Text = GlobalText.MaxSlopeAngleToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.MaxSlopeAngle(Enabled)
+    end
+})
+MaxSlopeAngleSlider = WeirdGruopbox:AddSlider("MaxSlopeAngleSlider", {
+    Text = GlobalText.MaxSlopeAngleSlider,
+    Default = 0,
+    Min = 0,
+    Max = 89.9,
+    Rounding = 1,
+    Suffix = "",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        Universals.MaxSlopeAngleValue(Number)
     end
 })
 

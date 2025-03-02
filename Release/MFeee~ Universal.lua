@@ -358,6 +358,14 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     TPWalkSlider = "传送行走速度",
     SpinToggle = "旋转",
     SpinSpeedSlider = "旋转速度",
+    ALilTrollGroupbox = "小恶搞",
+    GodButton = "本地无敌",
+    InvisibleToggle = "隐身",
+    FlingGroupbox = "甩飞",
+    FlingToggle = "旋转甩飞",
+    WalkFlingToggle = "行走甩飞",
+    InvisFlingButton = "隐形甩飞",
+    AntiFlingToggle = "防甩飞",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -675,6 +683,14 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     TPWalkSlider = "TP Walk Speed",
     SpinToggle = "Spin",
     SpinSpeedSlider = "Spin Speed",
+    ALilTrollGroupbox = "A Lil Troll",
+    GodButton = "Local God Mode",
+    InvisibleToggle = "Invisible",
+    FlingGroupbox = "Fling",
+    FlingToggle = "Spin Fling",
+    WalkFlingToggle = "Walk Fling",
+    InvisFlingButton = "Invisible Fling",
+    AntiFlingToggle = "Anti Fling",
 }
 
 --|| Oaklands Check ||--
@@ -2755,7 +2771,7 @@ AimbotTeamCheckMethodDropdown = AimbotDeveloperSettingsGroupbox:AddDropdown("Aim
 
 --|| A Lil Troll Groupbox ||--
 
-ALilTrollGroupbox = Tabs.Aimbot:AddRightGroupbox(GlobalText.ALilTrollGroupbox)
+ALilTrollGroupbox = Tabs.Troll:AddRightGroupbox(GlobalText.ALilTrollGroupbox)
 GodButton = ALilTrollGroupbox:AddButton({
     Text = GlobalText.GodButton,
     DoubleClick = true,
@@ -2777,7 +2793,7 @@ InvisibleToggle = ALilTrollGroupbox:AddToggle("InvisibleToggle", {
 
 --|| Fling Groupbox ||--
 
-FlingGroupbox = Tabs.Aimbot:AddRightGroupbox(GlobalText.FlingGroupbox)
+FlingGroupbox = Tabs.Troll:AddRightGroupbox(GlobalText.FlingGroupbox)
 FlingToggle = FlingGroupbox:AddToggle("FlingToggle", {
     Text = GlobalText.FlingToggle,
     Default = false,

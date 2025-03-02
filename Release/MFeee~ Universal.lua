@@ -2771,7 +2771,7 @@ AimbotTeamCheckMethodDropdown = AimbotDeveloperSettingsGroupbox:AddDropdown("Aim
 
 --|| A Lil Troll Groupbox ||--
 
-ALilTrollGroupbox = Tabs.Troll:AddRightGroupbox(GlobalText.ALilTrollGroupbox)
+ALilTrollGroupbox = Tabs.Troll:AddLeftGroupbox(GlobalText.ALilTrollGroupbox)
 GodButton = ALilTrollGroupbox:AddButton({
     Text = GlobalText.GodButton,
     DoubleClick = true,
@@ -2793,7 +2793,7 @@ InvisibleToggle = ALilTrollGroupbox:AddToggle("InvisibleToggle", {
 
 --|| Fling Groupbox ||--
 
-FlingGroupbox = Tabs.Troll:AddRightGroupbox(GlobalText.FlingGroupbox)
+FlingGroupbox = Tabs.Troll:AddLeftGroupbox(GlobalText.FlingGroupbox)
 FlingToggle = FlingGroupbox:AddToggle("FlingToggle", {
     Text = GlobalText.FlingToggle,
     Default = false,
@@ -2815,7 +2815,7 @@ InvisFlingButton = FlingGroupbox:AddButton({
         Universals.InvisFling()
     end
 })
-ALilTrollGroupbox:AddDivider()
+FlingGroupbox:AddDivider()
 AntiFlingToggle = FlingGroupbox:AddToggle("AntiFlingToggle", {
     Text = GlobalText.AntiFlingToggle,
     Default = false,

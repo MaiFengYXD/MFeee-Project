@@ -11,10 +11,10 @@ $$ | \_/ $$ |$$ |      \$$$$$$$\ \$$$$$$$\ \$$$$$$$\
 
 Createor | MaiFengYXD
 License  | CC0-1.0
-Version  | 0.3.7 (Alpha)
+Version  | 0.3.8 (Alpha)
 
 # Project Started on 2024-11-13 #
-# This Version was Last Edited on 2025-03-01 #
+# This Version was Last Edited on 2025-03-02 #
 
 Issues Report on Github or https://discord.gg/YBQUd8X8PK
 QQ: 3607178523
@@ -54,7 +54,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AssetsLoaded = "🥳 资源加载成功",
     GameNotLoaded = "🤒 游戏尚未完全加载！",
     MainWindowTitle = "通用",
-    MainWindowFooter = "0.3.7 (Alpha测试) | ",
+    MainWindowFooter = "0.3.8 (Alpha测试) | ",
     MainTab = "主页",
     PlayerTab = "玩家",
     CameraTab = "相机",
@@ -284,6 +284,80 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     DoHipHeightAfterMeRespawnToggle = "复活后继续执行臀部高度覆写",
     MaxSlopeAngleToggle = "最大坡度角度覆写",
     MaxSlopeAngleSlider = "最大坡度角度",
+    AimbotSettingsGroupbox = "设置",
+    EnableAimbotToggle = "启用自瞄",
+    AimbotKeyLabel = "自瞄按键",
+    AimbotKeybind = "自瞄",
+    AimbotToggleModeToggle = "切换式自瞄",
+    AimbotTeamCheckToggle = "队伍检测",
+    AimbotAliveCheckToggle = "存活检测",
+    AimbotWallCheckToggle = "子弹穿墙",
+    AimbotWallCheckTooltip = "已被修复！",
+    AimbotOffsetToMoveDirectionToggle = "自瞄预判",
+    AimbotOffsetIncrementSlider = "预判增量",
+    AimbotSensitivitySlider = "平滑度",
+    AimbotSensitivity2Slider = "鼠标相对移动灵敏度",
+    AimbotLockModeDropdown = "锁定模式",
+    CFrame = "CFrame",
+    Mousemoverel = "鼠标相对移动",
+    AimbotLockPartDropdown = "锁定部位",
+    Head = "头部",
+    HumanoidRootPart = "HumanoidRootPart",
+    Torso = "[R6]躯干",
+    LeftArm = "[R6]左臂",
+    RightArm = "[R6]右臂",
+    LeftLeg = "[R6]左腿",
+    RightLeg = "[R6]右腿",
+    UpperTorso = "[R15]上半身",
+    LowerTorso = "[R15]臀部",
+    LeftUpperArm = "[R15]左上臂",
+    LeftLowerArm = "[R15]左下臂",
+    LeftHand = "[R15]左手",
+    RightUpperArm = "[R15]右上臂",
+    RightLowerArm = "[R15]右下臂",
+    RightHand = "[R15]右手",
+    LeftUpperLeg = "[R15]左大腿",
+    LeftLowerLeg = "[R15]左小腿",
+    LeftFoot = "[R15]左脚",
+    RightUpperLeg = "[R15]右大腿",
+    RightLowerLeg = "[R15]右小腿",
+    RightFoot = "[R15]右脚",
+    AimbotFOVGroupbox = "圆圈",
+    EnableAimbotFOVToggle = "启用圆圈",
+    AimbotFOVRadiusSlider = "圆圈半径",
+    AimbotFOVNumSidesSlider = "圆圈边数",
+    AimbotFOVThicknessSlider = "圆圈粗细",
+    AimbotFOVTransparencySlider = "圆圈不透明度",
+    AimbotFOVFilledToggle = "填充圆圈",
+    AimbotFOVRainbowColorToggle = "彩虹圆圈",
+    AimbotFOVRainbowOutlineColorToggle = "彩虹圆圈轮廓",
+    AimbotFOVColorLabel = "圆圈颜色",
+    AimbotFOVColorPicker = "圆圈颜色",
+    AimbotFOVOutlineColorLabel = "圆圈轮廓颜色",
+    AimbotFOVOutlineColorPicker = "圆圈轮廓颜色",
+    AimbotFOVLockedColorLabel = "锁定时圆圈颜色",
+    AimbotFOVLockedColorPicker = "锁定时圆圈颜色",
+    AimbotDeveloperSettingsGroupbox = "开发者",
+    AimbotUpdateModeDropdown = "更新模式",
+    RenderStepped = "渲染步进时",
+    Stepped = "模拟步进时",
+    Heartbeat = "帧渲染完成时",
+    AimbotTeamCheckMethodDropdown = "队伍检测方式",
+    TeamColor = "队伍颜色",
+    Team = "队伍",
+    AimbotRainbowSpeedSlider = "彩虹速度",
+    RivalsCFrameLockTitle = "竞争对手风险提醒",
+    RivalsCFrameLockDescription = "竞争对手会检测锁定方式, 如果使用CFrame瞄准大概率会被秋后算账(Ban), 且影响体验！",
+    AimbotInfiniteLockDistanceToggle = "无限锁定距离",
+    VisibleAimbotFOVToggle = "可见的圆圈",
+    NoCharacterWarn = "为检测到玩家角色, 请尝试重生(重置人物)",
+    GodSuccess = "已启用本地无敌",
+    InvisSuccess = "已启用隐身, 现在你在别人眼里就是透明的了!",
+    InvisFlingWarn = "正在隐形甩飞, 不能切换甩飞模式",
+    TPWalkToggle = "传送行走",
+    TPWalkSlider = "传送行走速度",
+    SpinToggle = "旋转",
+    SpinSpeedSlider = "旋转速度",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -297,7 +371,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AssetsLoaded = "🥳 Assets Load Success",
     GameNotLoaded = "🤒 Game Not Fully Loaded!",
     MainWindowTitle = "Universal",
-    MainWindowFooter = "0.3.7 (Alpha Testing) | ",
+    MainWindowFooter = "0.3.8 (Alpha Testing) | ",
     MainTab = "Main",
     PlayerTab = "Player",
     CameraTab = "Camera",
@@ -527,6 +601,80 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     DoHipHeightAfterMeRespawnToggle = "Do Hip Height After Me Respawn",
     MaxSlopeAngleToggle = "Max Slope Angle Override",
     MaxSlopeAngleSlider = "Max Slope Angle",
+    AimbotSettingsGroupbox = "Settings",
+    EnableAimbotToggle = "Enable Aimbot",
+    AimbotKeyLabel = "Aimbot Trigger Key",
+    AimbotKeybind = "Aimbot",
+    AimbotToggleModeToggle = "Toggle Mode",
+    AimbotTeamCheckToggle = "Team Check",
+    AimbotAliveCheckToggle = "Alive Check",
+    AimbotWallCheckToggle = "Wall Check",
+    AimbotWallCheckTooltip = "Patched! Not Working Now",
+    AimbotOffsetToMoveDirectionToggle = "Offset to Move Direction",
+    AimbotOffsetIncrementSlider = "Offset Increment",
+    AimbotSensitivitySlider = "Smoothness",
+    AimbotSensitivity2Slider = "Mouse Move Relative Sensitivity",
+    AimbotLockModeDropdown = "Lock Mode",
+    CFrame = "CFrame",
+    Mousemoverel = "Mouse Move Relative",
+    AimbotLockPartDropdown = "Lock Part",
+    Head = "Head",
+    HumanoidRootPart = "HumanoidRootPart",
+    Torso = "[R6]Torso",
+    LeftArm = "[R6]Left Arm",
+    RightArm = "[R6]Right Arm",
+    LeftLeg = "[R6]Left Leg",
+    RightLeg = "[R6]Right Leg",
+    UpperTorso = "[R15]Upper Torso",
+    LowerTorso = "[R15]Lower Torso",
+    LeftUpperArm = "[R15]Left Upper Arm",
+    LeftLowerArm = "[R15]Left Lower Arm",
+    LeftHand = "[R15]Left Hand",
+    RightUpperArm = "[R15]Right Upper Arm",
+    RightLowerArm = "[R15]Right Lower Arm",
+    RightHand = "[R15]Right Hand",
+    LeftUpperLeg = "[R15]Left Upper Leg",
+    LeftLowerLeg = "[R15]Left Lower Leg",
+    LeftFoot = "[R15]Left Foot",
+    RightUpperLeg = "[R15]Right Upper Leg",
+    RightLowerLeg = "[R15]Right Lower Leg",
+    RightFoot = "[R15]Right Foot",
+    AimbotFOVGroupbox = "Circle",
+    EnableAimbotFOVToggle = "Enable Circle",
+    AimbotFOVRadiusSlider = "Circle Radius",
+    AimbotFOVNumSidesSlider = "Circle Sides",
+    AimbotFOVThicknessSlider = "Circle Thickness",
+    AimbotFOVTransparencySlider = "Circle Opacity",
+    AimbotFOVFilledToggle = "Filled Circle",
+    AimbotFOVRainbowColorToggle = "Rainbow Circle",
+    AimbotFOVRainbowOutlineColorToggle = "Rainbow Circle Outline",
+    AimbotFOVColorLabel = "Circle Color",
+    AimbotFOVColorPicker = "Circle Color",
+    AimbotFOVOutlineColorLabel = "Circle Outline Color",
+    AimbotFOVOutlineColorPicker = "Circle Outline Color",
+    AimbotFOVLockedColorLabel = "Locked Circle Color",
+    AimbotFOVLockedColorPicker = "Locked Circle Color",
+    AimbotDeveloperSettingsGroupbox = "Developer",
+    AimbotUpdateModeDropdown = "Update Mode",
+    RenderStepped = "RenderStepped",
+    Stepped = "Stepped",
+    Heartbeat = "Heartbeat",
+    AimbotTeamCheckMethodDropdown = "Team Check Method",
+    TeamColor = "Team Color",
+    Team = "Team",
+    AimbotRainbowSpeedSlider = "Rainbow Speed",
+    RivalsCFrameLockTitle = "Rivals CFrame Lock Warning",
+    RivalsCFrameLockDescription = "Rivals will detect the lock mode, if you use CFrame to aim, you will probably be banned, and it will affect the experience!",
+    AimbotInfiniteLockDistanceToggle = "Infinite Lock Distance",
+    VisibleAimbotFOVToggle = "Visible Circle",
+    NoCharacterWarn = "No Character Detected, Please Try to Respawn",
+    GodSuccess = "Local God Mode Enabled",
+    InvisSuccess = "Invisible Enabled, You are Now Invisible",
+    InvisibleFlingWarn = "Invisible Flinging, Can't Change Fling Mode",
+    TPWalkToggle = "TP Walk",
+    TPWalkSlider = "TP Walk Speed",
+    SpinToggle = "Spin",
+    SpinSpeedSlider = "Spin Speed",
 }
 
 --|| Oaklands Check ||--
@@ -741,7 +889,7 @@ Repo = "https://raw.githubusercontent.com/"
 MFRepo = (Repo .. "MaiFengYXD/ObsidianCN/main/")
 ObsidianRepo = (Repo .. "deividcomsono/Obsidian/main/")
 PastebinRepo = "https://pastebin.com/raw/"
-CurrentVersion = 37
+CurrentVersion = 38
 Library = nil
 ThemeManager = nil
 SaveManager = nil
@@ -774,7 +922,7 @@ task.spawn(function()
 end)
 task.spawn(function()
     Aimbot = loadstring(game:HttpGet(PastebinRepo .. "8A3dgm1q"))()
-    Aimbot.Settings.Enabled = false
+    Aimbot.Load()
     print(GlobalText.AimbotLoaded)
 end)
 task.spawn(function()
@@ -782,8 +930,8 @@ task.spawn(function()
 end)
 
 repeat
-    wait(0.016)
-    LoadTimer = (LoadTimer or 0) + 0.016
+    wait(0.1)
+    LoadTimer = (LoadTimer or 0) + 0.1
     if LoadTimer >= 15 then
         getgenv().MFeeeLoaded = false
         getgenv().MFeeeLoading = false
@@ -793,10 +941,6 @@ repeat
     end
 until Library and ThemeManager and SaveManager and Universals and ESPLibrary and Aimbot
 print(GlobalText.AssetsLoaded)
-
-if LeastVersion ~= CurrentVersion then
-    print(GlobalText.NewVersion)
-end
 
 if not game:IsLoaded() then
     Library:Notify(GlobalText.GameNotLoaded, 5)
@@ -812,6 +956,7 @@ Speaker = Players.LocalPlayer
 Character = Speaker.Character
 Humanoid = Character:FindFirstChild("Humanoid")
 Arsenal = (game.PlaceId == 286090429 and true) or false
+Rivals = (game.PlaceId == 17625359962 and true) or false
 ExecutorName, ExecutorVersion = identifyexecutor()
 QueueTeleport = (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) or queue_on_teleport
 Setclipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
@@ -957,7 +1102,7 @@ FPSCapToggle = MainAFKGroupbox:AddToggle("FPSCapToggle", {
 })
 FPSCapSlider = MainAFKGroupbox:AddSlider("FPSCapSlider", {
     Text = GlobalText.FPSCapSlider,
-    Default = getfpscap() or 240,
+    Default = UniversalModules.CurrentFPS,
     Min = 1,
     Max = 240,
     Rounding = 0,
@@ -1104,6 +1249,27 @@ WorkspaceGravitySlider = PlayerMovementGroupbox:AddSlider("WorkspaceGravitySlide
         Universals.GravityValue(Number)
     end
 })
+PlayerMovementGroupbox:AddDivider()
+TPWalkToggle = PlayerMovementGroupbox:AddToggle("TPWalkToggle", {
+    Text = GlobalText.TPWalkToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.TPWalk(Enabled)
+    end
+})
+TPWalkSlider = PlayerMovementGroupbox:AddSlider("TPWalkSlider", {
+    Text = GlobalText.TPWalkSlider,
+    Default = 10,
+    Min = 1,
+    Max = 100,
+    Rounding = 0,
+    Suffix = "",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        Universals.TPWalkValue(Number)
+    end
+})
 
 --|| Player Features Groupbox ||--
 
@@ -1145,6 +1311,26 @@ ClickToMoveToggle = PlayerFeaturesGroupbox:AddToggle("ClickToMoveToggle", {
     Default = false,
     Callback = function(Enabled)
         Universals.ClickToMove(Enabled)
+    end
+})
+SpinToggle = PlayerFeaturesGroupbox:AddToggle("SpinToggle", {
+    Text = GlobalText.SpinToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.Spin(Enabled)
+    end
+})
+SpinSpeedSlider = PlayerFeaturesGroupbox:AddSlider("SpinSpeedSlider", {
+    Text = GlobalText.SpinSpeedSlider,
+    Default = 5,
+    Min = 1,
+    Max = 1000,
+    Rounding = 0,
+    Suffix = "",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        Universals.SpinValue(Number)
     end
 })
 
@@ -1259,7 +1445,7 @@ HipHeightToggle = WeirdGruopbox:AddToggle("HipHeightToggle", {
 HipHeightSlider = WeirdGruopbox:AddSlider("HipHeightSlider", {
     Text = GlobalText.HipHeightSlider,
     Default = Character and Humanoid and Humanoid.HipHeight or 2.25,
-    Min = -1,
+    Min = -2.50,
     Max = 69,
     Rounding = 2,
     Suffix = "",
@@ -2211,6 +2397,417 @@ ESPArrowCenterOffsetSlider = ESPArrowGroupbox:AddSlider("ESPArrowCenterOffsetSli
     end
 })
 
+--|| Aimbot Settings Groupbox ||--
+
+AimbotSettingsGroupbox = Tabs.Aimbot:AddLeftGroupbox(GlobalText.AimbotSettingsGroupbox)
+EnableAimbotToggle = AimbotSettingsGroupbox:AddToggle("EnableAimbotToggle", {
+    Text = GlobalText.EnableAimbotToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Aimbot.Settings.Enabled = Enabled
+    end
+}):AddKeyPicker("AimbotKeybind",{
+    Text = GlobalText.AimbotKeybind,
+    Default = MFeeeLanguage == "Chinese" and "右键" or "MB2",
+    Mode = "Hold",
+    NoUI = false,
+    SyncToggleState = false,
+    ChangedCallback = function(Key)
+        Aimbot.Settings.TriggerKey = Key
+    end
+})
+AimbotToggleModeToggle = AimbotSettingsGroupbox:AddToggle("AimbotToggleModeToggle", {
+    Text = GlobalText.AimbotToggleModeToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Aimbot.Settings.Toggle = Enabled
+    end
+})
+AimbotInfiniteLockDistanceToggle = AimbotSettingsGroupbox:AddToggle("AimbotInfiniteLockDistanceToggle", {
+    Text = GlobalText.AimbotInfiniteLockDistanceToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Aimbot.InfiniteDistance(Enabled)
+    end
+})
+AimbotSettingsGroupbox:AddDivider()
+AimbotTeamCheckToggle = AimbotSettingsGroupbox:AddToggle("AimbotTeamCheckToggle", {
+    Text = GlobalText.AimbotTeamCheckToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Aimbot.Settings.TeamCheck = Enabled
+    end
+})
+AimbotAliveCheckToggle = AimbotSettingsGroupbox:AddToggle("AimbotAliveCheckToggle", {
+    Text = GlobalText.AimbotAliveCheckToggle,
+    Default = true,
+    Callback = function(Enabled)
+        Aimbot.Settings.AliveCheck = Enabled
+    end
+})
+AimbotWallCheckToggle = AimbotSettingsGroupbox:AddToggle("AimbotWallCheckToggle", {
+    Text = GlobalText.AimbotWallCheckToggle,
+    Default = false,
+    Disabled = true,
+    Tooltip = GlobalText.AimbotWallCheckTooltip,
+    DisabledTooltip = GlobalText.AimbotWallCheckTooltip,
+    Callback = function(Enabled)
+        Aimbot.Settings.WallCheck = false
+    end
+})
+AimbotSettingsGroupbox:AddDivider()
+AimbotOffsetToMoveDirectionToggle = AimbotSettingsGroupbox:AddToggle("AimbotOffsetToMoveDirectionToggle", {
+    Text = GlobalText.AimbotOffsetToMoveDirectionToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Aimbot.Settings.OffsetToMoveDirection = Enabled
+    end
+})
+AimbotOffsetIncrementSlider = AimbotSettingsGroupbox:AddSlider("AimbotOffsetIncrementSlider", {
+    Text = GlobalText.AimbotOffsetIncrementSlider,
+    Default = 15,
+    Min = 0,
+    Max = 30,
+    Rounding = 0,
+    Suffix = "",
+    Compact = false,
+    HideMax = true,
+    Callback = function(Number)
+        Aimbot.Settings.OffsetIncrement = Number
+    end
+})
+AimbotSettingsGroupbox:AddDivider()
+AimbotSensitivitySlider = AimbotSettingsGroupbox:AddSlider("AimbotSensitivitySlider", {
+    Text = GlobalText.AimbotSensitivitySlider,
+    Default = 0,
+    Min = 0,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = false,
+    HideMax = true,
+    Callback = function(Number)
+        Aimbot.Settings.Sensitivity = Number / 100
+    end
+})
+AimbotSensitivity2Slider = AimbotSettingsGroupbox:AddSlider("AimbotSensitivity2Slider", {
+    Text = GlobalText.AimbotSensitivity2Slider,
+    Default = 100,
+    Min = 0,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = false,
+    HideMax = true,
+    Callback = function(Number)
+        Aimbot.Settings.Sensitivity2 = Number / 10
+    end
+})
+AimbotSettingsGroupbox:AddDivider()
+AimbotLockModeDropdown = AimbotSettingsGroupbox:AddDropdown("AimbotLockModeDropdown", {
+    Text = GlobalText.AimbotLockModeDropdown,
+    Values = {
+        GlobalText.CFrame,
+        GlobalText.Mousemoverel
+    },
+    Default = (Rivals and GlobalText.Mousemoverel) or GlobalText.CFrame,
+    Multi = false,
+    Callback = function(Mode)
+        if Mode == GlobalText.CFrame then
+            Aimbot.Settings.LockMode = 1
+            if Rivals then
+                Library:Notify({
+                    Title = GlobalText.RivalsCFrameLockTitle,
+                    Description = GlobalText.RivalsCFrameLockDescription,
+                    Time = 5
+                })
+            end
+        else
+            Aimbot.Settings.LockMode = 2
+        end
+    end
+})
+AimbotLockPartDropdown = AimbotSettingsGroupbox:AddDropdown("AimbotLockPartDropdown", {
+    Text = GlobalText.AimbotLockPartDropdown,
+    Values = {
+        GlobalText.Head,
+        GlobalText.HumanoidRootPart,
+        GlobalText.Torso,
+        GlobalText.LeftArm,
+        GlobalText.RightArm,
+        GlobalText.LeftLeg,
+        GlobalText.RightLeg,
+        GlobalText.UpperTorso,
+        GlobalText.LowerTorso,
+        GlobalText.LeftUpperArm,
+        GlobalText.LeftLowerArm,
+        GlobalText.LeftHand,
+        GlobalText.RightUpperArm,
+        GlobalText.RightLowerArm,
+        GlobalText.RightHand,
+        GlobalText.LeftUpperLeg,
+        GlobalText.LeftLowerLeg,
+        GlobalText.LeftFoot,
+        GlobalText.RightUpperLeg,
+        GlobalText.RightLowerLeg,
+        GlobalText.RightFoot
+    },
+    Default = GlobalText.Head,
+    Multi = false,
+    Callback = function(Part)
+        if Part == GlobalText.Head then
+            Aimbot.Settings.LockPart = "Head"
+        elseif Part == GlobalText.HumanoidRootPart then
+            Aimbot.Settings.LockPart = "HumanoidRootPart"
+        elseif Part == GlobalText.Torso then
+            Aimbot.Settings.LockPart = "Torso"
+        elseif Part == GlobalText.LeftArm then
+            Aimbot.Settings.LockPart = "Left Arm"
+        elseif Part == GlobalText.RightArm then
+            Aimbot.Settings.LockPart = "Right Arm"
+        elseif Part == GlobalText.LeftLeg then
+            Aimbot.Settings.LockPart = "Left Leg"
+        elseif Part == GlobalText.RightLeg then
+            Aimbot.Settings.LockPart = "Right Leg"
+        elseif Part == GlobalText.UpperTorso then
+            Aimbot.Settings.LockPart = "UpperTorso"
+        elseif Part == GlobalText.LowerTorso then
+            Aimbot.Settings.LockPart = "LowerTorso"
+        elseif Part == GlobalText.LeftUpperArm then
+            Aimbot.Settings.LockPart = "LeftUpperArm"
+        elseif Part == GlobalText.LeftLowerArm then
+            Aimbot.Settings.LockPart = "LeftLowerArm"
+        elseif Part == GlobalText.LeftHand then
+            Aimbot.Settings.LockPart = "LeftHand"
+        elseif Part == GlobalText.RightUpperArm then
+            Aimbot.Settings.LockPart = "RightUpperArm"
+        elseif Part == GlobalText.RightLowerArm then
+            Aimbot.Settings.LockPart = "RightLowerArm"
+        elseif Part == GlobalText.RightHand then
+            Aimbot.Settings.LockPart = "RightHand"
+        elseif Part == GlobalText.LeftUpperLeg then
+            Aimbot.Settings.LockPart = "LeftUpperLeg"
+        elseif Part == GlobalText.LeftLowerLeg then
+            Aimbot.Settings.LockPart = "LeftLowerLeg"
+        elseif Part == GlobalText.LeftFoot then
+            Aimbot.Settings.LockPart = "LeftFoot"
+        elseif Part == GlobalText.RightUpperLeg then
+            Aimbot.Settings.LockPart = "RightUpperLeg"
+        elseif Part == GlobalText.RightLowerLeg then
+            Aimbot.Settings.LockPart = "RightLowerLeg"
+        elseif Part == GlobalText.RightFoot then
+            Aimbot.Settings.LockPart = "RightFoot"
+        end
+    end
+})
+
+--|| Aimbot FOV Groupbox ||--
+
+AimbotFOVGroupbox = Tabs.Aimbot:AddRightGroupbox(GlobalText.AimbotFOVGroupbox)
+EnableAimbotFOVToggle = AimbotFOVGroupbox:AddToggle("EnableAimbotFOVToggle", {
+    Text = GlobalText.EnableAimbotFOVToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Aimbot.FOVSettings.Enabled = Enabled
+    end
+})
+VisibleAimbotFOVToggle = AimbotFOVGroupbox:AddToggle("VisibleAimbotFOVToggle", {
+    Text = GlobalText.VisibleAimbotFOVToggle,
+    Default = true,
+    Callback = function(Enabled)
+        Aimbot.FOVSettings.Visible = Enabled
+    end
+})
+AimbotFOVRadiusSlider = AimbotFOVGroupbox:AddSlider("AimbotFOVRadiusSlider", {
+    Text = GlobalText.AimbotFOVRadiusSlider,
+    Default = 120,
+    Min = 0,
+    Max = 720,
+    Rounding = 0,
+    Suffix = " px",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        Aimbot.FOVSettings.Radius = Number
+    end
+})
+AimbotFOVNumSidesSlider = AimbotFOVGroupbox:AddSlider("AimbotFOVNumSidesSlider", {
+    Text = GlobalText.AimbotFOVNumSidesSlider,
+    Default = 60,
+    Min = 3,
+    Max = 120,
+    Rounding = 0,
+    Suffix = "",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        Aimbot.FOVSettings.NumSides = Number
+    end
+})
+AimbotFOVThicknessSlider = AimbotFOVGroupbox:AddSlider("AimbotFOVThicknessSlider", {
+    Text = GlobalText.AimbotFOVThicknessSlider,
+    Default = 2,
+    Min = 1,
+    Max = 10,
+    Rounding = 0,
+    Suffix = " px",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        Aimbot.FOVSettings.Thickness = Number
+    end
+})
+AimbotFOVTransparencySlider = AimbotFOVGroupbox:AddSlider("AimbotFOVTransparencySlider", {
+    Text = GlobalText.AimbotFOVTransparencySlider,
+    Default = 65,
+    Min = 0,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        Aimbot.FOVSettings.Transparency = Number / 100
+    end
+})
+AimbotFOVFilledToggle = AimbotFOVGroupbox:AddToggle("AimbotFOVFilledToggle", {
+    Text = GlobalText.AimbotFOVFilledToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Aimbot.FOVSettings.Filled = Enabled
+    end
+})
+AimbotFOVGroupbox:AddDivider()
+AimbotFOVRainbowColorToggle = AimbotFOVGroupbox:AddToggle("AimbotFOVRainbowColorToggle", {
+    Text = GlobalText.AimbotFOVRainbowColorToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Aimbot.FOVSettings.RainbowColor = Enabled
+    end
+})
+AimbotFOVRainbowOutlineColorToggle = AimbotFOVGroupbox:AddToggle("AimbotFOVRainbowOutlineColorToggle", {
+    Text = GlobalText.AimbotFOVRainbowOutlineColorToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Aimbot.FOVSettings.RainbowOutlineColor = Enabled
+    end
+})
+AimbotFOVColorLabel = AimbotFOVGroupbox:AddLabel(GlobalText.AimbotFOVColorLabel):AddColorPicker("AimbotFOVColorPicker", {
+    Title = GlobalText.AimbotFOVColorPicker,
+    Default = Color3.fromRGB(255, 255, 255),
+    Callback = function(Color)
+        Aimbot.FOVSettings.Color = Color
+    end
+})
+AimbotFOVOutlineColorLabel = AimbotFOVGroupbox:AddLabel(GlobalText.AimbotFOVOutlineColorLabel):AddColorPicker("AimbotFOVOutlineColorPicker", {
+    Title = GlobalText.AimbotFOVOutlineColorPicker,
+    Default = Color3.fromRGB(0, 0, 0),
+    Callback = function(Color)
+        Aimbot.FOVSettings.OutlineColor = Color
+    end
+})
+AimbotFOVLockedColorLabel = AimbotFOVGroupbox:AddLabel(GlobalText.AimbotFOVLockedColorLabel):AddColorPicker("AimbotFOVLockedColorPicker", {
+    Title = GlobalText.AimbotFOVLockedColorPicker,
+    Default = Color3.fromRGB(255, 0, 0),
+    Callback = function(Color)
+        Aimbot.FOVSettings.LockedColor = Color
+    end
+})
+
+--|| Aimbot Developer Settings Groupbox ||--
+
+AimbotDeveloperSettingsGroupbox = Tabs.Aimbot:AddRightGroupbox(GlobalText.AimbotDeveloperSettingsGroupbox)
+AimbotUpdateModeDropdown = AimbotDeveloperSettingsGroupbox:AddDropdown("AimbotUpdateModeDropdown", {
+    Text = GlobalText.AimbotUpdateModeDropdown,
+    Values = {
+        GlobalText.RenderStepped,
+        GlobalText.Stepped,
+        GlobalText.Heartbeat
+    },
+    Default = GlobalText.RenderStepped,
+    Multi = false,
+    Callback = function(Mode)
+        if Mode == GlobalText.RenderStepped then
+            Aimbot.Settings.UpdateMode = "RenderStepped"
+        elseif Mode == GlobalText.Stepped then
+            Aimbot.Settings.UpdateMode = "Stepped"
+        elseif Mode == GlobalText.Heartbeat then
+            Aimbot.Settings.UpdateMode = "Heartbeat"
+        end
+    end
+})
+AimbotTeamCheckMethodDropdown = AimbotDeveloperSettingsGroupbox:AddDropdown("AimbotTeamCheckMethodDropdown", {
+    Text = GlobalText.AimbotTeamCheckMethodDropdown,
+    Values = {
+        GlobalText.TeamColor,
+        GlobalText.Team
+    },
+    Default = GlobalText.TeamColor,
+    Multi = false,
+    Callback = function(Method)
+        if Method == GlobalText.TeamColor then
+            Aimbot.Settings.TeamCheckMethod = "TeamColor"
+        elseif Method == GlobalText.Team then
+            Aimbot.Settings.TeamCheckMethod = "Team"
+        end
+    end
+})
+
+--|| A Lil Troll Groupbox ||--
+
+ALilTrollGroupbox = Tabs.Aimbot:AddRightGroupbox(GlobalText.ALilTrollGroupbox)
+GodButton = ALilTrollGroupbox:AddButton({
+    Text = GlobalText.GodButton,
+    DoubleClick = true,
+    Func = function()
+        Universals.God()
+    end
+})
+InvisibleToggle = ALilTrollGroupbox:AddToggle("InvisibleToggle", {
+    Text = GlobalText.InvisibleToggle,
+    Default = false,
+    Callback = function(Enabled)
+        if Enabled then
+            Universals.Invisible()
+        else
+            Universals.Visible()
+        end
+    end
+})
+
+--|| Fling Groupbox ||--
+
+FlingGroupbox = Tabs.Aimbot:AddRightGroupbox(GlobalText.FlingGroupbox)
+FlingToggle = FlingGroupbox:AddToggle("FlingToggle", {
+    Text = GlobalText.FlingToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.Fling(Enabeld)
+    end
+})
+WalkFlingToggle = FlingGroupbox:AddToggle("WalkFlingToggle", {
+    Text = GlobalText.WalkFlingToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.WalkFling(Enabled)
+    end
+})
+InvisFlingButton = FlingGroupbox:AddButton({
+    Text = GlobalText.InvisFlingButton,
+    DoubleClick = true,
+    Func = function()
+        Universals.InvisFling()
+    end
+})
+ALilTrollGroupbox:AddDivider()
+AntiFlingToggle = FlingGroupbox:AddToggle("AntiFlingToggle", {
+    Text = GlobalText.AntiFlingToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.AntiFling(Enabled)
+    end
+})
+
 --|| Menu Groupbox ||--
 
 MenuGroup = Tabs.UI:AddLeftGroupbox(GlobalText.MenuGroupbox)
@@ -2363,8 +2960,12 @@ ThemeManager:ApplyToTab(Tabs.UI)
 
 --|| End Loading ||--
 
+if LeastVersion ~= CurrentVersion then
+    print(GlobalText.NewVersion)
+    Library:Notify(GlobalText.NewVersion, 5)
+end
+
 getgenv().MFeeeLoading = false
 getgenv().MFeeeLoaded = true
-Aimbot.Load()
 Options.FontFace:SetValue("Gotham")
 SaveManager:LoadAutoloadConfig()

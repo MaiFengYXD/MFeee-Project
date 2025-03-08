@@ -1341,10 +1341,8 @@ if not MFeeeQueueTPSeted and QueueTeleport then
     getgenv().MFeeeQueueTPSeted = true
     QueueTeleport([[
         local TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
-        if isfile(TPFilePath) then
-            if readfile(TPFilePath) == "true" then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/MaiFengYXD/MFeee-Project/main/Release/MFeee%7E%20Universal"))()
-            end
+        if isfile(TPFilePath) and readfile(TPFilePath) == "true" then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/MaiFengYXD/MFeee-Project/main/Release/MFeee%7E%20Universal.lua"))()
         end
     ]])
 end

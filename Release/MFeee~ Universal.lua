@@ -1,3 +1,5 @@
+--!strict
+
 --[[
 
 $$\      $$\ $$$$$$$$\                              ~
@@ -14,7 +16,7 @@ License  | CC0-1.0
 Version  | Alpha 0.3.8
 
 # Project Started on 2024-11-13 #
-# This Version was Last Edited on 2025-03-06 #
+# This Version was Last Edited on 2025-03-08 #
 
 Issues Report on Github or https://discord.gg/YBQUd8X8PK
 QQ: 3607178523
@@ -23,24 +25,34 @@ QQ: 3607178523
 
 
 
+--|| Studio Check ||--
+
+Cloneref = cloneref or function(x) return x end
+RunService = Cloneref(game:GetService("RunService"))
+CoreGui = Cloneref(game:GetService("CoreGui"))
+if RunService:IsStudio() then
+    local Message = Instance.new("Message")
+    Message.Text = "Do You Want to Cheat In Studio?"
+    Message.Parent = CoreGui
+    wait(3)
+    Message:Destroy()
+    return
+end
+
 --|| Language Config ||--
 
+--// Get Language \\--
 makefolder("MFeee~ Project")
 LanguageFilePath = "MFeee~ Project/Language.txt"
-
 if isfile(LanguageFilePath) then
-    local content = readfile(LanguageFilePath)
-    if content == "Chinese" then
-        getgenv().MFeeeLanguage = "Chinese"
-    else
-        getgenv().MFeeeLanguage = "English"
-    end
+    getgenv().MFeeeLanguage = readfile(LanguageFilePath) == "Chinese" and "Chinese" or "English"
 else
     writefile(LanguageFilePath, "English")
     getgenv().MFeeeLanguage = "English"
-    getgenv().MFeeeIAMNEW = true
+    MFeeeIAMNEW = true
 end
 
+--// Localization: Chinese or English \\--
 GlobalText = (MFeeeLanguage == "Chinese" and {
     Oaklands = "😵 你正尝试在橡树地内运行MFeee, 但橡树地有UI反作弊, 如果你仍要运行, 我无法保证你不会被加入黑名单",
     ScriptLoaded = "🤧 已经加载了脚本了！",
@@ -210,7 +222,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     Legacy = "传统",
     Unified = "统一",
     ESPGlobalSettingsGroupbox = "全局设置",
-    ESPAllToggle = "透视",
+    ESPAllToggle = "透视玩家",
     ESPTypeDropdown = "透视类型",
     Text = "文字",
     SphereAdornment = "球体",
@@ -222,8 +234,8 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     ESPArrowToggle = "透视箭头",
     ESPRandomColorToggle = "透视随机颜色",
     ESPColorLabel = "透视颜色",
-    ESPColorPicker = "透视颜色",
-    ESPTransparencySlider = "透视透明度",
+    ESPColorPicker = "选择框颜色",
+    ESPTransparencySlider = "透视主透明度",
     ESPHighlightGroupbox = "高亮类型设置",
     ESPFillColorLabel = "填充颜色",
     ESPFillColorPicker = "填充颜色",
@@ -243,7 +255,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     Top = "顶部",
     Mouse = "鼠标",
     ESPTracerThicknessSlider = "追踪线粗细",
-    ESPTracerTransparencySlider = "追踪线透明度",
+    ESPTracerTransparencySlider = "追踪线不透明度",
     ESPArrowGroupbox = "箭头设置",
     ESPArrowCenterOffsetSlider = "箭头中心偏移",
     ESPHugeDistanceToggle = "无限透视距离",
@@ -431,6 +443,15 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     InstantPromptMethodDropdown = "瞬间互动方式",
     FirePP = "Fireproximityprompt",
     HoldDuration = "修改按住时间为0",
+    WhyYouAreUsingConsole = "为什么你要使用控制台运行此脚本?",
+    MobileNotSupport = "😥 很抱歉, 脚本的移动端体验正在优化中, 但是很快就会上线!",
+    GayESPToggle = "彩虹颜色",
+    AutoInteractionMethodDropdown = "自动互动方式",
+    AIFromCharacter = "以角色位置",
+    AIFromCamera = "以相机位置",
+    ESPDisplayDistanceToggle = "显示距离",
+    ESPShowTextToggle = "显示文字",
+    TimeOutLimiterSlider = "超时限制",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -612,7 +633,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     ESPArrowToggle = "Arrow",
     ESPRandomColorToggle = "Random Color",
     ESPColorLabel = "ESP Color",
-    ESPColorPicker = "ESP Color",
+    ESPColorPicker = "Selection Box Color",
     ESPTransparencySlider = "Transparency",
     ESPHighlightGroupbox = "Highlight Settings",
     ESPFillColorLabel = "Fill Color",
@@ -821,32 +842,147 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     InstantPromptMethodDropdown = "Instant Prompt Method",
     FirePP = "Fireproximityprompt",
     HoldDuration = "HoldDuration = 0",
+    WhyYouAreUsingConsole = "Why You Are Using Console to Run This Script?",
+    MobileNotSupport = "😥 I'm Sorry, The Script's Mobile Experience is Under Optimization, But It Will Be Coming Soon!",
+    GayESPToggle = "Rainbow Color",
+    AutoInteractionMethodDropdown = "Auto Interaction Method",
+    AIFromCharacter = "From Character",
+    AIFromCamera = "From Camera",
+    ESPDisplayDistanceToggle = "Display Distance",
+    ESPShowTextToggle = "Show Text",
+    TimeOutLimiterSlider = "Timeout Limiter",
 }
 
 --|| Oaklands Check ||--
 
+Players = Cloneref(game:GetService("Players"))
+Speaker = Players.LocalPlayer
 if game.PlaceId == 9938675423 then
-    game.Players.LocalPlayer:Kick(GlobalText.Oaklands)
+    Speaker:Kick(GlobalText.Oaklands)
+    return
+end
+
+--|| Device Check ||--
+
+UserInputService = Cloneref(game:GetService("UserInputService"))
+GuiService = Cloneref(game:GetService("GuiService"))
+if GuiService:IsTenFootInterface() then
+    local Message = Instance.new("Message")
+    Message.Text = GlobalText.WhyYouAreUsingConsole
+    Message.Parent = CoreGui
+    wait(3)
+    Message:Destroy()
+    return
+elseif UserInputService.TouchEnabled and (not UserInputService.MouseEnabled or not UserInputService.KeyboardEnabled) then
+    local Message = Instance.new("Message")
+    Message.Text = GlobalText.MobileNotSupport
+    Message.Parent = CoreGui
+    wait(3)
+    Message:Destroy()
     return
 end
 
 --|| Loaded Check ||--
 
-if MFeeeLoaded then
+if getgenv().MFeeeLoaded then
     warn(GlobalText.ScriptLoaded)
     return
-elseif MFeeeLoading then
+elseif getgenv().MFeeeLoading then
     warn(GlobalText.ScriptLoading)
     return
 end
 
 --|| Start Loading ||--
 
+getgenv().MFeeeLoaded = false
 getgenv().MFeeeLoading = true
 
---// Beautiful Arts 😎 \\--
+--// Festivals and Emojis \\--
+Year = tonumber(os.date("%Y"))
+function EasterDate()
+    local A = math.floor(Year / 100)
+    local B = math.floor((13 + 8 * A) / 25)
+    local C = (15 - B + A - math.floor(A / 4)) % 30
+    local D = (4 + A - math.floor(A / 4)) % 7
+    local E = (19 * (Year % 19) + C) % 30
+    local F = (2 * (Year % 4) + 4 * (Year % 7) + 6 * E + D) % 7
+    local G = (22 + E + F)
+    return (E == 29 and F == 6 and "04 19") or (E == 28 and F == 6 and "04 18") or (31 < G and ("04 %02d"):format(G - 31)) or ("03 %02d"):format(G)
+end
+
+function MotherDay()
+    for Day = 8, 14 do
+        if os.date("%w", os.time{year = Year, month = 5, day = Day}) == "0" then
+            return ("05 %02d"):format(Day)
+        end
+    end
+end
+
+function FatherDay()
+    for Day = 15, 21 do
+        if os.date("%w", os.time{year = Year, month = 6, day = Day}) == "0" then
+            return ("06 %02d"):format(Day)
+        end
+    end
+end
+
+EmojiList = (MFeeeLanguage == "Chinese" and ({
+    ["01 01"] = "🎇",
+    ["01 26"] = "🥣", -- 2026
+    ["02 14"] = ({"💚", "💛", "🧡", "❤️", "💗"})[math.random(5)],
+    ["02 16"] = "🧨", -- 2026
+    ["02 17"] = "🧧", -- 2026
+    ["02 18"] = "🧧", -- 2026
+    ["02 19"] = "🧧", -- 2026
+    ["02 20"] = "🧧", -- 2026
+    ["02 21"] = "🧧", -- 2026
+    ["02 22"] = "🧧", -- 2026
+    ["03 03"] = "🏮", -- 2026
+    ["03 08"] = "👩",
+    ["03 12"] = "🌳",
+    [EasterDate()] = "🥚",
+    ["04 01"] = ({"🃏", "🤡", "😂", "🤣", "😡", "🤬", "😇", "🔥💀🔥", "🔥", "💀", "🐀", "🤨", "🤓", "🤑", "🤮", "👽", "😈", "👿", "🤘", "👎", "🈲", "🔞", "😤", "😕", "😏", "😒", "♿", "😎", "🤗", "🤔", "🧐", "👀", "❌", "✅", "⚠️", "😓", "🥵", "🙄", "🙄💅", "💄🙄💅", "🆘", "🉑", "😭", "😱", "🥴", "🥴🥴", "🤢", "🥸", "🐽", "👾", "🛠️", "🧧", "🧧", "🧧", "🧧", "🧧", "🧧", "🍃", "🏭", "🏭", "🏭","🏭", "🏭", "🥮", "👩", "👩", "👨", "👶", "🏮", "🎇", "🌳", "🎃", "🎃", "🎃", "🎃", "💚", "💛", "🧡", "❤️", "💗", "🧨", "🥣", "🪦", "🪦", "🪦", "🎄", "🎄", "🥚"})[math.random(88)],
+    ["04 04"] = "🪦",
+    ["04 05"] = "🪦",
+    ["04 06"] = "🪦",
+    ["05 01"] = "🏭",
+    ["05 02"] = "🏭",
+    ["05 03"] = "🏭",
+    ["05 04"] = "🏭",
+    ["05 05"] = "🏭",
+    [MotherDay()] = "👩",
+    ["05 31"] = "🍃", -- 2025
+    ["06 01"] = "👶",
+    [FatherDay()] = "👨",
+    ["10 06"] = "🥮", -- 2025
+    ["10 29"] = "🎃",
+    ["10 30"] = "🎃",
+    ["10 31"] = "🎃",
+    ["11 01"] = "🎃",
+    ["12 24"] = "🎄",
+    ["12 25"] = "🎄"
+})[os.date("%m %d")]) or ({
+    ["01 01"] = "🎇",
+    ["02 14"] = ({"💚", "💛", "🧡", "❤️", "💗"})[math.random(5)],
+    ["03 08"] = "👩",
+    ["03 12"] = "🌳",
+    [EasterDate()] = "🥚",
+    ["04 01"] = ({"🃏", "🤡", "😂", "🤣", "😡", "🤬", "😇", "🔥💀🔥", "🔥", "💀", "🐀", "🤨", "🤓", "🤑", "🤮", "👽", "😈", "👿", "🤘", "👎", "🈲", "🔞", "😤", "😕", "😏", "😒", "♿", "😎", "🤗", "🤔", "🧐", "👀", "❌", "✅", "⚠️", "😓", "🥵", "🙄", "🙄💅", "💄🙄💅", "🆘", "🉑", "😭", "😱", "🥴", "🥴🥴", "🤢", "🥸", "🐽", "👾", "🛠️", "🧧", "🧧", "🧧", "🧧", "🧧", "🧧", "🍃", "🏭", "🏭", "🏭","🏭", "🏭", "🥮", "👩", "👩", "👨", "👶", "🏮", "🎇", "🌳", "🎃", "🎃", "🎃", "🎃", "💚", "💛", "🧡", "❤️", "💗", "🧨", "🥣", "🪦", "🪦", "🪦", "🎄", "🎄", "🥚"})[math.random(88)],
+    [MotherDay()] = "👩",
+    ["06 01"] = "👶",
+    [FatherDay()] = "👨",
+    ["10 29"] = "🎃",
+    ["10 30"] = "🎃",
+    ["10 31"] = "🎃",
+    ["11 01"] = "🎃",
+    ["12 24"] = "🎄",
+    ["12 25"] = "🎄"
+})[os.date("%m %d")]
+Emoji = EmojiList or ""
+
+--// Beautiful Arts \\--
 Arts = {
--- | https://patorjk.com/software/taag | --
+--/ https://patorjk.com/software/taag \--
     [[
 
                  .-.                                
@@ -918,11 +1054,11 @@ _|"""""| _| """ | _|"""""| _|"""""| _|"""""|
     ]],
     [[
 
-███▄ ▄███▓  █████▒▓█████ ▓█████ ▓█████ 
+███▄ ▄▄███▓ ██████▒▓█████ ▓█████ ▓█████ 
 ▓██▒▀█▀ ██▒▓██   ▒ ▓█   ▀ ▓█   ▀ ▓█   ▀ 
-▓██    ▓██░▒████ ░ ▒███   ▒███   ▒███   
-▒██    ▒██ ░▓█▒  ░ ▒▓█  ▄ ▒▓█  ▄ ▒▓█  ▄ 
-▒██▒   ░██▒░▒█░    ░▒████▒░▒████▒░▒████▒
+▓██    ▓██░▒████ ░▒███   ▒███   ▒███    
+▒██    ▒██ ░▓█▒  ░▒▓█  ▄ ▒▓█  ▄ ▒▓█  ▄  
+▒██▒   ░██▒░▒█░   ░▒████▒░▒████▒░▒████▒ 
 ░ ▒░   ░  ░ ▒ ░    ░░ ▒░ ░░░ ▒░ ░░░ ▒░ ░
 ░  ░      ░ ░       ░ ░  ░ ░ ░  ░ ░ ░  ░
 ░      ░    ░ ░       ░      ░      ░   
@@ -1031,93 +1167,48 @@ $$ | \_/ $$ |$$ |      \$$$$$$$\ \$$$$$$$\ \$$$$$$$\
 print(Arts[math.random(18)])
 
 --// Environment Test \\--
-EnvTested = false
-function EnvTest()
-    print("————————————————————")
-    Cloneref = cloneref or function(x) return x end
-    Heartbeat = Cloneref(game:GetService("RunService")).Heartbeat
-    Workspace = Cloneref(game:GetService("Workspace"))
-    QueueTeleport = (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) or queue_on_teleport
-    Setclipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
-    if mouse1press and mouse1release then
-        print(GlobalText.Mouseclick1OK)
-    else
-        print(GlobalText.Mouseclick1NO)
-    end
-    if mouse2press and mouse2release then
-        print(GlobalText.Mouseclick2OK)
-    else
-        print(GlobalText.Mouseclick2NO)
-    end
-    if mousemoverel then
-        print(GlobalText.MousemoverelOK)
-    else
-        print(GlobalText.MousemoverelNO)
-    end
-    if mousemoveabs then
-        print(GlobalText.MousemoveabsOK)
-    else
-        print(GlobalText.MousemoveabsNO)
-    end
-    if QueueTeleport then
-        print(GlobalText.QueueTeleportOK)
-    else
-        print(GlobalText.QueueTeleportNO)
-    end
-    if Setclipboard then
-        print(GlobalText.ToclipboardOK)
-    else
-        print(GlobalText.ToclipboardNO)
-    end
-    local function TestHookmetamethod()
-        if hookmetamethod then
-            local Object = setmetatable({}, { __index = newcclosure(function() return false end), __metatable = "Locked!" })
-            local Ref = hookmetamethod(Object, "__index", function() return true end)
-            if Object.test ~= false and Ref() ~= true then
-                CanHookMM = true
-            end
-        else
-            CanHookMM = false
-        end
-    end
-    TestHookmetamethod()
-    if CanHookMM then
-        print(GlobalText.Hookmetamethod)
-    else
-        print(GlobalText.NoHookmetamethod)
-    end
-    local function TestFireProximityPrompt()
-        if fireproximityprompt then
-            local Part = Instance.new("Part")
-            Part.CFrame = CFrame.new(0, 0, 0)
-            Part.Anchored = true
-            Part.Parent = Workspace
-            local ProximityPrompt = Instance.new("ProximityPrompt")
-            ProximityPrompt.MaxActivationDistance = math.huge
-            ProximityPrompt.RequiresLineOfSight = false
-            ProximityPrompt.Triggered:Connect(function()
-                Part:Destroy()
-                CanFirePP = true
-            end)
-            ProximityPrompt.Parent = Part
-            fireproximityprompt(ProximityPrompt)
-        else
-            CanFirePP = false
-        end
-    end
-    TestFireProximityPrompt()
-    if CanFirePP then
-        print(GlobalText.Fireproximityprompt)
-    else
-        print(GlobalText.NoFireproximityprompt)
-    end
-    EnvTested = true
-    print("————————————————————")
+Workspace = Cloneref(game:GetService("Workspace"))
+QueueTeleport = (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) or queue_on_teleport
+Setclipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
+
+print("————————————————————")
+print((mouse1press and mouse1release and GlobalText.Mouseclick1OK) or GlobalText.Mouseclick1NO)
+print((mouse2press and mouse2release and GlobalText.Mouseclick2OK) or GlobalText.Mouseclick2NO)
+print((mousemoverel and GlobalText.MousemoverelOK) or GlobalText.MousemoverelNO)
+print((mousemoveabs and GlobalText.MousemoveabsOK) or GlobalText.MousemoveabsNO)
+print((QueueTeleport and GlobalText.QueueTeleportOK) or GlobalText.QueueTeleportNO)
+print((Setclipboard and GlobalText.ToclipboardOK) or GlobalText.ToclipboardNO)
+
+if hookmetamethod then
+    local Object = setmetatable({}, { __index = newcclosure(function() return false end), __metatable = "Locked!" })
+    local Ref = hookmetamethod(Object, "__index", function() return true end)
+    CanHookMM = Object.test ~= false and Ref() ~= true
+else
+    CanHookMM = false
 end
-EnvTest()
-repeat
-    Heartbeat:Wait()
-until EnvTested
+
+print((CanHookMM and GlobalText.Hookmetamethod) or GlobalText.NoHookmetamethod)
+
+if fireproximityprompt then
+    local Part = Instance.new("Part")
+    Part.Parent = Workspace
+    Part.CFrame = CFrame.new(0, 1e4, 0)
+    Part.Anchored = true
+    local ProximityPrompt = Instance.new("ProximityPrompt")
+    ProximityPrompt.MaxActivationDistance = math.huge
+    ProximityPrompt.RequiresLineOfSight = false
+    ProximityPrompt.Triggered:Connect(function()
+        Part:Destroy()
+        CanFirePP = true
+    end)
+    ProximityPrompt.Parent = Part
+    fireproximityprompt(ProximityPrompt)
+else
+    CanFirePP = false
+end
+
+print((CanFirePP and GlobalText.Fireproximityprompt) or GlobalText.NoFireproximityprompt)
+print("————————————————————")
 
 --// Load Obsidian and Modules \\--
 Repo = "https://raw.githubusercontent.com/"
@@ -1164,9 +1255,8 @@ task.spawn(function()
     end
 end)
 task.spawn(function()
-    ESPLibrary = loadstring(game:HttpGet(Repo .. "mstudio45/MSESP/main/source.luau"))()
+    ESPLibrary = loadstring(game:HttpGet(Repo .. "mstudio45/MSESP/refs/heads/main/source.luau"))()
     if TimeOut and ESPLibrary then
-        ESPLibrary:Clear()
         ESPLibrary:Destroy()
     elseif ESPLibrary then
         print(GlobalText.ESPLibraryLoaded)
@@ -1200,19 +1290,27 @@ task.spawn(function()
     Preload("15675032796")
 end)
 
+makefolder("MFeee~ Project")
+TimeOutLimiteFilePath = "MFeee~ Project/TimeOutLimite.txt"
+if isfile(TimeOutLimiteFilePath) then
+    TimeOutLimite = math.max(5, math.min(tonumber(readfile(TimeOutLimiteFilePath)) or 10, 60))
+else
+    writefile(TimeOutLimiteFilePath, "10")
+    TimeOutLimite = 10
+end
+
+Heartbeat = RunService.Heartbeat
 repeat
     LoadTimer = (LoadTimer or 0) + Heartbeat:Wait()
-    if LoadTimer >= 15 then
+    if LoadTimer >= TimeOutLimite then
         TimeOut = true
         getgenv().MFeeeLoaded = false
         getgenv().MFeeeLoading = false
-        warn(GlobalText.LoadFaild)
         Library = Library and Library:Unload()
         Universals = Universals and Universals:Exit()
-        ESPLibrary = ESPLibrary and ESPLibrary:Clear()
         ESPLibrary = ESPLibrary and ESPLibrary:Destroy()
         Aimbot = Aimbot and Aimbot:Exit()
-        error("load threads time out, time limit: 15s")
+        error(GlobalText.LoadFaild, 2)
         break
     end
 until Library and ThemeManager and SaveManager and Universals and ESPLibrary and Aimbot
@@ -1220,9 +1318,7 @@ print(GlobalText.AssetsLoaded)
 
 --|| Variables ||--
 
-Players = Cloneref(game:GetService("Players"))
 Teams = Cloneref(game:GetService("Teams"))
-Speaker = Players.LocalPlayer
 Character = Speaker.Character
 Humanoid = Character and Character:FindFirstChild("Humanoid")
 Arsenal = (game.PlaceId == 286090429 and true) or false
@@ -1273,7 +1369,7 @@ end
 --|| Main Window ||--
 
 MainWindow = Library:CreateWindow({
-    Title = GlobalText.MainWindowTitle,
+    Title = GlobalText.MainWindowTitle .. Emoji,
     Footer = GlobalText.MainWindowFooter .. Speaker.Name,
     Icon = 77335290652571,
     NotifySide = "Right",
@@ -1324,10 +1420,9 @@ ExecutorSUNCTestButton = ExecutorUNCTestButton:AddButton({
         NotifySound(GlobalText.SUNCTesting, 5)
         local ok, faild = pcall(function()
             loadstring(game:HttpGet("https://gitlab.com/sens3/nebunu/-/raw/main/HummingBird8's_sUNC_yes_i_moved_to_gitlab_because_my_github_acc_got_brickedd/sUNCm0m3n7.lua"))()
-        end)
-        if ok then
             NotifySound(GlobalText.SUNCSuc, 5)
-        else
+        end)
+        if faild then
             NotifySound(faild, 5)
         end
     end
@@ -1424,11 +1519,7 @@ ExecuteOnTeleportToggle = QueueTeleport and MainOthersGroupbox:AddToggle("Execut
     Default = (isfile(TPFilePath) and readfile(TPFilePath) == "true" and true) or false,
     Callback = function(Enabled)
         makefolder("MFeee~ Project")
-        if Enabled then
-            writefile(TPFilePath, "true")
-        else
-            writefile(TPFilePath, "false")
-        end
+        writefile(TPFilePath, Enabled and "true" or "false")
     end
 })
 AntiKickToggle = MainOthersGroupbox:AddToggle("AntiKickToggle", {
@@ -1522,6 +1613,21 @@ AnimationSpeedSlider = AdvancedGroupbox:AddSlider("AnimationSpeedSlider", {
     HideMax = true,
     Callback = function(Number)
         EasingDuration = Number
+    end
+})
+AdvancedGroupbox:AddDivider()
+TimeOutLimiterSlider = AdvancedGroupbox:AddSlider("TimeOutLimiterSlider", {
+    Text = GlobalText.TimeOutLimiterSlider,
+    Default = TimeOutLimite,
+    Min = 5,
+    Max = 60,
+    Rounding = 0,
+    Suffix = " s",
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        TimeOutLimite = Number
+        writefile(TimeOutLimiteFilePath, tostring(Number))
     end
 })
 
@@ -1691,6 +1797,18 @@ AutoInteractionToggle = PlayerFeaturesGroupbox:AddToggle("AutoInteractionToggle"
     NoUI = false,
     SyncToggleState = false,
 })
+AutoInteractionMethodDropdown = PlayerFeaturesGroupbox:AddDropdown("AutoInteractionMethodDropdown", {
+    Text = GlobalText.AutoInteractionMethodDropdown,
+    Values = {
+        GlobalText.AIFromCharacter,
+        GlobalText.AIFromCamera
+    },
+    Default = GlobalText.AIFromCharacter,
+    Multi = false,
+    Callback = function(Method)
+        AIMethod = Method == GlobalText.AIFromCharacter and "Character" or "Camera"
+    end
+})
 InstantPromptToggle = PlayerFeaturesGroupbox:AddToggle("InstantPromptToggle", {
     Text = GlobalText.InstantPromptToggle,
     Default = false,
@@ -1723,6 +1841,26 @@ PromptNoclipToggle = PlayerFeaturesGroupbox:AddToggle("PromptNoclipToggle", {
     Default = false,
     Callback = function(Enabled)
         Universals.RequiresLineOfSight(Enabled)
+    end
+})
+PlayerFeaturesGroupbox:AddDivider()
+FastResetToggle = PlayerFeaturesGroupbox:AddToggle("FastResetToggle", {
+    Text = GlobalText.FastResetToggle,
+    Default = false,
+    Callback = function(Enabled)
+        AllowFastReset = Enabled
+    end
+}):AddKeyPicker("FastResetKeyPicker", {
+    Text = GlobalText.FastResetKeybind,
+    Mode = "Hold",
+    NoUI = false,
+    SyncToggleState = false,
+    Callback = function(Enabled)
+        if Enabled and AllowFastReset then
+            pcall(function()
+                Speaker.Character:FindFirstChildOfClass("Humanoid").Health = 0
+            end)
+        end
     end
 })
 
@@ -1866,7 +2004,7 @@ HipHeightToggle = WeirdGruopbox:AddToggle("HipHeightToggle", {
 })
 HipHeightSlider = WeirdGruopbox:AddSlider("HipHeightSlider", {
     Text = GlobalText.HipHeightSlider,
-    Default = Character and Humanoid and Humanoid.HipHeight or 2.25,
+    Default = Character and Humanoid and math.round(Humanoid.HipHeight * 100) / 100 or 2.25,
     Min = -2.50,
     Max = 69,
     Rounding = 2,
@@ -1894,7 +2032,7 @@ MaxSlopeAngleToggle = WeirdGruopbox:AddToggle("MaxSlopeAngleToggle", {
 })
 MaxSlopeAngleSlider = WeirdGruopbox:AddSlider("MaxSlopeAngleSlider", {
     Text = GlobalText.MaxSlopeAngleSlider,
-    Default = Character and Humanoid and Humanoid.MaxSlopeAngle or 89,
+    Default = Character and Humanoid and math.round(Humanoid.MaxSlopeAngle * 10) / 10 or 89,
     Min = 0,
     Max = 89.9,
     Rounding = 1,
@@ -1915,7 +2053,7 @@ PlayerScaleToggle = WeirdGruopbox:AddToggle("PlayerScaleToggle", {
 })
 PlayerScaleSlider = WeirdGruopbox:AddSlider("PlayerScaleSlider", {
     Text = GlobalText.PlayerScaleSlider,
-    Default = Character and Character:GetScale() or 1,
+    Default = Character and math.round(Character:GetScale() * 100) / 100 or 1,
     Min = 0.01,
     Max = 50,
     Rounding = 2,
@@ -2347,94 +2485,243 @@ TechnologyDropdown = AmbientCustomGruopbox:AddDropdown("TechnologyDropdown", {
     end
 })
 
---|| ESP Series ||--
+--|| ESP Functions ||--
 
---// Variables \\--
+ESPConnections = {
+    CA = {},
+    TC = {}
+}
+ESPElements = {}
+ESPVisible = true
 
---/ Color \--
-ESPSurfaceColor = Color3.fromRGB(255, 255, 255)
-ESPTextColor = Color3.fromRGB(255, 255, 255)
-ESPFillColor = Color3.fromRGB(255, 255, 255)
-ESPOutlineColor = Color3.fromRGB(255, 255, 255)
-ESPTracerColor = Color3.fromRGB(255, 255, 255)
-ESPArrowColor = Color3.fromRGB(255, 255, 255)
+function ESPConditions(Player)
+    if not AllowESP then
+        return false
+    elseif not ESPMe and Player == Speaker then
+        return false
+    elseif ESPTeamCheck and #Teams:GetTeams() > 1 and Player.Team == Speaker.Team then
+        return false
+    end
+    return true
+end
 
---/ Numbers \--
-ESPStudsOffset = Vector3.new()
-ESPTextSize = 22
-ESPThickness = 0.1
-ESPFillTransparency = 0.6
-ESPOutlineTransparency = 0
-ESPMaxDistance = 1000
-ESPTransparency = 0.65
-ESPTracerThickness = 1
-ESPTracerTransparency = 1 -- Opposite to Roblox! --
-ESPArrowCenterOffset = 300
-
---/ Booleans \--
-ESPMe = false
-ESPRandomColor = false
-TracerEnabled = false
-ArrowEnabled = false
-ESPInstantApply = false
-ESPDisplayName = true
-ESPElement = nil
-
---/ Strings \--
-ESPType = (Arsenal and "SelectionBox") or "Highlight"
-TracerFrom = "Bottom"
-
---/ Table \--
-ESPPlayerConnections = {}
-
---// Functions \\--
-function ESPPlayerAdded(Player)
-    local TeamColor = Player.TeamColor.Color
-    local function OnCharacterAdded(Character)
-        if not AllowESP or not MFeeeLoaded then
-            return
+function ESPHandlePlayer()
+    for _, Player in pairs(Players:GetPlayers()) do
+        if ESPConditions(Player) then
+            ESPHandleCharacter(Player)
+            ESPConnections.CA[Player] = (ESPConnections.CA[Player] and ESPConnections.CA[Player]:Disconnect()) or Player.CharacterAdded:Connect(function()
+                ESPHandleCharacter(Player)
+            end)
+            ESPConnections.TA = (ESPConnections.TA and ESPConnections.TA:Disconnect()) or Teams.ChildAdded:Connect(function()
+                ESPRestart()
+            end)
+            ESPConnections.TC[Player] = (ESPConnections.TC[Player] and ESPConnections.TC[Player]:Disconnect()) or Player.Team and Player.Team.Changed:Connect(function()
+                ESPHandlePlayer()
+            end)
         end
-        if (Player == Speaker and not ESPMe) or (Player.TeamColor == Speaker.TeamColor and #Teams:GetTeams() > 1 and ESPTeamCheck) then
-            return
-        end
+    end
+end
+
+function ESPHandleCharacter(Player)
+    if ESPConditions(Player) then
+        local TeamColor = Player.TeamColor.Color
+        local Character = Player.Character or Player.CharacterAdded:Wait()
         Character:WaitForChild("HumanoidRootPart", math.huge)
-        local Humanoid = Character:WaitForChild("Humanoid", math.huge)
-        local Health = Humanoid and math.round(Humanoid.Health)
-        local HealthDisplay = "[" .. tostring(Health) .. "] "
-        local PlayerName = ESPDisplayName and tostring(Player.DisplayName) or tostring(Player.Name)
-        ESPElement = ESPLibrary:Add({
-            Name = (ESPShowHealth and HealthDisplay .. PlayerName) or PlayerName,
+        Character:WaitForChild("Humanoid", math.huge)
+        ESPElements[Player] = ESPLibrary:Add({
+            Name = ESPDisplayName and tostring(Player.DisplayName) or tostring(Player.Name),
             Model = Character,
-            Color = (ESPTeamColor and TeamColor) or ESPTextColor,
-            MaxDistance = ESPMaxDistance,
-            StudsOffset = ESPStudsOffset,
-            TextSize = ESPTextSize,
-            ESPType = ESPType,
-            SurfaceColor = (ESPTeamColor and TeamColor) or ESPSurfaceColor,
-            FillColor = (ESPTeamColor and TeamColor) or ESPFillColor,
-            OutlineColor = (ESPTeamColor and TeamColor) or ESPOutlineColor,
-            FillTransparency = ESPFillTransparency,
-            OutlineTransparency = ESPOutlineTransparency,
-            Transparency = ESPTransparency,
+            Visible = ESPVisible,
+            Color = ESPTeamColor and TeamColor or ESPMainColor or Color3.new(1, 1, 1),
+            MaxDistance = ESPMaxDistance or 5000,
+            TextSize = ESPTextSize or 22,
+            ESPType = ESPType or Arsenal and "SelectionBox" or "Highlight",
+            Thickness = ESPMainThickness or 0.1,
+            Transparency = ESPMainTransparency or 0.65,
+            SurfaceColor = ESPTeamColor and TeamColor or ESPSelectionBoxColor or Color3.new(1, 1, 1),
+            FillColor = ESPTeamColor and TeamColor or ESPFillColor or Color3.new(1, 1, 1),
+            OutlineColor = ESPTeamColor and TeamColor or ESPOutlineColor or Color3.new(1, 1, 1),
+            FillTransparency = ESPFillTransparency or 0.65,
+            OutlineTransparency = ESPOutlineTransparency or 0,
             Tracer = {
-                Enabled = TracerEnabled,
-                From = TracerFrom,
-                Color = (ESPTeamColor and TeamColor) or ESPTracerColor,
-                Thickness = ESPTracerThickness,
-                Transparency = ESPOutlineTransparency,
+                Enabled = ESPTracerEnabled,
+                From = TracerFrom or "Bottom",
+                Transparency = ESPTracerOpacity or 1,
+                Thickness = ESPTracerThickness or 2,
+                Color = ESPTeamColor and TeamColor or ESPTracerColor or Color3.new(1, 1, 1)
             },
             Arrow = {
-                Enabled = ArrowEnabled,
-                Color = (ESPTeamColor and TeamColor) or ESPArrowColor,
-                CenterOffset = ESPArrowCenterOffset,
+                Enabled = ESPArrowEnabled,
+                Color = ESPTeamColor and TeamColor or ESPArrowColor or Color3.new(1, 1, 1),
+                CenterOffset = ESPArrowCenterOffset or 300
             }
         })
     end
-    OnCharacterAdded(Player.Character or Player.CharacterAdded:Wait())
-    ESPPlayerConnections[Player] = (ESPPlayerConnections[Player] and ESPPlayerConnections[Player]:Disconnect()) or Player.CharacterAdded:Connect(OnCharacterAdded)
 end
 
-Players.PlayerAdded:Connect(ESPPlayerAdded)
+function ESPUpdate(Class)
+    task.spawn(function()
+        for _, Player in pairs(Players:GetPlayers()) do
+            if ESPConditions(Player) then
+                pcall(function()
+                    if Class == "ESPSelectionBoxColor" and not ESPTeamColor then
+                        ESPElements[Player].CurrentSettings.SurfaceColor = ESPSelectionBoxColor
+                        for _, Box in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
+                            if Box:IsA("SelectionBox") then
+                                Box.SurfaceColor3 = ESPSelectionBoxColor
+                            end
+                        end
+                        for _, Box in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
+                            if Box:IsA("SelectionBox") then
+                                Box.SurfaceColor3 = ESPSelectionBoxColor
+                            end
+                        end
+                    elseif Class == "ESPMainTransparency" then
+                        ESPElements[Player].CurrentSettings.Transparency = ESPMainTransparency
+                        for _, Element in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
+                            if Element:IsA("SphereHandleAdornment") or Element:IsA("CylinderHandleAdornment") or Element:IsA("BoxHandleAdornment") or Element:IsA("TextLabel") then
+                                Element.Transparency = ESPMainTransparency
+                            end
+                        end
+                        for _, Element in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
+                            if Element:IsA("SphereHandleAdornment") or Element:IsA("CylinderHandleAdornment") or Element:IsA("BoxHandleAdornment") or Element:IsA("TextLabel") then
+                                Element.Transparency = ESPMainTransparency
+                            end
+                        end
+                    elseif Class == "ESPFillColor" and not ESPTeamColor then
+                        ESPElements[Player].CurrentSettings.FillColor = ESPFillColor
+                        for _, Highlight in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
+                            if Highlight:IsA("Highlight") then
+                                Highlight.FillColor = ESPFillColor
+                            end
+                        end
+                        for _, Highlight in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
+                            if Highlight:IsA("Highlight") then
+                                Highlight.FillColor = ESPFillColor
+                            end
+                        end
+                    elseif Class == "ESPOutlineColor" and not ESPTeamColor then
+                        ESPElements[Player].CurrentSettings.OutlineColor = ESPOutlineColor
+                        for _, Highlight in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
+                            if Highlight:IsA("Highlight") then
+                                Highlight.OutlineColor = ESPOutlineColor
+                            end
+                        end
+                        for _, Highlight in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
+                            if Highlight:IsA("Highlight") then
+                                Highlight.OutlineColor = ESPOutlineColor
+                            end
+                        end
+                    elseif Class == "ESPFillTransparency" then
+                        ESPElements[Player].CurrentSettings.FillTransparency = ESPFillTransparency
+                        for _, Highlight in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
+                            if Highlight:IsA("Highlight") then
+                                Highlight.FillTransparency = ESPFillTransparency
+                            end
+                        end
+                        for _, Highlight in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
+                            if Highlight:IsA("Highlight") then
+                                Highlight.FillTransparency = ESPFillTransparency
+                            end
+                        end
+                    elseif Class == "ESPOutlineTransparency" then
+                        ESPElements[Player].CurrentSettings.OutlineTransparency = ESPOutlineTransparency
+                        for _, Highlight in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
+                            if Highlight:IsA("Highlight") then
+                                Highlight.OutlineTransparency = ESPOutlineTransparency
+                            end
+                        end
+                        for _, Highlight in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
+                            if Highlight:IsA("Highlight") then
+                                Highlight.OutlineTransparency = ESPOutlineTransparency
+                            end
+                        end
+                    elseif Class == "TextSize" then
+                        ESPElements[Player].CurrentSettings.TextSize = ESPTextSize
+                        for _, Text in pairs(ESPLibrary.BillboardGUI:GetDescendants()) do
+                            if Text:IsA("TextLabel") then
+                                Text.TextSize = ESPTextSize
+                            end
+                        end
+                    elseif Class == "TracerColor" then
+                        ESPElements[Player].CurrentSettings.Tracer.Color = ESPTracerColor
+                        for _, Tracer in pairs(ESPLibrary.MainGUI:GetDescendants()) do
+                            if typeof(Tracer) == "Path2D" then
+                                Tracer.Color = ESPTracerColor
+                            end
+                        end
+                    elseif Class == "TracerThickness" then
+                        ESPElements[Player].CurrentSettings.Tracer.Thickness = ESPTracerThickness
+                        for _, Tracer in pairs(ESPLibrary.MainGUI:GetDescendants()) do
+                            if typeof(Tracer) == "Path2D" then
+                                Tracer.Thickness = ESPTracerThickness
+                            end
+                        end
+                    elseif Class == "TracerOpacity" then
+                        ESPElements[Player].CurrentSettings.Tracer.Transparency = ESPTracerOpacity
+                        for _, Tracer in pairs(ESPLibrary.MainGUI:GetDescendants()) do
+                            if typeof(Tracer) == "Path2D" then
+                                Tracer.Transparency = ESPTracerOpacity
+                            end
+                        end
+                    elseif Class == "ArrowColor" then
+                        ESPElements[Player].CurrentSettings.Arrow.Color = ESPArrowColor
+                        for _, Arrow in pairs(ESPLibrary.MainGUI:GetDescendants()) do
+                            if typeof(Arrow) == "ImageLabel" then
+                                Arrow.ImageColor3 = ESPArrowColor
+                            end
+                        end
+                    elseif Class == "ArrowCenterOffset" then
+                        ESPElements[Player].CurrentSettings.Arrow.CenterOffset = ESPArrowCenterOffset
+                    end
+                end)
+            end
+        end
+    end)
+end
+
+function ESPClear()
+    ESPConnections.TA = ESPConnections.TA and ESPConnections.TA:Disconnect()
+    ESPConnections.TR = ESPConnections.TR and ESPConnections.TR:Disconnect()
+    for _, Object in pairs(ESPConnections) do
+        if typeof(Object) == "RBXScriptConnection" then
+            Object:Disconnect()
+        elseif typeof(Object) == "table" then
+            for _, Object2 in pairs(Object) do
+                Object2:Disconnect()
+            end
+        end
+    end
+    ESPLibrary:Clear()
+end
+
+function ESPRestart()
+    if AllowESP then
+        ESPLibrary:Clear()
+        Heartbeat:Wait()
+        ESPHandlePlayer()
+    end
+end
+
+--|| Player Connections ||--
+
+PlayerConnections = {}
+PlayerConnections.PA = (PlayerConnections.PA and PlayerConnections.PA:Disconnect()) or Players.PlayerAdded:Connect(function(Player)
+    if ESPConditions(Player) then
+        ESPHandleCharacter(Player)
+        ESPConnections.CA[Player] = (ESPConnections.CA[Player] and ESPConnections.CA[Player]:Disconnect()) or Player.CharacterAdded:Connect(function()
+            ESPHandleCharacter(Player)
+        end)
+        ESPConnections.TC[Player] = (ESPConnections.TC[Player] and ESPConnections.TC[Player]:Disconnect()) or Player.Team and Player.Team.Changed:Connect(ESPRestart)
+        ESPConnections.TA = (ESPConnections.TA and ESPConnections.TA:Disconnect()) or Teams.ChildAdded:Connect(ESPRestart)
+        ESPConnections.TR = (ESPConnections.TR and ESPConnections.TR:Disconnect()) or Teams.ChildRemoved:Connect(ESPRestart)
+    end
+end)
+
+PlayerConnections.PR = (PlayerConnections.PR and PlayerConnections.PR:Disconnect()) or Players.PlayerRemoving:Connect(function(Player)
+    ESPConnections.CA[Player] = ESPConnections.CA[Player] and ESPConnections.CA[Player]:Disconnect()
+    ESPConnections.TC[Player] = ESPConnections.TC[Player] and ESPConnections.TC[Player]:Disconnect()
+end)
 
 --|| ESP Global Settings Groupbox ||--
 
@@ -2445,11 +2732,9 @@ ESPAllToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPAllToggle", {
     Callback = function(Enabled)
         AllowESP = Enabled
         if Enabled then
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
+            ESPHandlePlayer()
         else
-            ESPLibrary:Clear()
+            ESPClear()
         end
     end
 })
@@ -2458,19 +2743,7 @@ ESPMeToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPMeToggle", {
     Default = false,
     Callback = function(Enabled)
         ESPMe = Enabled
-        if AllowESP then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-        end
-    end
-})
-ESPInstantApplyToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPInstantApplyToggle", {
-    Text = GlobalText.ESPInstantApplyToggle,
-    Default = false,
-    Callback = function(Enabled)
-        ESPInstantApply = Enabled
+        ESPRestart()
     end
 })
 ESPGlobalSettingsGroupbox:AddDivider()
@@ -2479,12 +2752,7 @@ ESPTeamCheckToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPTeamCheckToggle", {
     Default = false,
     Callback = function(Enabled)
         ESPTeamCheck = Enabled
-        if AllowESP and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-        end
+        ESPRestart()
     end
 })
 ESPTeamColorToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPTeamColorToggle", {
@@ -2492,12 +2760,23 @@ ESPTeamColorToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPTeamColorToggle", {
     Default = false,
     Callback = function(Enabled)
         ESPTeamColor = Enabled
-        if AllowESP and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-        end
+        ESPRestart()
+    end
+})
+ESPHugeDistanceToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPHugeDistanceToggle", {
+    Text = GlobalText.ESPHugeDistanceToggle,
+    Default = false,
+    Callback = function(Enabled)
+        ESPMaxDistance = Enabled and math.huge or 5000
+        ESPRestart()
+    end
+})
+GayESPToggle = ESPGlobalSettingsGroupbox:AddToggle("GayESPToggle", {
+    Text = GlobalText.GayESPToggle,
+    Default = false,
+    Callback = function(Enabled)
+        ESPLibrary.GlobalConfig.Rainbow = Enabled
+        ESPRestart()
     end
 })
 ESPTypeDropdown = ESPGlobalSettingsGroupbox:AddDropdown("ESPTypeDropdown", {
@@ -2511,6 +2790,7 @@ ESPTypeDropdown = ESPGlobalSettingsGroupbox:AddDropdown("ESPTypeDropdown", {
         GlobalText.Highlight
     },
     Default = Arsenal and GlobalText.SelectionBox or GlobalText.Highlight,
+    DisabledValues = Arsenal and {GlobalText.Highlight },
     Multi = false,
     Callback = function(Type)
         if Type == GlobalText.Text then
@@ -2526,55 +2806,21 @@ ESPTypeDropdown = ESPGlobalSettingsGroupbox:AddDropdown("ESPTypeDropdown", {
         elseif Type == GlobalText.Highlight then
             ESPType = "Highlight"
         end
-        if AllowESP then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-        end
-    end
-})
-ESPHugeDistanceToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPHugeDistanceToggle", {
-    Text = GlobalText.ESPHugeDistanceToggle,
-    Default = false,
-    Callback = function(Enabled)
-        if Enabled then
-            ESPMaxDistance = math.huge
-            if AllowESP then
-                ESPLibrary:Clear()
-                for _, Player in pairs(Players:GetPlayers()) do
-                    ESPPlayerAdded(Player)
-                end
-            end
-        else
-            ESPMaxDistance = 1000
-            if AllowESP then
-                ESPLibrary:Clear()
-                for _, Player in pairs(Players:GetPlayers()) do
-                    ESPPlayerAdded(Player)
-                end
-            end
-        end
+        ESPRestart()
     end
 })
 ESPGlobalSettingsGroupbox:AddDivider()
 ESPColorLabel = ESPGlobalSettingsGroupbox:AddLabel(GlobalText.ESPColorLabel):AddColorPicker("ESPColorPicker", {
     Title = GlobalText.ESPColorPicker,
-    Default = ESPSurfaceColor,
+    Default = Color3.new(1, 1, 1),
     Callback = function(Color)
-        ESPSurfaceColor = Color
-        if AllowESP and not ESPTeamColor and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPSelectionBoxColor = Color
+        ESPUpdate("ESPSelectionBoxColor")
     end
 })
 ESPTransparencySlider = ESPGlobalSettingsGroupbox:AddSlider("ESPTransparencySlider", {
     Text = GlobalText.ESPTransparencySlider,
-    Default = ESPTransparency * 100,
+    Default = 100,
     Min = 0,
     Max = 100,
     Rounding = 0,
@@ -2582,14 +2828,8 @@ ESPTransparencySlider = ESPGlobalSettingsGroupbox:AddSlider("ESPTransparencySlid
     Compact = true,
     HideMax = true,
     Callback = function(Number)
-        ESPTransparency = Number / 100
-        if AllowESP and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPMainTransparency = Number / 100
+        ESPUpdate("ESPMainTransparency")
     end
 })
 
@@ -2598,106 +2838,80 @@ ESPTransparencySlider = ESPGlobalSettingsGroupbox:AddSlider("ESPTransparencySlid
 ESPHighlightGroupbox = Tabs.ESP:AddLeftGroupbox(GlobalText.ESPHighlightGroupbox)
 ESPFillColorLabel = ESPHighlightGroupbox:AddLabel(GlobalText.ESPFillColorLabel):AddColorPicker("ESPFillColorPicker", {
     Title = GlobalText.ESPFillColorPicker,
-    Default = ESPFillColor,
+    Default = Color3.new(1, 1, 1),
     Callback = function(Color)
         ESPFillColor = Color
-        if AllowESP and not ESPTeamColor and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPUpdate("ESPFillColor")
     end
 })
 ESPOutlineColorLabel = ESPHighlightGroupbox:AddLabel(GlobalText.ESPOutlineColorLabel):AddColorPicker("ESPOutlineColorPicker", {
     Title = GlobalText.ESPOutlineColorPicker,
-    Default = ESPOutlineColor,
+    Default = Color3.new(1, 1, 1),
     Callback = function(Color)
         ESPOutlineColor = Color
-        if AllowESP and not ESPTeamColor and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPUpdate("ESPOutlineColor")
     end
 })
 ESPHighlightGroupbox:AddDivider()
 ESPFillTransparencySlider = ESPHighlightGroupbox:AddSlider("ESPFillTransparencySlider", {
     Text = GlobalText.ESPFillTransparencySlider,
-    Default = ESPFillTransparency * 100,
+    Default = 65,
     Min = 0,
     Max = 100,
     Rounding = 0,
     Suffix = " %",
     Compact = false,
-    HideMax = true,
+    HideMax = false,
     Callback = function(Number)
         ESPFillTransparency = Number / 100
-        if AllowESP and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPUpdate("ESPFillTransparency")
     end
 })
 ESPOutlineTransparencySlider = ESPHighlightGroupbox:AddSlider("ESPOutlineTransparencySlider", {
     Text = GlobalText.ESPOutlineTransparencySlider,
-    Default = ESPOutlineTransparency * 100,
+    Default = 0,
     Min = 0,
     Max = 100,
     Rounding = 0,
     Suffix = " %",
     Compact = false,
-    HideMax = true,
+    HideMax = false,
     Callback = function(Number)
         ESPOutlineTransparency = Number / 100
-        if AllowESP and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPUpdate("ESPOutlineTransparency")
     end
 })
 
 --|| ESP Text Groupbox ||--
 
 ESPTextGroupbox = Tabs.ESP:AddRightGroupbox(GlobalText.ESPTextGroupbox)
+ESPShowTextToggle = ESPTextGroupbox:AddToggle("ESPShowTextToggle", {
+    Text = GlobalText.ESPShowTextToggle,
+    Default = true,
+    Callback = function(Enabled)
+        ESPLibrary.GlobalConfig.Billboards = Enabled
+        ESPRestart()
+    end
+})
 ESPDisplayNameToggle = ESPTextGroupbox:AddToggle("ESPDisplayNameToggle", {
     Text = GlobalText.ESPDisplayNameToggle,
     Default = true,
     Callback = function(Enabled)
         ESPDisplayName = Enabled
-        if AllowESP then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-        end
+        ESPRestart()
     end
 })
-ESPShowHealthToggle = ESPTextGroupbox:AddToggle("ESPShowHealthToggle", {
-    Text = GlobalText.ESPHealthToggle,
-    Default = false,
+ESPDisplayDistanceToggle = ESPTextGroupbox:AddToggle("ESPDisplayDistanceToggle", {
+    Text = GlobalText.ESPDisplayDistanceToggle,
+    Default = true,
     Callback = function(Enabled)
-        ESPShowHealth = Enabled
-        if AllowESP then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-        end
+        ESPLibrary.GlobalConfig.Distance = Enabled
+        ESPRestart()
     end
 })
 ESPTextSizeSlider = ESPTextGroupbox:AddSlider("ESPTextSizeSlider", {
     Text = GlobalText.ESPTextSizeSlider,
-    Default = ESPTextSize,
+    Default = 22,
     Min = 10,
     Max = 26,
     Rounding = 0,
@@ -2706,13 +2920,7 @@ ESPTextSizeSlider = ESPTextGroupbox:AddSlider("ESPTextSizeSlider", {
     HideMax = true,
     Callback = function(Number)
         ESPTextSize = Number
-        if AllowESP and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPUpdate("TextSize")
     end
 })
 
@@ -2723,27 +2931,16 @@ ESPTracerToggle = ESPTracerGroupbox:AddToggle("ESPTracerToggle", {
     Text = GlobalText.ESPTracerToggle,
     Default = false,
     Callback = function(Enabled)
-        TracerEnabled = Enabled
-        if AllowESP then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-        end
+        ESPTracerEnabled = Enabled
+        ESPRestart()
     end
 })
 ESPTracerColorLabel = ESPTracerGroupbox:AddLabel(GlobalText.ESPTracerColorLabel):AddColorPicker("ESPTracerColorPicker", {
     Title = GlobalText.ESPTracerColorPicker,
-    Default = ESPTracerColor,
+    Default = Color3.new(1, 1, 1),
     Callback = function(Color)
         ESPTracerColor = Color
-        if AllowESP and not ESPTeamColor and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPUpdate("TracerColor")
     end
 })
 ESPTracerFromDropdown = ESPTracerGroupbox:AddDropdown("ESPTracerFromDropdown", {
@@ -2766,52 +2963,35 @@ ESPTracerFromDropdown = ESPTracerGroupbox:AddDropdown("ESPTracerFromDropdown", {
         elseif From == GlobalText.Mouse then
             TracerFrom = "Mouse"
         end
-        if AllowESP then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-        end
+        ESPRestart()
     end
 })
 ESPTracerThicknessSlider = ESPTracerGroupbox:AddSlider("ESPTracerThicknessSlider", {
     Text = GlobalText.ESPTracerThicknessSlider,
-    Default = ESPTracerThickness,
+    Default = 2,
     Min = 1,
     Max = 10,
     Rounding = 0,
     Suffix = " px",
     Compact = false,
-    HideMax = true,
+    HideMax = false,
     Callback = function(Number)
         ESPTracerThickness = Number
-        if AllowESP and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPUpdate("TracerThickness")
     end
 })
 ESPTracerTransparencySlider = ESPTracerGroupbox:AddSlider("ESPTracerTransparencySlider", {
     Text = GlobalText.ESPTracerTransparencySlider,
-    Default = ESPTracerTransparency * 100,
+    Default = 100,
     Min = 0,
     Max = 100,
     Rounding = 0,
     Suffix = " %",
     Compact = false,
-    HideMax = true,
+    HideMax = false,
     Callback = function(Number)
-        ESPTracerTransparency = Number / 100
-        if AllowESP and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPTracerOpacity = Number / 100
+        ESPUpdate("TracerOpacity")
     end
 })
 
@@ -2822,47 +3002,30 @@ ESPArrowToggle = ESPArrowGroupbox:AddToggle("ESPArrowToggle", {
     Text = GlobalText.ESPArrowToggle,
     Default = false,
     Callback = function(Enabled)
-        ArrowEnabled = Enabled
-        if AllowESP then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-        end
+        ESPArrowEnabled = Enabled
+        ESPRestart()
     end
 })
 ESPArrowColorLabel = ESPArrowGroupbox:AddLabel(GlobalText.ESPArrowColorLabel):AddColorPicker("ESPArrowColorPicker", {
     Title = GlobalText.ESPArrowColorPicker,
-    Default = ESPArrowColor,
+    Default = Color3.new(1, 1, 1),
     Callback = function(Color)
         ESPArrowColor = Color
-        if AllowESP and not ESPTeamColor and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPUpdate("ArrowColor")
     end
 })
 ESPArrowCenterOffsetSlider = ESPArrowGroupbox:AddSlider("ESPArrowCenterOffsetSlider", {
     Text = GlobalText.ESPArrowCenterOffsetSlider,
-    Default = ESPArrowCenterOffset,
+    Default = 300,
     Min = 0,
     Max = 500,
     Rounding = 0,
     Suffix = "",
     Compact = false,
-    HideMax = true,
+    HideMax = false,
     Callback = function(Number)
         ESPArrowCenterOffset = Number
-        if AllowESP and ESPInstantApply then
-            ESPLibrary:Clear()
-            for _, Player in pairs(Players:GetPlayers()) do
-                ESPPlayerAdded(Player)
-            end
-            Heartbeat:Wait()
-        end
+        ESPUpdate("ArrowCenterOffset")
     end
 })
 
@@ -2940,7 +3103,7 @@ AimbotOffsetIncrementSlider = AimbotSettingsGroupbox:AddSlider("AimbotOffsetIncr
     Rounding = 0,
     Suffix = "",
     Compact = false,
-    HideMax = true,
+    HideMax = false,
     Callback = function(Number)
         Aimbot.Settings.OffsetIncrement = Number
     end
@@ -2954,7 +3117,7 @@ AimbotSensitivitySlider = AimbotSettingsGroupbox:AddSlider("AimbotSensitivitySli
     Rounding = 0,
     Suffix = " %",
     Compact = false,
-    HideMax = true,
+    HideMax = false,
     Callback = function(Number)
         Aimbot.Settings.Sensitivity = Number / 100
     end
@@ -2967,7 +3130,7 @@ AimbotSensitivity2Slider = AimbotSettingsGroupbox:AddSlider("AimbotSensitivity2S
     Rounding = 0,
     Suffix = " %",
     Compact = false,
-    HideMax = true,
+    HideMax = false,
     Callback = function(Number)
         Aimbot.Settings.Sensitivity2 = Number / 10
     end
@@ -2990,7 +3153,7 @@ AimbotLockModeDropdown = AimbotSettingsGroupbox:AddDropdown("AimbotLockModeDropd
                     Description = GlobalText.RivalsCFrameLockDescription,
                     Time = 5
                 })
-                NotifySound(1, 1, true)
+                NotifySound(_, _, true)
             end
         else
             Aimbot.Settings.LockMode = 2
@@ -3252,10 +3415,10 @@ InvisibleTransparencySlider = ALilTrollGroupbox:AddSlider("InvisibleTransparency
     Rounding = 0,
     Suffix = " %",
     Compact = false,
-    HideMax = true,
+    HideMax = false,
     Callback = function(Number)
         InvisibleTransparency = Number / 100
-        Universals.InvisTransparency()
+        pcall(Universals.InvisTransparency)
     end
 })
 
@@ -3447,10 +3610,21 @@ UnloadButton = MenuGroup:AddButton({
     Func = function()
         Aimbot:Exit()
         Universals:Exit()
-        ESPLibrary:Clear()
         ESPLibrary:Destroy()
         Library:Unload()
+        for _, Object in pairs(ESPConnections) do
+            if typeof(Object) == "RBXScriptConnection" then
+                Object:Disconnect()
+            elseif typeof(Object) == "table" then
+                for _, Object2 in pairs(Object) do
+                    Object2:Disconnect()
+                end
+            end
+        end
+        PlayerConnections.PA = PlayerConnections.PA and PlayerConnections.PA:Disconnect()
+        PlayerConnections.PR = PlayerConnections.PR and PlayerConnections.PR:Disconnect()
         getgenv().MFeeeLoaded = false
+        getgenv().MFeeeLoading = false
         print(GlobalText.Unloaded)
         print([[
 
@@ -3533,8 +3707,6 @@ if LeastVersion ~= CurrentVersion then
     NotifySound(GlobalText.NewVersion, 5)
 end
 
-getgenv().MFeeeLoading = false
-getgenv().MFeeeLoaded = true
 Options.FontFace:SetValue("Gotham")
 if Camera.ViewportSize.X >= 3840 and Camera.ViewportSize.Y >= 2089 then
     Options.DPIScaleDropdown:SetValue("150%")
@@ -3547,4 +3719,8 @@ elseif Camera.ViewportSize.X >= 1280 and Camera.ViewportSize.Y >= 649 then
 else
     Options.DPIScaleDropdown:SetValue("50%")
 end
+
 SaveManager:LoadAutoloadConfig()
+
+getgenv().MFeeeLoading = false
+getgenv().MFeeeLoaded = true

@@ -450,6 +450,8 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     ESPDisplayDistanceToggle = "显示距离",
     ESPShowTextToggle = "显示文字",
     TimeOutLimiterSlider = "超时限制",
+    FastResetToggle = "快速重置人物(重生)",
+    FastResetKeybind = "快速重置人物",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -849,6 +851,8 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     ESPDisplayDistanceToggle = "Display Distance",
     ESPShowTextToggle = "Show Text",
     TimeOutLimiterSlider = "Timeout Limiter",
+    FastResetToggle = "Fast Reset",
+    FastResetKeybind = "Fast Reset",
 }
 
 --|| Oaklands Check ||--
@@ -1342,6 +1346,7 @@ if not MFeeeQueueTPSeted and QueueTeleport then
     QueueTeleport([[
         local TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
         if isfile(TPFilePath) and readfile(TPFilePath) == "true" then
+            MFeee_IsFromTP = true
             loadstring(game:HttpGet("https://raw.githubusercontent.com/MaiFengYXD/MFeee-Project/main/Release/MFeee%7E%20Universal.lua"))()
         end
     ]])
@@ -1512,7 +1517,7 @@ QuickLanguageChangeDivider = MFeeeIAMNEW and QuickLanguageChange:AddDivider()
 TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
 ExecuteOnTeleportToggle = QueueTeleport and MainOthersGroupbox:AddToggle("ExecuteOnTeleportToggle", {
     Text = GlobalText.ExecuteOnTeleportToggle,
-    Default = (isfile(TPFilePath) and readfile(TPFilePath) == "true" and true) or false,
+    Default = MFeee_IsFromTP,
     Callback = function(Enabled)
         makefolder("MFeee~ Project")
         writefile(TPFilePath, Enabled and "true" or "false")

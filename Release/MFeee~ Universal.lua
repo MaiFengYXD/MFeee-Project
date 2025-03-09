@@ -452,6 +452,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     TimeOutLimiterSlider = "超时限制",
     FastResetToggle = "快速重置人物(重生)",
     FastResetKeybind = "快速重置人物",
+    ResetIntervalSlider = "重置人物间隔",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -853,6 +854,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     TimeOutLimiterSlider = "Timeout Limiter",
     FastResetToggle = "Fast Reset",
     FastResetKeybind = "Fast Reset",
+    ResetIntervalSlider = "Reset Interval",
 }
 
 --|| Oaklands Check ||--
@@ -1580,9 +1582,10 @@ AnimationModeDropdown = AdvancedGroupbox:AddDropdown("AnimationModeDropdown", {
         GlobalText.Linear,
         GlobalText.NoAnimation
     },
-    Default = GlobalText.CubicEaseOut,
+    Default = GlobalText.QuarticEaseOut,
     Multi = false,
     Callback = function(Mode)
+        NoEasingAnimator = Mode == GlobalText.NoAnimation
         if Mode == GlobalText.CubicEaseIn then
             EasingSelector("CubicEaseIn")
         elseif Mode == GlobalText.CubicEaseOut then
@@ -1591,7 +1594,7 @@ AnimationModeDropdown = AdvancedGroupbox:AddDropdown("AnimationModeDropdown", {
             EasingSelector("CubicEaseInOut")
         elseif Mode == GlobalText.QuarticEaseIn then
             EasingSelector("QuarticEaseIn")
-        elseif Mode == GlobalText.QuarticEaseIn then
+        elseif Mode == GlobalText.QuarticEaseOut then
             EasingSelector("QuarticEaseOut")
         elseif Mode == GlobalText.QuarticEaseInOut then
             EasingSelector("QuarticEaseInOut")
@@ -1600,12 +1603,9 @@ AnimationModeDropdown = AdvancedGroupbox:AddDropdown("AnimationModeDropdown", {
         end
     end
 })
-Options.AnimationModeDropdown:OnChanged(function()
-    NoEasingAnimator = Options.AnimationModeDropdown.Value == GlobalText.NoAnimation
-end)
 AnimationSpeedSlider = AdvancedGroupbox:AddSlider("AnimationSpeedSlider", {
     Text = GlobalText.AnimationSpeedSlider,
-    Default = 0.8,
+    Default = 1,
     Min = 0.2,
     Max = 2,
     Rounding = 1,
@@ -1845,6 +1845,17 @@ PromptNoclipToggle = PlayerFeaturesGroupbox:AddToggle("PromptNoclipToggle", {
     end
 })
 PlayerFeaturesGroupbox:AddDivider()
+LastResetTime = 0
+ResetInterval = 1
+FR = (FR and FR:Disconnect()) or Heartbeat:Connect(function(DeltaTime)
+    pcall(function()
+        local Humanoid = Speaker.Character:FindFirstChild("Humanoid")
+        if Options.FastResetKeyPicker:GetState() and AllowFastReset and tick() - LastResetTime >= ResetInterval and Humanoid.Health > 0 then
+            Humanoid.Health = 0
+            LastResetTime = tick()
+        end
+    end)
+end)
 FastResetToggle = PlayerFeaturesGroupbox:AddToggle("FastResetToggle", {
     Text = GlobalText.FastResetToggle,
     Default = false,
@@ -1855,13 +1866,19 @@ FastResetToggle = PlayerFeaturesGroupbox:AddToggle("FastResetToggle", {
     Text = GlobalText.FastResetKeybind,
     Mode = "Hold",
     NoUI = false,
-    SyncToggleState = false,
-    Callback = function(Enabled)
-        if Enabled and AllowFastReset then
-            pcall(function()
-                Speaker.Character:FindFirstChildOfClass("Humanoid").Health = 0
-            end)
-        end
+    SyncToggleState = false
+})
+ResetIntervalSlider = PlayerFeaturesGroupbox:AddSlider("ResetIntervalSlider", {
+    Text = GlobalText.ResetIntervalSlider,
+    Default = 1,
+    Min = 0,
+    Max = 10,
+    Rounding = 1,
+    Suffix = " s",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        ResetInterval = Number
     end
 })
 
@@ -3060,7 +3077,7 @@ AimbotInfiniteLockDistanceToggle = AimbotSettingsGroupbox:AddToggle("AimbotInfin
     Text = GlobalText.AimbotInfiniteLockDistanceToggle,
     Default = false,
     Callback = function(Enabled)
-        Aimbot.InfiniteDistance(Enabled)
+        Aimbot.Settings.InfiniteDistance = Enabled
     end
 })
 AimbotSettingsGroupbox:AddDivider()
@@ -3624,6 +3641,7 @@ UnloadButton = MenuGroup:AddButton({
         end
         PlayerConnections.PA = PlayerConnections.PA and PlayerConnections.PA:Disconnect()
         PlayerConnections.PR = PlayerConnections.PR and PlayerConnections.PR:Disconnect()
+        FR = FR and FR:Disconnect()
         getgenv().MFeeeLoaded = false
         getgenv().MFeeeLoading = false
         print(GlobalText.Unloaded)

@@ -4297,26 +4297,26 @@ AndYouLabel = SpecialThanksGroupbox:AddLabel(GlobalText.AndYouLabel)
 
 AboutGameGroupbox = Tabs.About:AddRightGroupbox(GlobalText.AboutGameGroupbox)
 YouPlayedLabel = AboutGameGroupbox:AddLabel(GlobalText.YouPlayedLabel .. math.round(Workspace.DistributedGameTime * 10) / 10 .. GlobalText.YouPlayedLabel2)
-MFCons.YP = (MFCons.YP and MFCons.YP:Disconnect()) or Heartbeat:Connect(function()
+MFCons.YP = (MFCons.YP and MFCons.YP:Disconnect()) or RunService.Stepped:Connect(function()
     local Time = math.round(Workspace.DistributedGameTime * 10) / 10
     local Suffix = GlobalText.YouPlayedLabel2
     if Time > 31536000 then
-        Time = Time / 31536000
+        Time = math.round(Time / 31536000 * 1e7) / 1e7
         Suffix = GlobalText.YouPlayedLabel8
     elseif Time > 2592000 then
-        Time = Time / 2592000
+        Time = math.round(Time / 2592000 * 1e6) / 1e6
         Suffix = GlobalText.YouPlayedLabel7
     elseif Time > 604800 then
-        Time = Time / 604800
+        Time = math.round(Time / 604800 * 1e5) / 1e5
         Suffix = GlobalText.YouPlayedLabel6
     elseif Time > 86400 then
-        Time = Time / 86400
+        Time = math.round(Time / 86400 * 1e4) / 1e4
         Suffix = GlobalText.YouPlayedLabel5
     elseif Time > 3600 then
-        Time = Time / 3600
+        Time = math.round(Time / 3600 * 1e3) / 1e3
         Suffix = GlobalText.YouPlayedLabel4
     elseif Time > 60 then
-        Time = Time / 60
+        Time = math.round(Time / 60 * 1e2) / 1e2
         Suffix = GlobalText.YouPlayedLabel3
     end
     YouPlayedLabel:SetText(GlobalText.YouPlayedLabel .. Time .. Suffix)

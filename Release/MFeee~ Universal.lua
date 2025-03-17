@@ -1480,7 +1480,7 @@ repeat
         error(GlobalText.LoadFaild, 2)
         break
     end
-until Library and ThemeManager and SaveManager and Universals and ESPLibrary and Aimbot
+until Library and ThemeManager and SaveManager and Universals and ESPLibrary and Aimbot and SilentAim
 print(GlobalText.AssetsLoaded)
 
 --|| Variables ||--

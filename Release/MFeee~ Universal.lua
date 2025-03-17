@@ -345,7 +345,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AimbotFOVLockedColorPicker = "锁定时圆圈颜色",
     AimbotDeveloperSettingsGroupbox = "开发者",
     AimbotUpdateModeDropdown = "更新模式",
-    RenderStepped = "渲染帧开始渲染之前",
+    RenderStepped = "渲染帧开始之前",
     Stepped = "物理模拟步骤之前",
     Heartbeat = "逻辑帧处理之后",
     AimbotTeamCheckMethodDropdown = "队伍检测方式",

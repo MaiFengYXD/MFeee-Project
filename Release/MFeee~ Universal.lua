@@ -510,6 +510,8 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     YouPlayedLabel6 = " 周😨",
     YouPlayedLabel7 = " 月💀",
     YouPlayedLabel8 = " 年👻",
+    AboutGameGroupbox = "关于游戏",
+    AimbotFOVRainbowSpeedSlider = "彩虹圆圈速度",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -971,6 +973,8 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     YouPlayedLabel6 = " Weeks😨",
     YouPlayedLabel7 = " Months💀",
     YouPlayedLabel8 = " Years👻",
+    AboutGameGroupbox = "About Game",
+    AimbotFOVRainbowSpeedSlider = "Rainbow Circle Speed",
 }
 
 --|| Oaklands Check ||--
@@ -3852,11 +3856,11 @@ AimbotUpdateModeDropdown = AimbotDeveloperSettingsGroupbox:AddDropdown("AimbotUp
     Multi = false,
     Callback = function(Mode)
         if Mode == GlobalText.RenderStepped then
-            Aimbot.Settings.UpdateMode = "RenderStepped"
+            Aimbot.DeveloperSettings.UpdateMode = "RenderStepped"
         elseif Mode == GlobalText.Stepped then
-            Aimbot.Settings.UpdateMode = "Stepped"
+            Aimbot.DeveloperSettings.UpdateMode = "Stepped"
         elseif Mode == GlobalText.Heartbeat then
-            Aimbot.Settings.UpdateMode = "Heartbeat"
+            Aimbot.DeveloperSettings.UpdateMode = "Heartbeat"
         end
     end
 })
@@ -3870,10 +3874,23 @@ AimbotTeamCheckMethodDropdown = AimbotDeveloperSettingsGroupbox:AddDropdown("Aim
     Multi = false,
     Callback = function(Method)
         if Method == GlobalText.TeamColor then
-            Aimbot.Settings.TeamCheckMethod = "TeamColor"
+            Aimbot.DeveloperSettings.TeamCheckOption = "TeamColor"
         elseif Method == GlobalText.Team then
-            Aimbot.Settings.TeamCheckMethod = "Team"
+            Aimbot.DeveloperSettings.TeamCheckOption = "Team"
         end
+    end
+})
+AimbotFOVRainbowSpeedSlider = AimbotDeveloperSettingsGroupbox:AddSlider("AimbotFOVRainbowSpeedSlider", {
+    Text = GlobalText.AimbotFOVRainbowSpeedSlider,
+    Default = 40,
+    Min = 10,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        Aimbot.DeveloperSettings.RainbowSpeed = Number / 100
     end
 })
 

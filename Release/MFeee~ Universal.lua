@@ -14,7 +14,7 @@ License  | CC0-1.0
 Version  | Alpha 0.3.8
 
 # Project Started on 2024-11-13 #
-# This Version was Last Edited on 2025-03-09 #
+# This Version was Last Edited on 2025-03-17 #
 
 Issues Report on Github or https://discord.gg/YBQUd8X8PK
 QQ: 3607178523
@@ -25,13 +25,12 @@ QQ: 3607178523
 
 --|| Studio Check ||--
 
-Cloneref = cloneref or function(x) return x end
+Cloneref = cloneref or function(...) return ... end
 RunService = Cloneref(game:GetService("RunService"))
 CoreGui = Cloneref(game:GetService("CoreGui"))
 if RunService:IsStudio() then
-    local Message = Instance.new("Message")
+    local Message = Instance.new("Message", CoreGui)
     Message.Text = "Do You Want to Cheat In Studio?"
-    Message.Parent = CoreGui
     wait(3)
     Message:Destroy()
     return
@@ -93,12 +92,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AntiAFKSuffix = " 秒",
     AntiAFKNumberText = "防挂机交互间隔时间(秒)",
     AntiAFKDropdownText = "防挂机交互方式",
-    AntiAFKDropdownValues = {
-        "鼠标相对移动",
-        "鼠标绝对移动",
-        "鼠标左键点击",
-        "鼠标右键点击"
-    },
+    DisconnectIdleConnections = "断开挂机连接",
     Mousemoverel = "鼠标相对移动",
     Mousemoveabs = "鼠标绝对移动",
     Mouseleftclick = "鼠标左键点击",
@@ -137,13 +131,13 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     VehicleNoclipNotify2 = "载具无碰撞未激活",
     AntiVoidToggle = "防虚空坠落伤害",
     AntiPlatformStandToggle = "防立正",
-    FlyGruopbox = "飞行",
+    FlyGruopbox = "速度飞行",
     FlyToggle = "飞行",
     FlySpeedSlider = "飞行速度",
     FlyKeyLabel = "飞行按键",
     FlyKeybind = "飞行",
-    VerticalFlySpeedMultipilerSlider = "垂直速度倍数",
-    Multipiler = " 倍",
+    VerticalFlySpeedMultiplierSlider = "垂直速度倍数",
+    Multiplier = " 倍",
     FlyModeDropdown = "飞行模式",
     StandFly = "立正飞行",
     VFly = "载具飞行",
@@ -151,7 +145,6 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     FlyGyroToggle = "飞行陀螺仪",
     QEFlyToggle = "使用QE进行垂直移动",
     StopFlyOnDiedToggle = "死亡时停止飞行",
-    WeaponryCheck = "你正在游玩武器库, 该游戏包含飞行反作弊，无法启用飞行功能",
     MenuGroupbox = "界面",
     KeybindMenuOpenToggle = "打开快捷按键菜单",
     ShowCustomCursorToggle = "使用自定义鼠标",
@@ -265,9 +258,10 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AssistantLabel1 = "助手: Kimi AI",
     AssistantLabel2 = "助手2: DeepSeek",
     AssistantLabel3 = "助手3: Gemini",
-    AssistantLabel4 = "助手4: Grok3",
+    AssistantLabel4 = "助手4: Grok",
+    AssistantLabel5 = "助手5: Qwen",
     SpecialThanksGroupbox = "特别感谢",
-    ObsidianLabel = "DeividComsono: Obsidian UI库",
+    ObsidianLabel = "DeividComsono: UI库",
     AimbotLabel = "Exunys: 自瞄模块",
     ESPLabel = "Mstudio45: 透视模块",
     AndYouLabel = "以及你: 使用这个脚本🥰",
@@ -278,6 +272,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     LinksGroupbox = "相关链接",
     DiscordLink = "Discord邀请已复制!",
     GithubLink = "Github主页链接已复制!",
+    IssuesReportOnLabel = "在Github或者Discord反馈任何Bug! 我接受各种语言的报告(推荐中文), 以及意见。不要刷屏!",
     CantSetClipBoard = "你的执行器不支持Setclipboard或Toclipboard函数!",
     ExecuteOnTeleportToggle = "传送时执行",
     LoadFaild = "❌ 加载线程超时, 加载失败!",
@@ -350,9 +345,9 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AimbotFOVLockedColorPicker = "锁定时圆圈颜色",
     AimbotDeveloperSettingsGroupbox = "开发者",
     AimbotUpdateModeDropdown = "更新模式",
-    RenderStepped = "渲染步进时",
-    Stepped = "模拟步进时",
-    Heartbeat = "帧渲染完成时",
+    RenderStepped = "渲染帧开始渲染之前",
+    Stepped = "物理模拟步骤之前",
+    Heartbeat = "逻辑帧处理之后",
     AimbotTeamCheckMethodDropdown = "队伍检测方式",
     TeamColor = "队伍颜色",
     Team = "队伍",
@@ -361,7 +356,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     RivalsCFrameLockDescription = "竞争对手会检测锁定方式, 如果使用CFrame瞄准大概率会被秋后算账(Ban), 且影响体验！",
     AimbotInfiniteLockDistanceToggle = "无限锁定距离",
     VisibleAimbotFOVToggle = "可见的圆圈",
-    NoCharacterWarn = "为检测到玩家角色, 请尝试重生(重置人物)",
+    NoCharacterWarn = "未检测到玩家角色, 请尝试重生(重置人物)",
     GodSuccess = "已启用本地无敌",
     InvisSuccess = "已启用隐身, 现在你在别人眼里就是透明的了!",
     InvisFlingWarn = "正在隐形甩飞, 不能切换甩飞模式",
@@ -385,10 +380,8 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     MixedAntiFlingMethod = "混合",
     WalkFlingKeybind = "甩飞",
     ESPInstantApplyToggle = "即时应用(会卡)",
-    IssuesReportOnLabel = "在Github或者Discord反馈任何Bug!",
     ContinueFlingOnDiedToggle = "复活后继续甩飞",
     ForceCheckboxToggle = "强制复选框",
-    FlyAccelerationModeDropdown = "飞行动能模式",
     CubicEaseInOut = "缓入缓出",
     CubicEaseIn = "缓入",
     CubicEaseOut = "缓出",
@@ -411,7 +404,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     InstantPromptToggle = "瞬间互动",
     PromptNoclipToggle = "穿墙互动",
     DistantPromptToggle = "远距互动",
-    PromptDistanceMultipilerSlider = "互动距离",
+    PromptDistanceMultiplierSlider = "互动距离",
     PlayerScaleToggle = "玩家缩放",
     PlayerScaleSlider = "玩家缩放",
     AdvancedGroupbox = "高级",
@@ -420,17 +413,9 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     SmoothGyroToggle = "平滑陀螺仪",
     SmoothGyroValueSlider = "平滑度",
     Smart = "智能模式",
-    MousemoveabsOK = "✅ 鼠标绝对移动函数存在",
-    MousemoveabsNO = "❌ 鼠标绝对移动函数不存在",
-    MousemoverelOK = "✅ 鼠标相对移动函数存在",
-    MousemoverelNO = "❌ 鼠标相对移动函数不存在",
-    Mouseclick1OK = "✅ 鼠标左键点击函数存在",
-    Mouseclick1NO = "❌ 鼠标左键点击函数不存在",
-    Mouseclick2OK = "✅ 鼠标右键点击函数存在",
-    Mouseclick2NO = "❌ 鼠标右键点击函数不存在",
-    ToclipboardOK = "✅ Toclipboard函数存在",
+    ToclipboardOK = "⏺️ Toclipboard函数存在",
     ToclipboardNO = "❌ Toclipboard函数不存在",
-    QueueTeleportOK = "✅ QueueTeleport函数存在",
+    QueueTeleportOK = "⏺️ QueueTeleport函数存在",
     QueueTeleportNO = "❌ QueueTeleport函数不存在",
     Hookmetamethod = "✅ Hookmetamethod函数可用",
     NoHookmetamethod = "❌ Hookmetamethod函数不可用",
@@ -449,10 +434,82 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AIFromCamera = "以相机位置",
     ESPDisplayDistanceToggle = "显示距离",
     ESPShowTextToggle = "显示文字",
-    TimeOutLimiterSlider = "超时限制",
-    FastResetToggle = "快速重置人物(重生)",
+    TimeOutLimiterSlider = "加载线程超时限制",
+    FastResetToggle = "快速重置人物(适用跑酷游戏)",
     FastResetKeybind = "快速重置人物",
     ResetIntervalSlider = "重置人物间隔",
+    FlyControllerDropdown = "飞行垂直控制键",
+    QEFly = "Q / E",
+    LeftShiftDown = "左Shift / 空格",
+    LeftControlDown = "左Ctrl / 空格",
+    ConstraintsFlyTab = "约束飞行",
+    ConstraintsFlyToggle = "使用约束飞行",
+    ConstraintsMaxSpeedSlider = "最大速度",
+    ConstraintsAccelerationSlider = "加速度",
+    ConstraintsTurnSpeedSlider = "转向速度",
+    ConstraintsResponsivenessSlider = "响应速度",
+    LookToCameraToggle = "朝向相机",
+    ResetMethodDropdown = "重置人物方式",
+    BreakJoints = "断开关节",
+    StateDied = "设为死亡状态",
+    Health0 = "血量 = 0",
+    All = "全都用一遍",
+    InvisFlingNotify = "可在恶搞标签页中修改你的甩飞模式",
+    ConstraintsFlyingStateDropdown = "飞行时切换人物状态",
+    NoChange = "不修改",
+    FallingDown = "倒地",
+    Ragdoll = "布娃娃",
+    GettingUp = "起身",
+    Jumping = "跳跃",
+    Swimming = "游泳",
+    Freefall = "自由落体",
+    Flying = "飞行",
+    Landed = "着陆",
+    Running = "奔跑",
+    RunningNoPhysics = "奔跑(无物理)",
+    StrafingNoPhysics = "横向移动(无物理)",
+    Climbing = "攀爬",
+    Seated = "坐下",
+    PlatformStanding = "平台站立",
+    Died = "死亡(?💀)",
+    Physics = "物理",
+    GetConnectionsOK = "✅ GetConnections函数可用",
+    NoGetConnections = "❌ GetConnections函数不可用",
+    ESPTextModelDropdown = "文字模型",
+    Humanoid = "Humanoid",
+    RootPart = "HumanoidRootPart",
+    Character = "角色",
+    APlayerDropdown = "选择玩家",
+    LockToPlayerToggle = "锁定到玩家",
+    HeadSitPlayerToggle = "骑在玩家头上",
+    SpamInput = "垃圾邮件文本",
+    SpamInputPlaceholder = "任意字符, 不能发脏话",
+    SpamToggle = "垃圾邮件",
+    SpamSpeedSlider = "垃圾邮件间隔",
+    NoRenderToggle = "禁用3D渲染器",
+    FreeCameraToggle = "自由视角",
+    FreeCameraKeybind = "自由视角",
+    FreecamSpeedSlider = "自由视角速度",
+    CameraPlayerSelectorDropdown = "选择玩家",
+    SpectatePlayerToggle = "旁观玩家",
+    UnSpectateWhenCharacterRemovingToggle = "旁观玩家死亡后停止旁观",
+    FixCameraButton = "修复相机",
+    LeftShiftMultiplierSlider = "左Shift倍速",
+    SpaceMultiplierSlider = "空格倍速",
+    AntiFallingDownToggle = "防摔倒",
+    SilentAimLoaded = "✅ 已加载魔法子弹模块",
+    GameName = "游戏名称: ",
+    GameNaming = "正在获取...",
+    GamePlaceId = "游戏ID: ",
+    GamePlaceIdCopied = "游戏ID已复制!",
+    YouPlayedLabel = "你玩了: ",
+    YouPlayedLabel2 = " 秒",
+    YouPlayedLabel3 = " 分",
+    YouPlayedLabel4 = " 时🤓",
+    YouPlayedLabel5 = " 天🤔",
+    YouPlayedLabel6 = " 周😨",
+    YouPlayedLabel7 = " 月💀",
+    YouPlayedLabel8 = " 年👻",
 }) or {
     Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
     ScriptLoaded = "🤧 Script Already Loaded!",
@@ -495,12 +552,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AntiAFKSuffix = " s",
     AntiAFKNumberText = "Anti AFK Interval(seconds)",
     AntiAFKDropdownText = "Anti AFK Interaction",
-    AntiAFKDropdownValues = {
-        "Mouse move relative",
-        "Mouse move absolute",
-        "Mouse leftclick",
-        "Mouse rightclick"
-    },
+    DisconnectIdleConnections = "Disconnect Idle Connections",
     Mousemoverel = "Mouse move relative",
     Mousemoveabs = "Mouse move absolute",
     Mouseleftclick = "Mouse leftclick",
@@ -516,7 +568,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     BoringClickLabel = "You Clicked ",
     BoringClickLabel2 = " Times",
     BoringClickButton = "Click Me!",
-    BoringClickInput = "Click Multipiler",
+    BoringClickInput = "Click Multiplier",
     InputNumber = "Please Input a Number",
     BoringClickResetButton = "Reset Clicks",
     ResetedClickLabel = "You Lost ",
@@ -539,13 +591,13 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     VehicleNoclipNotify2 = "Vehicle Noclip Deactivated",
     AntiVoidToggle = "Anti Void Fall Damage",
     AntiPlatformStandToggle = "Anti Platform Stand",
-    FlyGruopbox = "Fly",
+    FlyGruopbox = "Body Movers",
     FlyToggle = "Fly",
     FlySpeedSlider = "Fly Speed",
     FlyKeyLabel = "Fly Keybind",
     FlyKeybind = "Fly",
-    VerticalFlySpeedMultipilerSlider = "Vertical Speed Multipiler",
-    Multipiler = " x",
+    VerticalFlySpeedMultiplierSlider = "Vertical Speed Multiplier",
+    Multiplier = " x",
     FlyModeDropdown = "Fly Mode",
     StandFly = "Stand Fly",
     VFly = "Vehicle Fly",
@@ -553,7 +605,6 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     FlyGyroToggle = "Fly Gyro",
     QEFlyToggle = "Use QE Vertical Movement",
     StopFlyOnDiedToggle = "Stop Fly On Died",
-    WeaponryCheck = "Weaponry Check Detected, This Game Contains Fly Anticheat, Fly are Disabled",
     MenuGroupbox = "Menu",
     KeybindMenuOpenToggle = "Open Keybind Menu",
     ShowCustomCursorToggle = "Use Custom Cursor",
@@ -667,9 +718,10 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AssistantLabel1 = "Assistant: Kimi AI",
     AssistantLabel2 = "Assistant2: DeepSeek",
     AssistantLabel3 = "Assistant3: Gemini",
-    AssistantLabel4 = "Assistant4: Grok3",
+    AssistantLabel4 = "Assistant4: Grok",
+    AssistantLabel5 = "Assistant5: Qwen",
     SpecialThanksGroupbox = "Special Thanks",
-    ObsidianLabel = "DeividComsono: Obsidian UI Library",
+    ObsidianLabel = "DeividComsono: UI Library",
     AimbotLabel = "Exunys: Aimbot Module",
     ESPLabel = "Mstudio45: ESP Module",
     AndYouLabel = "And You: For Using This Script🥰",
@@ -680,6 +732,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     LinksGroupbox = "Links",
     DiscordLink = "Discord Invite Copied!",
     GithubLink = "Github Page Copied!",
+    IssuesReportOnLabel = "Report Any Bugs on Github or Discord! I Accept Any Language(Recommended English), Any Suggestions. No Spamming!",
     CantSetClipBoard = "Your Executor Doesn't Support Setclipboard or Toclipboard Function!",
     ExecuteOnTeleportToggle = "Execute On Teleport",
     LoadFaild = "❌ Load Thread Time Out, Load Faild!",
@@ -790,7 +843,6 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     IssuesReportOn = "Report Any Bug on Github or Discord!",
     ContinueFlingOnDiedToggle = "Continue Fling On Relive",
     ForceCheckboxToggle = "Force Checkbox",
-    FlyAccelerationModeDropdown = "Fly Acceleration Mode",
     CubicEaseInOut = "Ease In Out",
     CubicEaseIn = "Ease In",
     CubicEaseOut = "Ease Out",
@@ -813,7 +865,7 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     InstantPromptToggle = "Instant Prompt",
     PromptNoclipToggle = "Prompt Clip",
     DistancePromptToggle = "Distant Prompt",
-    PromptDistanceMultipilerSlider = "Prompt Distance",
+    PromptDistanceMultiplierSlider = "Prompt Distance",
     PlayerScaleToggle = "Player Scale",
     PlayerScaleSlider = "Scale",
     AdvancedGroupbox = "Advanced",
@@ -822,17 +874,9 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     SmoothGyroToggle = "Smooth Gyro",
     SmoothGyroValueSlider = "Smoothness",
     Smart = "Smart Mode",
-    MousemoveabsOK = "✅ Mousemoveabs Exist",
-    MousemoveabsNO = "❌ Mousemoveabs Not Exist",
-    MousemoverelOK = "✅ Mousemoverel Exist",
-    MousemoverelNO = "❌ Mousemoverel Not Exist",
-    Mouseclick1OK = "✅ Mouse Left Click Exist",
-    Mouseclick1NO = "❌ Mouse Left Click Not Exist",
-    Mouseclick2OK = "✅ Mouse Right Click Exist",
-    Mouseclick2NO = "❌ Mouse Right Click Not Exist",
-    ToclipboardOK = "✅ Toclipboard Exist",
+    ToclipboardOK = "⏺️ Toclipboard Exist",
     ToclipboardNO = "❌ Toclipboard Not Exist",
-    QueueTeleportOK = "✅ Queueteleport Exist",
+    QueueTeleportOK = "⏺️ Queueteleport Exist",
     QueueTeleportNO = "❌ Queueteleport Not Exist",
     Hookmetamethod = "✅ Hookmetamethod Available",
     NoHookmetamethod = "❌ Hookmetamethod Unavailable",
@@ -851,10 +895,82 @@ GlobalText = (MFeeeLanguage == "Chinese" and {
     AIFromCamera = "From Camera",
     ESPDisplayDistanceToggle = "Display Distance",
     ESPShowTextToggle = "Show Text",
-    TimeOutLimiterSlider = "Timeout Limiter",
-    FastResetToggle = "Fast Reset",
+    TimeOutLimiterSlider = "Loader Timeout Limite",
+    FastResetToggle = "Fast Reset(For obby games)",
     FastResetKeybind = "Fast Reset",
     ResetIntervalSlider = "Reset Interval",
+    FlyControllerDropdown = "Fly Vertical Controller",
+    QEFly = "Q / E",
+    LeftShiftDown = "Left Shift / Space",
+    LeftControlDown = "Left Ctrl / Space",
+    ConstraintsFlyTab = "Constraints Fly",
+    ConstraintsFlyToggle = "Use Constraints Fly",
+    ConstraintsMaxSpeedSlider = "Max Speed",
+    ConstraintsAccelerationSlider = "Acceleration",
+    ConstraintsTurnSpeedSlider = "Turn Speed",
+    ConstraintsResponsivenessSlider = "Responsiveness",
+    LookToCameraToggle = "Look To Camera",
+    ResetMethodDropdown = "Reset Method",
+    BreakJoints = "Break Joints",
+    StateDied = "Change State Died",
+    Health0 = "Health = 0",
+    All = "All",
+    InvisFlingNotify = "You Can Change Your Fling Mode in Troll Tab",
+    ConstraintsFlyingStateDropdown = "Change State When Flying",
+    NoChange = "No Change",
+    FallingDown = "Falling Down",
+    Ragdoll = "Ragdoll",
+    GettingUp = "Getting Up",
+    Jumping = "Jumping",
+    Swimming = "Swimming",
+    Freefall = "Freefall",
+    Flying = "Flying",
+    Landed = "Landed",
+    Running = "Running",
+    RunningNoPhysics = "Running(No Physics)",
+    StrafingNoPhysics = "Strafing(No Physics)",
+    Climbing = "Climbing",
+    Seated = "Seated",
+    PlatformStanding = "Platform Standing",
+    Died = "Died(Why?💀)",
+    Physics = "Physics",
+    GetConnectionsOK = "✅ GetConnections Available",
+    NoGetConnections = "❌ GetConnections Unavailable",
+    ESPTextModelDropdown = "Text Model",
+    Humanoid = "Humanoid",
+    RootPart = "HumanoidRootPart",
+    Character = "Character",
+    APlayerDropdown = "Select Player",
+    LockToPlayerToggle = "Lock To Player",
+    HeadSitPlayerToggle = "Head Sit Player",
+    SpamInput = "Spam Input",
+    SpamInputPlaceholder = "Any Characters, No Swearing Words",
+    SpamToggle = "Spam",
+    SpamSpeedSlider = "Spam Interval",
+    NoRenderToggle = "Disable 3D Renderer",
+    FreeCameraToggle = "Free Camera",
+    FreeCameraKeybind = "Free Camera",
+    FreecamSpeedSlider = "Freecam Speed",
+    CameraPlayerSelectorDropdown = "Select Player",
+    SpectatePlayerToggle = "Spectate",
+    UnSpectateWhenCharacterRemovingToggle = "Unspectate When Character Removing",
+    FixCameraButton = "Fix Camera",
+    LeftShiftMultiplierSlider = "Left Shift Multiplier",
+    SpaceMultiplierSlider = "Space Multiplier",
+    AntiFallingDownToggle = "Anti Falling Down",
+    SilentAimLoaded = "✅ Silent Aim Module Loaded",
+    GameName = "Game Name: ",
+    GameNaming = "Getting...",
+    GamePlaceId = "Game ID: ",
+    GamePlaceIdCopied = "Game ID Copied!",
+    YouPlayedLabel = "You Played: ",
+    YouPlayedLabel2 = " Seconds",
+    YouPlayedLabel3 = " Minutes",
+    YouPlayedLabel4 = " Hours🤓",
+    YouPlayedLabel5 = " Days🤔",
+    YouPlayedLabel6 = " Weeks😨",
+    YouPlayedLabel7 = " Months💀",
+    YouPlayedLabel8 = " Years👻",
 }
 
 --|| Oaklands Check ||--
@@ -871,16 +987,14 @@ end
 UserInputService = Cloneref(game:GetService("UserInputService"))
 GuiService = Cloneref(game:GetService("GuiService"))
 if GuiService:IsTenFootInterface() then
-    local Message = Instance.new("Message")
+    local Message = Instance.new("Message", CoreGui)
     Message.Text = GlobalText.WhyYouAreUsingConsole
-    Message.Parent = CoreGui
     wait(3)
     Message:Destroy()
     return
 elseif UserInputService.TouchEnabled and (not UserInputService.MouseEnabled or not UserInputService.KeyboardEnabled) then
-    local Message = Instance.new("Message")
+    local Message = Instance.new("Message", CoreGui)
     Message.Text = GlobalText.MobileNotSupport
-    Message.Parent = CoreGui
     wait(3)
     Message:Destroy()
     return
@@ -1176,17 +1290,15 @@ QueueTeleport = (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_t
 Setclipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
 
 print("————————————————————")
-print((mouse1press and mouse1release and GlobalText.Mouseclick1OK) or GlobalText.Mouseclick1NO)
-print((mouse2press and mouse2release and GlobalText.Mouseclick2OK) or GlobalText.Mouseclick2NO)
-print((mousemoverel and GlobalText.MousemoverelOK) or GlobalText.MousemoverelNO)
-print((mousemoveabs and GlobalText.MousemoveabsOK) or GlobalText.MousemoveabsNO)
 print((QueueTeleport and GlobalText.QueueTeleportOK) or GlobalText.QueueTeleportNO)
 print((Setclipboard and GlobalText.ToclipboardOK) or GlobalText.ToclipboardNO)
 
 if hookmetamethod then
-    local Object = setmetatable({}, { __index = newcclosure(function() return false end), __metatable = "Locked!" })
-    local Ref = hookmetamethod(Object, "__index", function() return true end)
-    CanHookMM = Object.test ~= false and Ref() ~= true
+    pcall(function()
+        local Object = setmetatable({}, { __index = newcclosure(function() return false end), __metatable = "Locked!" })
+        local Ref = hookmetamethod(Object, "__index", function() return true end)
+        CanHookMM = Object.test ~= false and Ref() ~= true
+    end)
 else
     CanHookMM = false
 end
@@ -1194,24 +1306,38 @@ end
 print((CanHookMM and GlobalText.Hookmetamethod) or GlobalText.NoHookmetamethod)
 
 if fireproximityprompt then
-    local Part = Instance.new("Part")
-    Part.Parent = Workspace
-    Part.CFrame = CFrame.new(0, 1e4, 0)
-    Part.Anchored = true
-    local ProximityPrompt = Instance.new("ProximityPrompt")
-    ProximityPrompt.MaxActivationDistance = math.huge
-    ProximityPrompt.RequiresLineOfSight = false
-    ProximityPrompt.Triggered:Connect(function()
-        Part:Destroy()
-        CanFirePP = true
+    pcall(function()
+        local ProximityPrompt = Instance.new("ProximityPrompt", Workspace)
+        ProximityPrompt.MaxActivationDistance = math.huge
+        ProximityPrompt.RequiresLineOfSight = false
+        ProximityPrompt.Triggered:Once(function()
+            CanFirePP = true
+            ProximityPrompt:Destroy()
+        end)
+        fireproximityprompt(ProximityPrompt)
+        task.wait(.1)
     end)
-    ProximityPrompt.Parent = Part
-    fireproximityprompt(ProximityPrompt)
 else
     CanFirePP = false
 end
-
 print((CanFirePP and GlobalText.Fireproximityprompt) or GlobalText.NoFireproximityprompt)
+
+GetConnections = getconnections or get_signal_cons
+if GetConnections then
+    pcall(function()
+        local Types = { Enabled = "boolean" }
+        local Bindable = Instance.new("BindableEvent")
+        Bindable.Event:Once(function() end)
+        local Connection = GetConnections(Bindable.Event)[1]
+        for i, v in pairs(Types) do
+            CanGetCons = Connection[i] ~= nil and typeof(Connection[i]) == v
+        end
+    end)
+else
+    CanGetCons = false
+end
+
+print((CanGetCons and GlobalText.GetConnectionsOK) or GlobalText.NoGetConnections)
 print("————————————————————")
 
 --// Load Obsidian and Modules \\--
@@ -1227,71 +1353,98 @@ Universals = nil
 Aimbot = nil
 
 task.spawn(function()
-    Library = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Library%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "Library.lua"))()
-    if TimeOut and Library then
-        Library:Unload()
-    elseif Library then
-        Options = Library.Options
-        Toggles = Library.Toggles
-        Library.ForceCheckbox = false
-        Library.ShowToggleFrameInKeybinds = true
-        print(GlobalText.LibraryLoaded)
-    end
+    pcall(function()
+        Library = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Library%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "Library.lua"))()
+        if TimeOut and Library then
+            Library:Unload()
+        elseif Library then
+            Options = Library.Options
+            Toggles = Library.Toggles
+            Library.ForceCheckbox = false
+            Library.ShowToggleFrameInKeybinds = true
+            PrintUI()
+        end
+    end)
 end)
 task.spawn(function()
-    ThemeManager = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Addons/ThemeManager%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "addons/ThemeManager.lua"))()
-    if not TimeOut and ThemeManager then
-        print(GlobalText.ThemeManagerLoaded)
-    end
+    pcall(function()
+        ThemeManager = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Addons/ThemeManager%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "addons/ThemeManager.lua"))()
+        PrintUI()
+    end)
 end)
 task.spawn(function()
-    SaveManager = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Addons/SaveManager%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "addons/SaveManager.lua"))()
-    if not TimeOut and SaveManager then
-        print(GlobalText.SaveManagerLoaded)
-    end
+    pcall(function()
+        SaveManager = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Addons/SaveManager%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "addons/SaveManager.lua"))()
+        PrintUI()
+    end)
 end)
 task.spawn(function()
-    Universals = loadstring(game:HttpGet(PastebinRepo .. "ukLr0Pmm"))()--loadstring(game:HttpGet(Repo .. "MaiFengYXD/Universal-Modules/main/Universal%20Modules.lua"))()
-    if TimeOut and Universals then
-        Universals:Exit()
-    elseif Universals then
-        print(GlobalText.UniversalsLoaded)
-    end
+    pcall(function()
+        Universals = loadstring(game:HttpGet(PastebinRepo .. "ukLr0Pmm"))()--loadstring(game:HttpGet(Repo .. "MaiFengYXD/Universal-Modules/main/Universal%20Modules.lua"))()
+        if TimeOut and Universals then
+            Universals:Exit()
+        elseif Universals then
+            print(GlobalText.UniversalsLoaded)
+        end
+    end)
 end)
 task.spawn(function()
-    ESPLibrary = loadstring(game:HttpGet(Repo .. "mstudio45/MSESP/refs/heads/main/source.luau"))()
-    if TimeOut and ESPLibrary then
-        ESPLibrary:Destroy()
-    elseif ESPLibrary then
-        print(GlobalText.ESPLibraryLoaded)
-    end
+    pcall(function()
+        ESPLibrary = loadstring(game:HttpGet(Repo .. "mstudio45/MSESP/refs/heads/main/source.luau"))()
+        if TimeOut and ESPLibrary then
+            ESPLibrary:Destroy()
+        elseif ESPLibrary then
+            print(GlobalText.ESPLibraryLoaded)
+        end
+    end)
 end)
 task.spawn(function()
-    Aimbot = loadstring(game:HttpGet(PastebinRepo .. "8A3dgm1q"))()
-    if TimeOut and Aimbot then
-        Aimbot:Exit()
-    elseif Aimbot then
-        Aimbot.Load()
-        print(GlobalText.AimbotLoaded)
-    end
+    pcall(function()
+        Aimbot = loadstring(game:HttpGet(PastebinRepo .. "8A3dgm1q"))()
+        if TimeOut and Aimbot then
+            Aimbot:Exit()
+        elseif Aimbot then
+            Aimbot.Load()
+            print(GlobalText.AimbotLoaded)
+        end
+    end)
 end)
 task.spawn(function()
-    LeastVersion = loadstring(game:HttpGet(PastebinRepo .. "BhnD85nE"))()
+    pcall(function()
+        SilentAim = loadstring(game:HttpGet(PastebinRepo .. "MRygSimb"))()
+        if TimeOut and SilentAim then
+            SilentAim:Exit()
+        elseif SilentAim then
+            print(GlobalText.SilentAimLoaded)
+        end
+    end)
+end)
+task.spawn(function()
+    pcall(function()
+        LeastVersion = loadstring(game:HttpGet(PastebinRepo .. "BhnD85nE"))()
+    end)
 end)
 task.spawn(function()
     SoundService = Cloneref(game:GetService("SoundService"))
     local function Preload(Id)
-        local Sound = Instance.new("Sound", SoundService) do
-            Sound.SoundId = "rbxassetid://" .. Id
-            Sound.Volume = 0
-            Sound.PlayOnRemove = true
-            Sound:Destroy()
-        end
+        local Sound = Instance.new("Sound", SoundService)
+        Sound.SoundId = "rbxassetid://" .. Id
+        Sound.Volume = 0
+        Sound.PlayOnRemove = true
+        Sound:Destroy()
     end
     Preload("4590662766")
     Preload("4590657391")
     Preload("9113884125")
     Preload("15675032796")
+end)
+task.spawn(function()
+    Heartbeat = RunService.Heartbeat
+    ThisGamesName = Cloneref(game:GetService("MarketplaceService")):GetProductInfo(game.PlaceId).Name
+    repeat
+        Heartbeat:Wait()
+    until ThisGamesName and GameNameLabel
+    GameNameLabel:SetText(GlobalText.GameName .. ThisGamesName)
 end)
 
 makefolder("MFeee~ Project")
@@ -1303,7 +1456,13 @@ else
     TimeOutLimite = 10
 end
 
-Heartbeat = RunService.Heartbeat
+function PrintUI()
+    if Library and ThemeManager and SaveManager then
+        print(GlobalText.LibraryLoaded)
+        PrintUI = function() return end
+    end
+end
+
 repeat
     LoadTimer = (LoadTimer or 0) + Heartbeat:Wait()
     if LoadTimer >= TimeOutLimite then
@@ -1323,14 +1482,16 @@ print(GlobalText.AssetsLoaded)
 --|| Variables ||--
 
 Teams = Cloneref(game:GetService("Teams"))
+ReplicatedStorage = Cloneref(game:GetService("ReplicatedStorage"))
+TextChatService = Cloneref(game:GetService("TextChatService"))
 Character = Speaker.Character
 Humanoid = Character and Character:FindFirstChild("Humanoid")
 Arsenal = (game.PlaceId == 286090429 and true) or false
 Rivals = (game.PlaceId == 17625359962 and true) or false
-Weaponry = (game.PlaceId == 3297964905 and true) or false
 ExecutorName, ExecutorVersion = identifyexecutor()
 NotifyAlert = true
 ObsidianNotify = true
+MFCons = {}
 
 --// Toclipboard Function \\--
 Toclipboard = function(Text)
@@ -1450,22 +1611,32 @@ AntiAFKNotify = MainAFKGroupbox:AddToggle("AntiAFKNotify", {
 })
 AntiAFKSlider = MainAFKGroupbox:AddSlider("AntiAFKSlider", {
     Text = GlobalText.AntiAFKNumberText,
-    Default = 60,
+    Default = 15,
     Min = 3,
     Max = 300,
     Rounding = 0,
     Suffix = GlobalText.AntiAFKSuffix,
     HideMax = true,
     Callback = function(Number)
+        AntiAFKEnabled = Enabled
         Universals.AntiAFKValue(Number)
     end
 })
 AntiAFKDropdown = MainAFKGroupbox:AddDropdown("AntiAFKDropdown", {
     Text = GlobalText.AntiAFKDropdownText,
-    Values = GlobalText.AntiAFKDropdownValues,
-    Default = GlobalText.Mousemoverel,
+    Values = {
+        GlobalText.DisconnectIdleConnections,
+        GlobalText.Mousemoverel,
+        GlobalText.Mousemoveabs,
+        GlobalText.Mouseleftclick,
+        GlobalText.Mouserightclick
+    },
+    Default = CanGetCons and GlobalText.DisconnectIdleConnections or GlobalText.Mousemoverel,
+    DisabledValues = not CanGetCons and {GlobalText.DisconnectIdleConnections},
+    DisabledTooltip = GlobalText.NoGetConnections,
     Multi = false,
     Callback = function(Method)
+        AntiIdle = Method == GlobalText.DisconnectIdleConnections
         if Method == GlobalText.Mousemoverel then
             Universals.AntiAFKMethod("1")
         elseif Method == GlobalText.Mousemoveabs then
@@ -1475,9 +1646,21 @@ AntiAFKDropdown = MainAFKGroupbox:AddDropdown("AntiAFKDropdown", {
         elseif Method == GlobalText.Mouserightclick then
             Universals.AntiAFKMethod("4")
         end
+        if AntiAFKEnabled then
+            Universals.AntiAFK(false)
+            Heartbeat:Wait()
+            Universals.AntiAFK(true)
+        end
     end
 })
 MainAFKGroupbox:AddDivider()
+NoRenderToggle = MainAFKGroupbox:AddToggle("NoRenderToggle", {
+    Text = GlobalText.NoRenderToggle,
+    Default = false,
+    Callback = function(Enabled)
+        RunService:Set3dRenderingEnabled(not Enabled)
+    end
+})
 FPSCapToggle = MainAFKGroupbox:AddToggle("FPSCapToggle", {
     Text = GlobalText.FPSCapToggle,
     Default = false,
@@ -1538,7 +1721,7 @@ BoringClickLabel = MainOthersGroupbox:AddLabel(GlobalText.BoringClickLabel .. " 
 BoringClickButton = MainOthersGroupbox:AddButton({
     Text = GlobalText.BoringClickButton,
     Func = function()
-        ClickedTimes = (ClickedTimes or 0) + (ClickMultipiler or 1)
+        ClickedTimes = (ClickedTimes or 0) + (ClickMultiplier or 1)
         BoringClickLabel:SetText(GlobalText.BoringClickLabel .. " " .. ClickedTimes .. " " .. GlobalText.BoringClickLabel2)
     end
 })
@@ -1550,9 +1733,9 @@ BoringClickInput = MainOthersGroupbox:AddInput("BoringClickInput", {
     ClearTextOnFocus = false,
     Placeholder = GlobalText.BoringClickInput,
     Callback = function(Text)
-        ClickMultipiler = tonumber(Text)
+        ClickMultiplier = tonumber(Text)
         if not tonumber(Text) then
-            ClickMultipiler = 1
+            ClickMultiplier = 1
             NotifySound(GlobalText.InputNumber, 5)
         end
     end
@@ -1755,6 +1938,13 @@ AntiVoidToggle = PlayerFeaturesGroupbox:AddToggle("AntiVoidToggle", {
         Universals.AntiVoid(Enabled)
     end
 })
+AntiFallingDownToggle = PlayerFeaturesGroupbox:AddToggle("AntiFallingDownToggle", {
+    Text = GlobalText.AntiFallingDownToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.AntiFallingDown(Enabled)
+    end
+})
 ClickToMoveToggle = PlayerFeaturesGroupbox:AddToggle("ClickToMoveToggle", {
     Text = GlobalText.ClickToMoveToggle,
     Default = false,
@@ -1824,17 +2014,17 @@ DistantPromptToggle = PlayerFeaturesGroupbox:AddToggle("DistantPromptToggle", {
         Universals.MaxActivationDistance(Enabled)
     end
 })
-PromptDistanceMultipilerSlider = PlayerFeaturesGroupbox:AddSlider("PromptDistanceMultipilerSlider", {
-    Text = GlobalText.PromptDistanceMultipilerSlider,
+PromptDistanceMultiplierSlider = PlayerFeaturesGroupbox:AddSlider("PromptDistanceMultiplierSlider", {
+    Text = GlobalText.PromptDistanceMultiplierSlider,
     Default = 1,
     Min = 0.5,
     Max = 2,
     Rounding = 1,
-    Suffix = GlobalText.Multipiler,
+    Suffix = GlobalText.Multiplier,
     Compact = true,
     HideMax = true,
-    Callback = function(Multipiler)
-        Universals.MaxActivationDistanceValue(Multipiler)
+    Callback = function(Multiplier)
+        Universals.MaxActivationDistanceValue(Multiplier)
     end
 })
 PromptNoclipToggle = PlayerFeaturesGroupbox:AddToggle("PromptNoclipToggle", {
@@ -1847,11 +2037,23 @@ PromptNoclipToggle = PlayerFeaturesGroupbox:AddToggle("PromptNoclipToggle", {
 PlayerFeaturesGroupbox:AddDivider()
 LastResetTime = 0
 ResetInterval = 1
-FR = (FR and FR:Disconnect()) or Heartbeat:Connect(function(DeltaTime)
+FastResetMethod = "All"
+MFCons.FR = (MFCons.FR and MFCons.FR:Disconnect()) or Heartbeat:Connect(function()
     pcall(function()
-        local Humanoid = Speaker.Character:FindFirstChild("Humanoid")
+        local Character = Speaker.Character
+        local Humanoid = Character:FindFirstChildOfClass("Humanoid")
         if Options.FastResetKeyPicker:GetState() and AllowFastReset and tick() - LastResetTime >= ResetInterval and Humanoid.Health > 0 then
-            Humanoid.Health = 0
+            if FastResetMethod == "BreakJoints" then
+                Character:BreakJoints()
+            elseif FastResetMethod == "Died" then
+                Humanoid:ChangeState(15)
+            elseif FastResetMethod == "Health" then
+                Humanoid.Health = 0
+            else
+                Character:BreakJoints()
+                Humanoid:ChangeState(15)
+                Humanoid.Health = 0
+            end
             LastResetTime = tick()
         end
     end)
@@ -1881,17 +2083,39 @@ ResetIntervalSlider = PlayerFeaturesGroupbox:AddSlider("ResetIntervalSlider", {
         ResetInterval = Number
     end
 })
+ResetMethodDropdown = PlayerFeaturesGroupbox:AddDropdown("ResetMethodDropdown", {
+    Text = GlobalText.ResetMethodDropdown,
+    Values = {
+        GlobalText.BreakJoints,
+        GlobalText.StateDied,
+        GlobalText.Health0,
+        GlobalText.All
+    },
+    Default = GlobalText.All,
+    Multi = false,
+    Callback = function(Method)
+        if Method == GlobalText.BreakJoints then
+            FastResetMethod = "BreakJoints"
+        elseif Method == GlobalText.StateDied then
+            FastResetMethod = "Died"
+        elseif Method == GlobalText.Health0 then
+            FastResetMethod = "Health"
+        else
+            FastResetMethod = "All"
+        end
+    end
+})
 
---|| Fly Groupbox ||--
+--|| Fly Tabs ||--
 
-FlyGruopbox = Tabs.Player:AddRightGroupbox(GlobalText.FlyGruopbox)
+FlyTabs = Tabs.Player:AddRightTabbox()
+
+--// Velocity Fly Tab \\--
+FlyGruopbox = FlyTabs:AddTab(GlobalText.FlyGruopbox) -- I am too lazy to rename the tab fr
 FlyToggle = FlyGruopbox:AddToggle("FlyToggle", {
     Text = GlobalText.FlyToggle,
     Default = false,
     Callback = function(Enabled)
-        if InvisFlinging and InvisFlinged then
-            return
-        end
         Universals.Fly(Enabled)
     end
 }):AddKeyPicker("FlyKeyPicker", {
@@ -1913,17 +2137,17 @@ FlySpeedSlider = FlyGruopbox:AddSlider("FlySpeedSlider", {
         FlySpeed = Number
     end
 })
-VerticalFlySpeedMultipilerSlider = FlyGruopbox:AddSlider("VerticalFlySpeedMultipilerSlider", {
-    Text = GlobalText.VerticalFlySpeedMultipilerSlider,
+VerticalFlySpeedMultiplierSlider = FlyGruopbox:AddSlider("VerticalFlySpeedMultiplierSlider", {
+    Text = GlobalText.VerticalFlySpeedMultiplierSlider,
     Default = 1,
     Min = 0.5,
     Max = 2,
     Rounding = 1,
-    Suffix = GlobalText.Multipiler,
+    Suffix = GlobalText.Multiplier,
     Compact = true,
     HideMax = true,
     Callback = function(Number)
-        VerticalFlySpeedMultipiler = Number
+        VerticalFlySpeedMultiplier = Number
     end
 })
 FlyModeDropdown = FlyGruopbox:AddDropdown("FlyModeDropdown", {
@@ -1988,6 +2212,20 @@ SmoothGyroValueSlider = FlyGruopbox:AddSlider("SmoothGyroValueSlider", {
     end
 })
 FlyGruopbox:AddDivider()
+FlyControllerDropdown = FlyGruopbox:AddDropdown("FlyControllerDropdown", {
+    Text = GlobalText.FlyControllerDropdown,
+    Values = {
+        GlobalText.QEFly,
+        GlobalText.LeftShiftDown,
+        GlobalText.LeftControlDown
+    },
+    Default = GlobalText.QEFly,
+    Multi = false,
+    Callback = function(Mode)
+        QEFly = Mode == GlobalText.QEFly and true or false
+        LeftControlDown = Mode == GlobalText.LeftControlDown and true or false
+    end
+})
 UseUpVectorFlyToggle = FlyGruopbox:AddToggle("UseUpVectorFlyToggle", {
     Text = GlobalText.UseUpVectorFlyToggle,
     Default = true,
@@ -1995,18 +2233,147 @@ UseUpVectorFlyToggle = FlyGruopbox:AddToggle("UseUpVectorFlyToggle", {
         UseUpVector = Enabled
     end
 })
-QEFlyToggle = FlyGruopbox:AddToggle("QEFlyToggle", {
-    Text = GlobalText.QEFlyToggle,
-    Default = true,
-    Callback = function(Enabled)
-        QEFly = Enabled
-    end
-})
 StopFlyOnDiedToggle = FlyGruopbox:AddToggle("StopFlyOnDiedToggle", {
     Text = GlobalText.StopFlyOnDiedToggle,
     Default = true,
     Callback = function(Enabled)
         StopFlyOnDied = Enabled
+    end
+})
+
+--// Constraints Fly Tab \\--
+ConstraintsFlyTab = FlyTabs:AddTab(GlobalText.ConstraintsFlyTab)
+ConstraintsFlyToggle = ConstraintsFlyTab:AddToggle("ConstraintsFlyToggle", {
+    Text = GlobalText.ConstraintsFlyToggle,
+    Default = false,
+    Callback = function(Enabled)
+        UseConstraintsFly = Enabled
+        if Universals.Flying then
+            Universals.Fly(false)
+            Heartbeat:Wait()
+            Universals.Fly(true)
+        end
+    end
+})
+ConstraintsMaxSpeedSlider = ConstraintsFlyTab:AddSlider("ConstraintsMaxSpeedSlider", {
+    Text = GlobalText.ConstraintsMaxSpeedSlider,
+    Default = 32,
+    Min = 10,
+    Max = 200,
+    Rounding = 0,
+    Suffix = "",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        ConstraintsMaxSpeed = Number
+    end
+})
+ConstraintsAccelerationSlider = ConstraintsFlyTab:AddSlider("ConstraintsAccelerationSlider", {
+    Text = GlobalText.ConstraintsAccelerationSlider,
+    Default = 75,
+    Min = 10,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        ConstraintsAcceleration = Number / 10
+    end
+})
+ConstraintsFlyTab:AddDivider()
+LookToCameraToggle = ConstraintsFlyTab:AddToggle("LookToCameraToggle", {
+    Text = GlobalText.LookToCameraToggle,
+    Default = true,
+    Callback = function(Enabled)
+        LookToCamera = Enabled
+    end
+})
+ConstraintsResponsivenessSlider = ConstraintsFlyTab:AddSlider("ConstraintsResponsivenessSlider", {
+    Text = GlobalText.ConstraintsResponsivenessSlider,
+    Default = 100,
+    Min = 1,
+    Max = 200,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = true,
+    Callback = function(Number)
+        ConstraintsResponsiveness = Number
+    end
+})
+ConstraintsTurnSpeedSlider = ConstraintsFlyTab:AddSlider("ConstraintsTurnSpeedSlider", {
+    Text = GlobalText.ConstraintsTurnSpeedSlider,
+    Default = 60,
+    Min = 10,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        ConstraintsTurnSpeed = Number / 10
+    end
+})
+ConstraintsFlyTab:AddDivider()
+ConstraintsFlyingStateDropdown = ConstraintsFlyTab:AddDropdown("ConstraintsFlyingStateDropdown", {
+    Text = GlobalText.ConstraintsFlyingStateDropdown,
+    Values = {
+        GlobalText.NoChange,
+        GlobalText.FallingDown,
+        GlobalText.Ragdoll,
+        GlobalText.GettingUp,
+        GlobalText.Jumping,
+        GlobalText.Swimming,
+        GlobalText.Freefall,
+        GlobalText.Flying,
+        GlobalText.Landed,
+        GlobalText.Running,
+        GlobalText.RunningNoPhysics,
+        GlobalText.StrafingNoPhysics,
+        GlobalText.Climbing,
+        GlobalText.Seated,
+        GlobalText.PlatformStanding,
+        GlobalText.Died,
+        GlobalText.Physics
+    },
+    Default = GlobalText.NoChange,
+    Multi = false,
+    Callback = function(State)
+        if State == GlobalText.FallingDown then
+            ConstraintsFlyingState = 0
+        elseif State == GlobalText.Ragdoll then
+            ConstraintsFlyingState = 1
+        elseif State == GlobalText.GettingUp then
+            ConstraintsFlyingState = 2
+        elseif State == GlobalText.Jumping then
+            ConstraintsFlyingState = 3
+        elseif State == GlobalText.Swimming then
+            ConstraintsFlyingState = 4
+        elseif State == GlobalText.Freefall then
+            ConstraintsFlyingState = 5
+        elseif State == GlobalText.Flying then
+            ConstraintsFlyingState = 6
+        elseif State == GlobalText.Landed then
+            ConstraintsFlyingState = 7
+        elseif State == GlobalText.Running then
+            ConstraintsFlyingState = 8
+        elseif State == GlobalText.RunningNoPhysics then
+            ConstraintsFlyingState = 10
+        elseif State == GlobalText.StrafingNoPhysics then
+            ConstraintsFlyingState = 11
+        elseif State == GlobalText.Climbing then
+            ConstraintsFlyingState = 12
+        elseif State == GlobalText.Seated then
+            ConstraintsFlyingState = 13
+        elseif State == GlobalText.PlatformStanding then
+            ConstraintsFlyingState = 14
+        elseif State == GlobalText.Died then
+            ConstraintsFlyingState = 15
+        elseif State == GlobalText.Physics then
+            ConstraintsFlyingState = 16
+        else
+            ConstraintsFlyingState = 18
+        end
     end
 })
 
@@ -2075,7 +2442,7 @@ PlayerScaleSlider = WeirdGruopbox:AddSlider("PlayerScaleSlider", {
     Min = 0.01,
     Max = 50,
     Rounding = 2,
-    Suffix = GlobalText.Multipiler,
+    Suffix = GlobalText.Multiplier,
     Compact = true,
     HideMax = true,
     Callback = function(Number)
@@ -2147,6 +2514,82 @@ MinZoomSlider = CameraCommonGruopbox:AddSlider("MinZoomSlider", {
     end
 })
 CameraCommonGruopbox:AddDivider()
+FreeCameraToggle = CameraCommonGruopbox:AddToggle("FreeCameraToggle", {
+    Text = GlobalText.FreeCameraToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.FreeCamera(Enabled)
+    end
+}):AddKeyPicker("FreeCameraKeyPicker", {
+    Text = GlobalText.FreeCameraKeybind,
+    Default = "P",
+    Mode = "Toggle",
+    SyncToggleState = true,
+})
+FreecamSpeedSlider = CameraCommonGruopbox:AddSlider("FreecamSpeedSlider", {
+    Text = GlobalText.FreecamSpeedSlider,
+    Default = 32,
+    Min = 10,
+    Max = 200,
+    Rounding = 0,
+    Suffix = "",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        local Speed = Number / 64
+        NavKeyboardSpeed = Vector3.new(Speed, Speed, Speed)
+    end
+})
+LeftShiftMultiplierSlider = CameraCommonGruopbox:AddSlider("LeftShiftMultiplierSlider", {
+    Text = GlobalText.LeftShiftMultiplierSlider,
+    Default = 0.3,
+    Min = 0.1,
+    Max = 2,
+    Rounding = 1,
+    Suffix = GlobalText.Multiplier,
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        NavShiftMultiplier = Number
+    end
+})
+SpaceMultiplierSlider = CameraCommonGruopbox:AddSlider("SpaceMultiplierSlider", {
+    Text = GlobalText.SpaceMultiplierSlider,
+    Default = 2,
+    Min = 0.1,
+    Max = 2,
+    Rounding = 1,
+    Suffix = GlobalText.Multiplier,
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        NavSpaceMultiplier = Number
+    end
+})
+CameraCommonGruopbox:AddDivider()
+CameraPlayerSelectorDropdown = CameraCommonGruopbox:AddDropdown("CameraPlayerSelectorDropdown", {
+    Text = GlobalText.CameraPlayerSelectorDropdown,
+    SpecialType = "Player",
+    ExcludeLocalPlayer = true,
+    Callback = function(Player)
+        CameraPlayer = Player
+    end
+})
+SpectatePlayerToggle = CameraCommonGruopbox:AddToggle("SpectatePlayerToggle", {
+    Text = GlobalText.SpectatePlayerToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.SpectatePlayer(Enabled)
+    end
+})
+UnSpectateWhenCharacterRemovingToggle = CameraCommonGruopbox:AddToggle("UnSpectateWhenCharacterRemovingToggle", {
+    Text = GlobalText.UnSpectateWhenCharacterRemovingToggle,
+    Default = false,
+    Callback = function(Enabled)
+        USWCR = Enabled
+    end
+})
+CameraCommonGruopbox:AddDivider()
 UnlockThirdPersonToggle = CameraCommonGruopbox:AddToggle("UnlockThirdPersonToggle", {
     Text = GlobalText.UnlockThirdPersonToggle,
     Default = false,
@@ -2184,6 +2627,13 @@ AntiGameplayPausedToggle = CameraMoreGruopbox:AddToggle("AntiGameplayPausedToggl
     Default = false,
     Callback = function(Enabled)
         Universals.AntiGameplayPaused(Enabled)
+    end
+})
+FixCameraButton = CameraMoreGruopbox:AddButton({
+    Text = GlobalText.FixCameraButton,
+    DoubleClick = true,
+    Func = function()
+        Universals.FixCamera()
     end
 })
 CameraMoreGruopbox:AddDivider()
@@ -2267,8 +2717,8 @@ NoAtmosphereToggle = AmbientGeneralGruopbox:AddToggle("NoAtmosphereToggle", {
     Text = GlobalText.NoAtmosphereToggle,
     Default = false,
     Callback = function(Enabled)
-        Universals.NoAtmosphere(Enabled)
         Universals.NoFog(Enabled)
+        Universals.NoAtmosphere(Enabled)
     end
 })
 NoDepthOfFieldToggle = AmbientGeneralGruopbox:AddToggle("NoDepthOfFieldToggle", {
@@ -2511,6 +2961,8 @@ ESPConnections = {
 }
 ESPElements = {}
 ESPVisible = true
+ESPDisplayName = true
+ESPTextModel = 2
 
 function ESPConditions(Player)
     if not AllowESP then
@@ -2533,7 +2985,7 @@ function ESPHandlePlayer()
             ESPConnections.TA = (ESPConnections.TA and ESPConnections.TA:Disconnect()) or Teams.ChildAdded:Connect(function()
                 ESPRestart()
             end)
-            ESPConnections.TC[Player] = (ESPConnections.TC[Player] and ESPConnections.TC[Player]:Disconnect()) or Player.Team and Player.Team.Changed:Connect(function()
+            ESPConnections.TC[Player] = (ESPConnections.TC[Player] and ESPConnections.TC[Player]:Disconnect()) Player:GetPropertyChangedSignal("Team"):Connect(function()
                 ESPHandlePlayer()
             end)
         end
@@ -2544,16 +2996,17 @@ function ESPHandleCharacter(Player)
     if ESPConditions(Player) then
         local TeamColor = Player.TeamColor.Color
         local Character = Player.Character or Player.CharacterAdded:Wait()
-        Character:WaitForChild("HumanoidRootPart", math.huge)
-        Character:WaitForChild("Humanoid", math.huge)
+        local Humanoid = Character:WaitForChild("Humanoid", math.huge)
+        local RootPart = Humanoid.RootPart
         ESPElements[Player] = ESPLibrary:Add({
             Name = ESPDisplayName and tostring(Player.DisplayName) or tostring(Player.Name),
             Model = Character,
+            TextModel = ESPTextModel == 1 and Humanoid or ESPTextModel == 2 and RootPart or Character,
             Visible = ESPVisible,
             Color = ESPTeamColor and TeamColor or ESPMainColor or Color3.new(1, 1, 1),
             MaxDistance = ESPMaxDistance or 5000,
             TextSize = ESPTextSize or 22,
-            ESPType = ESPType or Arsenal and "SelectionBox" or "Highlight",
+            ESPType = ESPType or Arsenal and "Adornment" or "Highlight",
             Thickness = ESPMainThickness or 0.1,
             Transparency = ESPMainTransparency or 0.65,
             SurfaceColor = ESPTeamColor and TeamColor or ESPSelectionBoxColor or Color3.new(1, 1, 1),
@@ -2838,7 +3291,7 @@ ESPColorLabel = ESPGlobalSettingsGroupbox:AddLabel(GlobalText.ESPColorLabel):Add
 })
 ESPTransparencySlider = ESPGlobalSettingsGroupbox:AddSlider("ESPTransparencySlider", {
     Text = GlobalText.ESPTransparencySlider,
-    Default = 100,
+    Default = 65,
     Min = 0,
     Max = 100,
     Rounding = 0,
@@ -2939,6 +3392,26 @@ ESPTextSizeSlider = ESPTextGroupbox:AddSlider("ESPTextSizeSlider", {
     Callback = function(Number)
         ESPTextSize = Number
         ESPUpdate("TextSize")
+    end
+})
+ESPTextModelDropdown = ESPTextGroupbox:AddDropdown("ESPTextModelDropdown", {
+    Text = GlobalText.ESPTextModelDropdown,
+    Values = {
+        GlobalText.Humanoid,
+        GlobalText.RootPart,
+        GlobalText.Character
+    },
+    Default = GlobalText.RootPart,
+    Multi = false,
+    Callback = function(Model)
+        if Model == GlobalText.Humanoid then
+            ESPTextModel = 1
+        elseif Model == GlobalText.RootPart then
+            ESPTextModel = 2
+        else
+            ESPTextModel = 0
+        end
+        ESPRestart()
     end
 })
 
@@ -3407,7 +3880,7 @@ AimbotTeamCheckMethodDropdown = AimbotDeveloperSettingsGroupbox:AddDropdown("Aim
 --|| A Lil Troll Groupbox ||--
 
 ALilTrollGroupbox = Tabs.Troll:AddLeftGroupbox(GlobalText.ALilTrollGroupbox)
-GodButton = ALilTrollGroupbox:AddButton({
+GodButton = ALilTrollGroupbox:AddButton("GodButton", {
     Text = GlobalText.GodButton,
     DoubleClick = true,
     Func = function()
@@ -3437,6 +3910,136 @@ InvisibleTransparencySlider = ALilTrollGroupbox:AddSlider("InvisibleTransparency
     Callback = function(Number)
         InvisibleTransparency = Number / 100
         pcall(Universals.InvisTransparency)
+    end
+})
+ALilTrollGroupbox:AddDivider()
+APlayerDropdown = ALilTrollGroupbox:AddDropdown("APlayerDropdown", {
+    Text = GlobalText.APlayerDropdown,
+    SpecialType = "Player",
+    ExcludeLocalPlayer = true,
+    Multi = false,
+    Callback = function(Player)
+        APlayerPicked = Player
+        if Player == nil and HeadSitPlayer then
+            local Character = Speaker.Character
+            local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+            if Humanoid then
+                Humanoid.Sit = false
+                Humanoid:ChangeState(2)
+            end
+        end
+    end
+})
+
+MFCons.LP = (MFCons.LP and MFCons.LP:Disconnect()) or Heartbeat:Connect(function()
+    if LockToPlayer and APlayerPicked ~= Speaker then
+        pcall(function()
+            Speaker.Character.HumanoidRootPart.CFrame = APlayerPicked.Character.HumanoidRootPart.CFrame
+        end)
+    end
+end)
+MFCons.HS = (MFCons.HS and MFCons.HS:Disconnect()) or Heartbeat:Connect(function()
+    if HeadSitPlayer and APlayerPicked ~= Speaker then
+        pcall(function()
+            local Humanoid = Speaker.Character:FindFirstChildOfClass("Humanoid")
+            local RootPart = Humanoid.RootPart
+            local PRootPart = APlayerPicked.Character.HumanoidRootPart
+            RootPart.CFrame = PRootPart.CFrame * CFrame.Angles(0, math.rad(0), 0) * CFrame.new(0, 1.6, 0.4)
+            Humanoid.Sit = true
+        end)
+    end
+end)
+MFCons.TPR = (MFCons.TPR and MFCons.TPR:Disconnect()) or Players.PlayerRemoving:Connect(function(Player)
+    if APlayerPicked == Player then
+        APlayerPicked = nil
+        LockToPlayerToggle:SetValue(false)
+        HeadSitPlayerToggle:SetValue(false)
+    end
+end)
+
+LockToPlayerToggle = ALilTrollGroupbox:AddToggle("LockToPlayerToggle", {
+    Text = GlobalText.LockToPlayerToggle,
+    Default = false,
+    Callback = function(Enabled)
+        LockToPlayer = Enabled
+        if Enabled and HeadSitPlayer then
+            HeadSitPlayerToggle:SetValue(false)
+        end
+    end
+})
+HeadSitPlayerToggle = ALilTrollGroupbox:AddToggle("HeadSitPlayerToggle", {
+    Text = GlobalText.HeadSitPlayerToggle,
+    Default = false,
+    Callback = function(Enabled)
+        HeadSitPlayer = Enabled
+        if Enabled and LockToPlayer then
+            LockToPlayerToggle:SetValue(false)
+        elseif not Enabled then
+            local Character = Speaker.Character
+            local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+            if Humanoid then
+                Humanoid.Sit = false
+                Humanoid:ChangeState(2)
+            end
+        end
+    end
+})
+ALilTrollGroupbox:AddDivider()
+SpamSpeed = 1
+SpamText = "Join team c00lkidd today!"
+SpamInput = ALilTrollGroupbox:AddInput("SpamInput", {
+    Text = GlobalText.SpamInput,
+    Default = "Join team c00lkidd today!",
+    Numeric = false,
+    Finished = true,
+    ClearTextOnFocus = false,
+    Placeholder = GlobalText.SpamInputPlaceholder,
+    Callback = function(Text)
+        SpamText = tostring(Text)
+    end
+})
+SpamToggle = ALilTrollGroupbox:AddToggle("SpamToggle", {
+    Text = GlobalText.SpamToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Spamming = Enabled
+        task.spawn(function()
+            while Spamming and SpamText do
+                local Start = tick()
+                wait(SpamSpeed)
+                local End = tick()
+                local ActWait = End - Start
+                local Deviation = ActWait - SpamSpeed
+                if math.abs(Deviation) > 0.1 then
+                    local WaitMore = -Deviation
+                    if WaitMore > 0 then
+                        wait(WaitMore)
+                    end
+                end
+                if Spamming and SpamText then
+                    if TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService then
+                        ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(SpamText, "All")
+                    else
+                        TextChatService.TextChannels.RBXGeneral:SendAsync(SpamText)
+                    end
+                else
+                    break
+                end
+            end
+        end)
+    end
+})
+SpamSpeedSlider = ALilTrollGroupbox:AddSlider("SpamSpeedSlider", {
+    Text = GlobalText.SpamSpeedSlider,
+    Default = 1,
+    Min = 0.1,
+    Max = 5,
+    Rounding = 1,
+    Suffix = " s",
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        SpamSpeed = Number
     end
 })
 
@@ -3519,6 +4122,10 @@ AntiFlingMethodDropdown = FlingGroupbox:AddDropdown("AntiFlingMethodDropdown", {
         end
     end
 })
+
+--|| Animation Groupbox ||--
+
+--AnimationGroupbox = Tabs.Troll:AddRightGroupbox(GlobalText.AnimationGroupbox)
 
 --|| Menu Groupbox ||--
 
@@ -3630,24 +4237,21 @@ UnloadButton = MenuGroup:AddButton({
         Universals:Exit()
         ESPLibrary:Destroy()
         Library:Unload()
-        for _, Object in pairs(ESPConnections) do
-            if typeof(Object) == "RBXScriptConnection" then
-                Object:Disconnect()
-            elseif typeof(Object) == "table" then
-                for _, Object2 in pairs(Object) do
-                    Object2:Disconnect()
+        local function Disconnect(Table)
+            for _, Object in pairs(Table) do
+                if typeof(Object) == "RBXScriptConnection" then
+                    Object:Disconnect()
+                elseif typeof(Object) == "table" then
+                    Disconnect(Object)
                 end
             end
         end
-        PlayerConnections.PA = PlayerConnections.PA and PlayerConnections.PA:Disconnect()
-        PlayerConnections.PR = PlayerConnections.PR and PlayerConnections.PR:Disconnect()
-        FR = FR and FR:Disconnect()
+        Disconnect(ESPConnections)
+        Disconnect(PlayerConnections)
+        Disconnect(MFCons)
         getgenv().MFeeeLoaded = false
         getgenv().MFeeeLoading = false
-        print(GlobalText.Unloaded)
-        print([[
-
-        ]])
+        print(GlobalText.Unloaded .. "\n\n")
     end
 })
 
@@ -3661,6 +4265,7 @@ AssistantLabel1 = CreditsGroupbox:AddLabel(GlobalText.AssistantLabel1)
 AssistantLabel2 = CreditsGroupbox:AddLabel(GlobalText.AssistantLabel2)
 AssistantLabel3 = CreditsGroupbox:AddLabel(GlobalText.AssistantLabel3)
 AssistantLabel4 = CreditsGroupbox:AddLabel(GlobalText.AssistantLabel4)
+AssistantLabel5 = CreditsGroupbox:AddLabel(GlobalText.AssistantLabel5)
 
 --|| Special Thanks Groupbox ||--
 
@@ -3670,6 +4275,43 @@ AimbotLabel = SpecialThanksGroupbox:AddLabel(GlobalText.AimbotLabel)
 ESPLabel = SpecialThanksGroupbox:AddLabel(GlobalText.ESPLabel)
 SpecialThanksGroupbox:AddDivider()
 AndYouLabel = SpecialThanksGroupbox:AddLabel(GlobalText.AndYouLabel)
+
+--|| About Game Groupbox ||--
+
+AboutGameGroupbox = Tabs.About:AddRightGroupbox(GlobalText.AboutGameGroupbox)
+YouPlayedLabel = AboutGameGroupbox:AddLabel(GlobalText.YouPlayedLabel .. math.round(Workspace.DistributedGameTime * 10) / 10 .. GlobalText.YouPlayedLabel2)
+MFCons.YP = (MFCons.YP and MFCons.YP:Disconnect()) or Heartbeat:Connect(function()
+    local Time = math.round(Workspace.DistributedGameTime * 10) / 10
+    local Suffix = GlobalText.YouPlayedLabel2
+    if Time > 31536000 then
+        Time = Time / 31536000
+        Suffix = GlobalText.YouPlayedLabel8
+    elseif Time > 2592000 then
+        Time = Time / 2592000
+        Suffix = GlobalText.YouPlayedLabel7
+    elseif Time > 604800 then
+        Time = Time / 604800
+        Suffix = GlobalText.YouPlayedLabel6
+    elseif Time > 86400 then
+        Time = Time / 86400
+        Suffix = GlobalText.YouPlayedLabel5
+    elseif Time > 3600 then
+        Time = Time / 3600
+        Suffix = GlobalText.YouPlayedLabel4
+    elseif Time > 60 then
+        Time = Time / 60
+        Suffix = GlobalText.YouPlayedLabel3
+    end
+    YouPlayedLabel:SetText(GlobalText.YouPlayedLabel .. Time .. Suffix)
+end)
+GameNameLabel = AboutGameGroupbox:AddLabel(GlobalText.GameName .. (ThisGamesName or GlobalText.GameNaming))
+GamePlaceIdButton = AboutGameGroupbox:AddButton({
+    Text = GlobalText.GamePlaceId .. game.PlaceId,
+    Func = function()
+        Toclipboard(game.PlaceId)
+        NotifySound(GlobalText.GamePlaceIdCopied, 3)
+    end
+})
 
 --|| About Project Groupbox ||--
 
@@ -3703,7 +4345,10 @@ ViewMyGithubButton = JoinDiscordButton:AddButton({
         NotifySound(GlobalText.GithubLink, 3)
     end
 })
-IssuesReportOnLabel = LinksGroupbox:AddLabel(GlobalText.IssuesReportOnLabel)
+IssuesReportOnLabel = LinksGroupbox:AddLabel("IssuesReportOnLabel", {
+    Text = GlobalText.IssuesReportOnLabel,
+    DoesWrap = true
+})
 
 --|| Addons ||--
 

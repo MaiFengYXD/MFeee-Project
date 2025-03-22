@@ -569,7 +569,7 @@ SpawnLoad(function()
 end)
 
 SpawnLoad(function()
-    Universals = loadstring(game:HttpGet(PastebinRepo .. "ukLr0Pmm"))()--loadstring(game:HttpGet(Repo .. "MaiFengYXD/Universal-Modules/main/Universal%20Modules.lua"))()
+    Universals = loadstring(game:HttpGet(Repo .. "MaiFengYXD/Universal-Modules/main/Universal%20Modules.lua"))()
     if TimeOut and Universals then
         Universals:Exit()
     elseif Universals then

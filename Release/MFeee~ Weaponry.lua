@@ -864,6 +864,23 @@ pcall(function()
         end
     end
 end)
+local OldGPCS = {}
+pcall(function()
+    if not (CanHookFunc and CanCC) then return end
+    local function HookGPCS(Instance)
+        if not Instance:IsA("BasePart") then return end
+        OldGPCS[Instance] = Hook(Instance.GetPropertyChangedSignal, function(...)
+            if not checkcaller() then return end
+            return OldGPCS[Instance](...)
+        end)
+    end
+    for _, Instance in pairs(Workspace.Hitboxes:GetDescendants()) do
+        if not Instance:IsA("BasePart") then continue end
+        HookGPCS(Instance)
+    end
+    Workspace.Hitboxes.DescendantAdded:Connect(HookGPCS)
+end)
+
 AntiKickNotify = MainOthersGroupbox:AddToggle("AntiKickNotify", {
     Text = GlobalText.AntiKickNotifyText,
     Default = false,

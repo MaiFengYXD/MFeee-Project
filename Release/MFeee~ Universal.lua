@@ -2345,7 +2345,7 @@ local function ESPUpdate(Class)
     for _, Player in pairs(Players:GetPlayers()) do
         if ESPConditions(Player) then continue end
         task.spawn(function()
-            ESPUpdateCore(Class, Player)
+            pcall(ESPUpdateCore, Class, Player)
         end)
     end
 end

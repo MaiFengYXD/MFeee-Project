@@ -671,7 +671,7 @@ local Toclipboard = function(Text)
     end
 end
 
---[=[if not getgenv().MFeeeQueueTPSeted and QueueTeleport then
+if not getgenv().MFeeeQueueTPSeted and QueueTeleport then
     getgenv().MFeeeQueueTPSeted = true
     QueueTeleport([[
         local TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
@@ -680,7 +680,7 @@ end
             loadstring(game:HttpGet("https://raw.githubusercontent.com/MaiFengYXD/MFeee-Project/main/Release/MFeee%7E%20Weaponry.lua"))()
         end
     ]])
-end]=]
+end
 
 function NotifySound(Text, Duration, OnlySound)
     if NotifyAlert then

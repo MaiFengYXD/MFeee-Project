@@ -14,7 +14,7 @@ License  | CC0-1.0
 Version  | Alpha 0.3.8
 
 # Project Started on 2024-11-13 #
-# This Version was Last Edited on 2025-03-17 #
+# This Version was Last Edited on 2025-03-22 #
 
 Issues Report on Github or https://discord.gg/YBQUd8X8PK
 QQ: 3607178523
@@ -25,993 +25,142 @@ QQ: 3607178523
 
 --|| Studio Check ||--
 
-Cloneref = cloneref or function(...) return ... end
-RunService = Cloneref(game:GetService("RunService"))
-CoreGui = Cloneref(game:GetService("CoreGui"))
+local Cloneref = cloneref or function(...) return ... end
+local RunService = Cloneref(game:GetService("RunService"))
+local CoreGui = Cloneref(game:GetService("CoreGui"))
 if RunService:IsStudio() then
     local Message = Instance.new("Message", CoreGui)
     Message.Text = "Do You Want to Cheat In Studio?"
-    wait(3)
-    Message:Destroy()
-    return
+    task.wait(3)
+    return Message:Destroy()
 end
 
 --|| Language Config ||--
 
 --// Get Language \\--
+if not (makefolder and isfile and readfile and writefile) then
+    warn("Incompatible Executor!(Missing makefolder, isfile, readfile, writefile)")
+    local Message = Instance.new("Message", CoreGui)
+    Message.Text = "Incompatible Executor!\n(Missing makefolder, isfile, readfile, writefile)"
+    task.wait(3)
+    return Message:Destroy()
+end
+
+if not getgenv then
+    warn("Incompatible Executor!(Missing getgenv)")
+    local Message = Instance.new("Message", CoreGui)
+    Message.Text = "Incompatible Executor!\n(Missing getgenv)"
+    task.wait(3)
+    return Message:Destroy()
+end
+
 makefolder("MFeee~ Project")
-LanguageFilePath = "MFeee~ Project/Language.txt"
+local LanguageFilePath = "MFeee~ Project/Language.txt"
 if isfile(LanguageFilePath) then
     getgenv().MFeeeLanguage = readfile(LanguageFilePath) == "Chinese" and "Chinese" or "English"
 else
     writefile(LanguageFilePath, "English")
     getgenv().MFeeeLanguage = "English"
-    MFeeeIAMNEW = true
+    getgenv().MFeeeIAMNEW = true
 end
 
 --// Localization: Chinese or English \\--
-GlobalText = (MFeeeLanguage == "Chinese" and {
-    Oaklands = "😵 你正尝试在橡树地内运行MFeee, 但橡树地有UI反作弊, 如果你仍要运行, 我无法保证你不会被加入黑名单",
-    ScriptLoaded = "🤧 已经加载了脚本了！",
-    ScriptLoading = "🤧 脚本正在加载中！",
-    LibraryLoaded = "✅ 已加载UI库",
-    ThemeManagerLoaded = "✅ 已加载主题管理器",
-    SaveManagerLoaded = "✅ 已加载文件保存管理器",
-    UniversalsLoaded = "✅ 已加载通用模块",
-    ESPLibraryLoaded = "✅ 已加载透视模块",
-    AimbotLoaded = "✅ 已加载自瞄模块",
-    AssetsLoaded = "🥳 资源加载成功",
-    GameNotLoaded = "🤒 游戏尚未完全加载！",
-    MainWindowTitle = "通用",
-    MainWindowFooter = "Alpha 0.3.8 | ",
-    MainTab = "主页",
-    PlayerTab = "玩家",
-    CameraTab = "相机",
-    AmbientTab = "环境",
-    ESPTab = "透视",
-    AimbotTab = "自瞄",
-    TrollTab = "恶搞",
-    MISCTab = "杂项",
-    UISettingsTab = "界面",
-    AboutTab = "关于",
-    MainExecutorGruopbox = "执行器",
-    ExecutorNameText = "名称: ",
-    ExecutorUNC = "UNC: ",
-    UNCTesting = "正在测试UNC",
-    UNCSuc = "UNC测试成功",
-    UNCTest = "测试UNC",
-    SUNCTest = "测试sUNC",
-    SUNCTesting = "正在测试sUNC, 请稍等片刻",
-    SUNCSuc = "SUNC测试成功, 请在控制台查看你的sUNC数值",
-    SUNCWarn = "崩溃风险!",
-    MainAFKGroupbox = "挂机",
-    AntiAFKText = "防挂机",
-    AntiAFKNotifyText = "防挂机次数通知",
-    AntiAFKNotify = "已防挂机一次！总共防挂机 ",
-    AntiAFKNotify2 = " 次",
-    AntiAFKSuffix = " 秒",
-    AntiAFKNumberText = "防挂机交互间隔时间(秒)",
-    AntiAFKDropdownText = "防挂机交互方式",
-    DisconnectIdleConnections = "断开挂机连接",
-    Mousemoverel = "鼠标相对移动",
-    Mousemoveabs = "鼠标绝对移动",
-    Mouseleftclick = "鼠标左键点击",
-    Mouserightclick = "鼠标右键点击",
-    FPSCapToggle = "FPS限制",
-    FPSCapSlider = "目标FPS",
-    MainOthersGroupbox = "更多",
-    QuickLanguageChange = "Change Language",
-    NeedRestartToApply = "重启脚本后生效",
-    AntiKickToggleText = "防踢出(客户端)",
-    AntiKickEgg = "这实际上是不可关闭的",
-    CantAntiKick = "你的执行器不支持防踢出",
-    BoringClickLabel = "本次功德",
-    BoringClickLabel2 = "",
-    BoringClickButton = "积德",
-    BoringClickInput = "积德倍数",
-    InputNumber = "请输入一个数字",
-    BoringClickResetButton = "重置功德",
-    ResetedClickLabel = "你失去了 ",
-    ResetedClickLabel2 = " 功德",
-    PlayerMovementGroupbox = "移动",
-    PlayerWalkSpeedToggle = "移动速度覆写",
-    PlayerWalkSpeedSlider = "移动速度",
-    PlayerJumpPowerToggle = "跳跃力覆写",
-    PlayerJumpPowerSlider = "跳跃力",
-    WorkspaceGravityToggle = "重力覆写",
-    WorkspaceGravitySlider = "重力",
-    PlayerFeaturesGroupbox = "功能",
-    NoclipToggle = "无碰撞",
-    NoclipKeyLabel = "无碰撞按键",
-    NoclipKeybind = "无碰撞",
-    VehicleNoclipKeyLabel = "载具无碰撞按键",
-    VehicleNoclipKeybind = "载具无碰撞",
-    VehicleNoclipToggle = "载具无碰撞",
-    VehicleNoclipNotify = "载具无碰撞已激活",
-    VehicleNoclipNotify2 = "载具无碰撞未激活",
-    AntiVoidToggle = "防虚空坠落伤害",
-    AntiPlatformStandToggle = "防立正",
-    FlyGruopbox = "速度飞行",
-    FlyToggle = "飞行",
-    FlySpeedSlider = "飞行速度",
-    FlyKeyLabel = "飞行按键",
-    FlyKeybind = "飞行",
-    VerticalFlySpeedMultiplierSlider = "垂直速度倍数",
-    Multiplier = " 倍",
-    FlyModeDropdown = "飞行模式",
-    StandFly = "立正飞行",
-    VFly = "载具飞行",
-    SitFly = "坐下飞行",
-    FlyGyroToggle = "飞行陀螺仪",
-    QEFlyToggle = "使用QE进行垂直移动",
-    StopFlyOnDiedToggle = "死亡时停止飞行",
-    MenuGroupbox = "界面",
-    KeybindMenuOpenToggle = "打开快捷按键菜单",
-    ShowCustomCursorToggle = "使用自定义鼠标",
-    NotifySideToggle = "左侧通知",
-    Right = "右侧",
-    Left = "左侧",
-    NotifyRight = "已将通知位置更改为右侧",
-    NotifyLeft = "已将通知位置更改为左侧",
-    DPIScaleDropdown = "DPI缩放",
-    MenuKeyLabel = "打开界面按键",
-    MenuKeybind = "",
-    UnloadButton = "卸载脚本",
-    UnloadButtonToolTip = "完全卸载?",
-    Unloaded = "😇 已卸载脚本",
-    ClickToMoveToggle = "点击移动",
-    CameraCommonGruopbox = "常用",
-    FOVToggle = "视野覆写",
-    FOVSlider = "视野",
-    MaxZoomToggle = "最大缩放覆写",
-    MaxZoomSlider = "最大缩放",
-    MinZoomToggle = "最小缩放覆写",
-    MinZoomSlider = "最小缩放",
-    UnlockThirdPersonToggle = "解锁第三人称视角",
-    CameraNoclipToggle = "相机无碰撞",
-    AntiFollowCameraModeToggle = "防相机[跟随]模式",
-    CameraMoreGruopbox = "更多",
-    AllowShiftLockToggle = "允许视角锁定",
-    AntiGameplayPausedToggle = "防游戏暂停画面",
-    CameraOffsetToggle = "相机视角偏移",
-    AmbientGeneralGruopbox = "常用",
-    FullBrightToggle = "全亮",
-    FullDarkToggle = "全黑(?)",
-    SuperFullBrightToggle = "超级全亮(替换天空)",
-    NoAtmosphereToggle = "无雾霾",
-    NoDepthOfFieldToggle = "无景深",
-    NoBlurToggle = "无模糊",
-    NoBloomToggle = "无泛光",
-    AmbientCustomGruopbox = "自定义",
-    AmbientColorToggle = "环境颜色覆写",
-    AmbientColorPicker = "环境颜色",
-    BrightnessToggle = "亮度覆写",
-    BrightnessSlider = "亮度",
-    ClockTimeToggle = "时间覆写",
-    ClockTimeSlider = "时间",
-    OutdoorAmbientToggle = "室外环境光覆写",
-    OutdoorAmbientColorPicker = "室外环境光颜色",
-    ColorShiftBottomToggle = "底部偏移色覆写",
-    ColorShiftBottomColorPicker = "底部偏移颜色",
-    ColorShiftTopToggle = "顶部偏移色覆写",
-    ColorShiftTopColorPicker = "顶部偏移颜色",
-    DiffuseScaleToggle = "漫反射光覆写",
-    DiffuseScaleSlider = "漫反射光",
-    SpecularScaleToggle = "镜反射覆写",
-    SpecularScaleSlider = "镜反射光",
-    ShadowSoftnessToggle = "阴影软度覆写",
-    ShadowSoftnessSlider = "阴影软度",
-    GeographicLatitudeToggle = "地理纬度覆写",
-    GeographicLatitudeSlider = "地理纬度",
-    TechnologyToggle = "照明技术覆写",
-    TechnologyDropdown = "照明技术",
-    CameraOffsetWarn = "当相机主体不是Humanoid时, 相机视角偏移无法生效",
-    Compatibility = "兼容性",
-    Voxel = "体素(光照首计划)",
-    ShadowMap = "阴影贴图(光照第二计划)",
-    Future = "未来(光照第三计划)",
-    Legacy = "传统",
-    Unified = "统一",
-    ESPGlobalSettingsGroupbox = "全局设置",
-    ESPAllToggle = "透视玩家",
-    ESPTypeDropdown = "透视类型",
-    Text = "文字",
-    SphereAdornment = "球体",
-    CylinderAdornment = "圆柱体",
-    Adornment = "装饰",
-    SelectionBox = "选择框",
-    Highlight = "高亮",
-    ESPTracerToggle = "透视追踪线",
-    ESPArrowToggle = "透视箭头",
-    ESPRandomColorToggle = "透视随机颜色",
-    ESPColorLabel = "透视颜色",
-    ESPColorPicker = "选择框颜色",
-    ESPTransparencySlider = "透视主透明度",
-    ESPHighlightGroupbox = "高亮类型设置",
-    ESPFillColorLabel = "填充颜色",
-    ESPFillColorPicker = "填充颜色",
-    ESPOutlineColorLabel = "轮廓颜色",
-    ESPOutlineColorPicker = "轮廓颜色",
-    ESPFillTransparencySlider = "填充透明度",
-    ESPOutlineTransparencySlider = "轮廓透明度",
-    ESPTextGroupbox = "文字设置",
-    ESPDisplayNameToggle = "使用玩家昵称而不是用户名",
-    ESPHealthToggle = "显示血量",
-    ESPTextSizeSlider = "文字大小",
-    ESPThicknessSlider = "粗细",
-    ESPTracerGroupbox = "追踪线设置",
-    ESPTracerFromDropdown = "追踪线起点",
-    Bottom = "底部",
-    Center = "中心",
-    Top = "顶部",
-    Mouse = "鼠标",
-    ESPTracerThicknessSlider = "追踪线粗细",
-    ESPTracerTransparencySlider = "追踪线不透明度",
-    ESPArrowGroupbox = "箭头设置",
-    ESPArrowCenterOffsetSlider = "箭头中心偏移",
-    ESPHugeDistanceToggle = "无限透视距离",
-    ESPMaxDistanceSlider = "最大透视距离",
-    NewVersion = "⚠️ 你正在使用的版本非最新版! 请在Github或Discord获取最新版本",
-    CreditsGroupbox = "制作人员",
-    DeveloperLabel = "开发者: MaiFengYXD",
-    DeveloperLabel2 = "另一位开发者: Github Copilot🐵",
-    AssistantLabel1 = "助手: Kimi AI",
-    AssistantLabel2 = "助手2: DeepSeek",
-    AssistantLabel3 = "助手3: Gemini",
-    AssistantLabel4 = "助手4: Grok",
-    AssistantLabel5 = "助手5: Qwen",
-    SpecialThanksGroupbox = "特别感谢",
-    ObsidianLabel = "DeividComsono: UI库",
-    AimbotLabel = "Exunys: 自瞄模块",
-    ESPLabel = "Mstudio45: 透视模块",
-    AndYouLabel = "以及你: 使用这个脚本🥰",
-    AboutProjectGroupbox = "关于我",
-    MFeeeLabel = "MFeee~ Project",
-    AboutLabel = "MFeee~ Project旨在提供完全免费开源, 没有繁琐的密钥系统, 同时拥有丰富功能的外部UI。MFeee~ Project奉上毫不费力的使用体验, 让你能沉浸式地享受, 做到丝滑地控制等等。",
-    LicenseLabel = "MFeee~ Project全系列均使用CC0-1.0公共协议, 你可以随意编辑、重新发布、重新授权脚本",
-    LinksGroupbox = "相关链接",
-    DiscordLink = "Discord邀请已复制!",
-    GithubLink = "Github主页链接已复制!",
-    IssuesReportOnLabel = "在Github或者Discord反馈任何Bug! 我接受各种语言的报告(推荐中文), 以及意见。不要刷屏!",
-    CantSetClipBoard = "你的执行器不支持Setclipboard或Toclipboard函数!",
-    ExecuteOnTeleportToggle = "传送时执行",
-    LoadFaild = "❌ 加载线程超时, 加载失败!",
-    ESPMeToggle = "透视自己",
-    ESPTeamCheckToggle = "队伍检测",
-    ESPTeamColorToggle = "队伍颜色",
-    ESPTracerColorLabel = "追踪线颜色",
-    ESPTracerColorPicker = "追踪线颜色",
-    ESPArrowColorLabel = "箭头颜色",
-    ESPArrowColorPicker = "箭头颜色",
-    UseUpVectorFlyToggle = "使用上向量控制垂直",
-    WeirdGruopbox = "奇葩",
-    HipHeightToggle = "臀部高度覆写",
-    HipHeightSlider = "臀部高度",
-    DoHipHeightAfterMeRespawnToggle = "复活后继续执行臀部高度覆写",
-    MaxSlopeAngleToggle = "最大坡度角度覆写",
-    MaxSlopeAngleSlider = "最大坡度角度",
-    AimbotSettingsGroupbox = "设置",
-    EnableAimbotToggle = "启用自瞄",
-    AimbotKeyLabel = "自瞄按键",
-    AimbotKeybind = "自瞄",
-    AimbotToggleModeToggle = "切换式自瞄",
-    AimbotTeamCheckToggle = "队伍检测",
-    AimbotAliveCheckToggle = "存活检测",
-    AimbotWallCheckToggle = "子弹穿墙",
-    AimbotWallCheckTooltip = "已被修复！",
-    AimbotOffsetToMoveDirectionToggle = "自瞄预判",
-    AimbotOffsetIncrementSlider = "预判增量",
-    AimbotSensitivitySlider = "平滑度",
-    AimbotSensitivity2Slider = "鼠标相对移动灵敏度",
-    AimbotLockModeDropdown = "锁定模式",
-    CFrame = "CFrame",
-    Mousemoverel = "鼠标相对移动",
-    AimbotLockPartDropdown = "锁定部位",
-    Head = "头部",
-    HumanoidRootPart = "HumanoidRootPart",
-    Torso = "[R6]躯干",
-    LeftArm = "[R6]左臂",
-    RightArm = "[R6]右臂",
-    LeftLeg = "[R6]左腿",
-    RightLeg = "[R6]右腿",
-    UpperTorso = "[R15]上半身",
-    LowerTorso = "[R15]臀部",
-    LeftUpperArm = "[R15]左上臂",
-    LeftLowerArm = "[R15]左下臂",
-    LeftHand = "[R15]左手",
-    RightUpperArm = "[R15]右上臂",
-    RightLowerArm = "[R15]右下臂",
-    RightHand = "[R15]右手",
-    LeftUpperLeg = "[R15]左大腿",
-    LeftLowerLeg = "[R15]左小腿",
-    LeftFoot = "[R15]左脚",
-    RightUpperLeg = "[R15]右大腿",
-    RightLowerLeg = "[R15]右小腿",
-    RightFoot = "[R15]右脚",
-    AimbotFOVGroupbox = "圆圈",
-    EnableAimbotFOVToggle = "启用圆圈",
-    AimbotFOVRadiusSlider = "圆圈半径",
-    AimbotFOVNumSidesSlider = "圆圈边数",
-    AimbotFOVThicknessSlider = "圆圈粗细",
-    AimbotFOVTransparencySlider = "圆圈不透明度",
-    AimbotFOVFilledToggle = "填充圆圈",
-    AimbotFOVRainbowColorToggle = "彩虹圆圈",
-    AimbotFOVRainbowOutlineColorToggle = "彩虹圆圈轮廓",
-    AimbotFOVColorLabel = "圆圈颜色",
-    AimbotFOVColorPicker = "圆圈颜色",
-    AimbotFOVOutlineColorLabel = "圆圈轮廓颜色",
-    AimbotFOVOutlineColorPicker = "圆圈轮廓颜色",
-    AimbotFOVLockedColorLabel = "锁定时圆圈颜色",
-    AimbotFOVLockedColorPicker = "锁定时圆圈颜色",
-    AimbotDeveloperSettingsGroupbox = "开发者",
-    AimbotUpdateModeDropdown = "更新模式",
-    RenderStepped = "渲染帧开始之前",
-    Stepped = "物理模拟步骤之前",
-    Heartbeat = "逻辑帧处理之后",
-    AimbotTeamCheckMethodDropdown = "队伍检测方式",
-    TeamColor = "队伍颜色",
-    Team = "队伍",
-    AimbotRainbowSpeedSlider = "彩虹速度",
-    RivalsCFrameLockTitle = "竞争对手风险提醒",
-    RivalsCFrameLockDescription = "竞争对手会检测锁定方式, 如果使用CFrame瞄准大概率会被秋后算账(Ban), 且影响体验！",
-    AimbotInfiniteLockDistanceToggle = "无限锁定距离",
-    VisibleAimbotFOVToggle = "可见的圆圈",
-    NoCharacterWarn = "未检测到玩家角色, 请尝试重生(重置人物)",
-    GodSuccess = "已启用本地无敌",
-    InvisSuccess = "已启用隐身, 现在你在别人眼里就是透明的了!",
-    InvisFlingWarn = "正在隐形甩飞, 不能切换甩飞模式",
-    TPWalkToggle = "传送行走",
-    TPWalkSlider = "传送行走速度",
-    SpinToggle = "旋转",
-    SpinSpeedSlider = "旋转速度",
-    ALilTrollGroupbox = "小恶搞",
-    GodButton = "本地无敌",
-    InvisibleToggle = "隐身",
-    InvisibleTransparencySlider = "隐身透明度(只有你能看见)",
-    FlingGroupbox = "甩飞",
-    FlingToggle = "甩飞",
-    SpinFling = "旋转甩飞",
-    WalkFling = "行走甩飞",
-    InvisFlingButton = "隐形甩飞",
-    AntiFlingToggle = "防甩飞",
-    AntiFlingMethodDropdown = "防甩飞方式",
-    NoClipOthers = "使别人无碰撞",
-    RestoreVelocity = "重置速度",
-    MixedAntiFlingMethod = "混合",
-    WalkFlingKeybind = "甩飞",
-    ESPInstantApplyToggle = "即时应用(会卡)",
-    ContinueFlingOnDiedToggle = "复活后继续甩飞",
-    ForceCheckboxToggle = "强制复选框",
-    CubicEaseInOut = "缓入缓出",
-    CubicEaseIn = "缓入",
-    CubicEaseOut = "缓出",
-    Linear = "线性",
-    NotifySoundDropdown = "通知音效",
-    None = "无",
-    ObsidianNotify = "将使用Obsidian通知音效",
-    LinoriaNotify = "将使用Linoria通知音效",
-    NoneNotify = "将关闭通知音效",
-    AnimationModeDropdown = "动画曲线模式",
-    CubicEaseIn = "三次缓入",
-    CubicEaseOut = "三次缓出",
-    CubicEaseInOut = "三次缓入缓出",
-    QuarticEaseIn = "四次缓入",
-    QuarticEaseOut = "四次缓出",
-    QuarticEaseInOut = "四次缓入缓出",
-    Linear = "线性",
-    NoAnimation = "无动画",
-    AnimationSpeedSlider = "动画持续时长",
-    InstantPromptToggle = "瞬间互动",
-    PromptNoclipToggle = "穿墙互动",
-    DistantPromptToggle = "远距互动",
-    PromptDistanceMultiplierSlider = "互动距离",
-    PlayerScaleToggle = "玩家缩放",
-    PlayerScaleSlider = "玩家缩放",
-    AdvancedGroupbox = "高级",
-    FlyPhysicsTab = "物理飞行",
-    PhysicsFlyToggle = "物理飞行",
-    SmoothGyroToggle = "平滑陀螺仪",
-    SmoothGyroValueSlider = "平滑度",
-    Smart = "智能模式",
-    ToclipboardOK = "⏺️ Toclipboard函数存在",
-    ToclipboardNO = "❌ Toclipboard函数不存在",
-    QueueTeleportOK = "⏺️ QueueTeleport函数存在",
-    QueueTeleportNO = "❌ QueueTeleport函数不存在",
-    Hookmetamethod = "✅ Hookmetamethod函数可用",
-    NoHookmetamethod = "❌ Hookmetamethod函数不可用",
-    Fireproximityprompt = "✅ Fireproximityprompt函数可用",
-    NoFireproximityprompt = "❌ Fireproximityprompt函数不可用",
-    AutoInteractionToggle = "自动互动",
-    AutoInteractionKeybind = "自动互动",
-    InstantPromptMethodDropdown = "瞬间互动方式",
-    FirePP = "Fireproximityprompt",
-    HoldDuration = "修改按住时间为0",
-    WhyYouAreUsingConsole = "为什么你要使用控制台运行此脚本?",
-    MobileNotSupport = "😥 很抱歉, 脚本的移动端体验正在优化中, 但是很快就会上线!",
-    GayESPToggle = "彩虹颜色",
-    AutoInteractionMethodDropdown = "自动互动方式",
-    AIFromCharacter = "以角色位置",
-    AIFromCamera = "以相机位置",
-    ESPDisplayDistanceToggle = "显示距离",
-    ESPShowTextToggle = "显示文字",
-    TimeOutLimiterSlider = "加载线程超时限制",
-    FastResetToggle = "快速重置人物(适用跑酷游戏)",
-    FastResetKeybind = "快速重置人物",
-    ResetIntervalSlider = "重置人物间隔",
-    FlyControllerDropdown = "飞行垂直控制键",
-    QEFly = "Q / E",
-    LeftShiftDown = "左Shift / 空格",
-    LeftControlDown = "左Ctrl / 空格",
-    ConstraintsFlyTab = "约束飞行",
-    ConstraintsFlyToggle = "使用约束飞行",
-    ConstraintsMaxSpeedSlider = "最大速度",
-    ConstraintsAccelerationSlider = "加速度",
-    ConstraintsTurnSpeedSlider = "转向速度",
-    ConstraintsResponsivenessSlider = "响应速度",
-    LookToCameraToggle = "朝向相机",
-    ResetMethodDropdown = "重置人物方式",
-    BreakJoints = "断开关节",
-    StateDied = "设为死亡状态",
-    Health0 = "血量 = 0",
-    All = "全都用一遍",
-    InvisFlingNotify = "可在恶搞标签页中修改你的甩飞模式",
-    ConstraintsFlyingStateDropdown = "飞行时切换人物状态",
-    NoChange = "不修改",
-    FallingDown = "倒地",
-    Ragdoll = "布娃娃",
-    GettingUp = "起身",
-    Jumping = "跳跃",
-    Swimming = "游泳",
-    Freefall = "自由落体",
-    Flying = "飞行",
-    Landed = "着陆",
-    Running = "奔跑",
-    RunningNoPhysics = "奔跑(无物理)",
-    StrafingNoPhysics = "横向移动(无物理)",
-    Climbing = "攀爬",
-    Seated = "坐下",
-    PlatformStanding = "平台站立",
-    Died = "死亡(?💀)",
-    Physics = "物理",
-    GetConnectionsOK = "✅ GetConnections函数可用",
-    NoGetConnections = "❌ GetConnections函数不可用",
-    ESPTextModelDropdown = "文字模型",
-    Humanoid = "Humanoid",
-    RootPart = "HumanoidRootPart",
-    Character = "角色",
-    APlayerDropdown = "选择玩家",
-    LockToPlayerToggle = "锁定到玩家",
-    HeadSitPlayerToggle = "骑在玩家头上",
-    SpamInput = "垃圾邮件文本",
-    SpamInputPlaceholder = "任意字符, 不能发脏话",
-    SpamToggle = "垃圾邮件",
-    SpamSpeedSlider = "垃圾邮件间隔",
-    NoRenderToggle = "禁用3D渲染器",
-    FreeCameraToggle = "自由视角",
-    FreeCameraKeybind = "自由视角",
-    FreecamSpeedSlider = "自由视角速度",
-    CameraPlayerSelectorDropdown = "选择玩家",
-    SpectatePlayerToggle = "旁观玩家",
-    UnSpectateWhenCharacterRemovingToggle = "旁观玩家死亡后停止旁观",
-    FixCameraButton = "修复相机",
-    LeftShiftMultiplierSlider = "左Shift倍速",
-    SpaceMultiplierSlider = "空格倍速",
-    AntiFallingDownToggle = "防摔倒",
-    SilentAimLoaded = "✅ 已加载魔法子弹模块",
-    GameName = "游戏名称: ",
-    GameNaming = "正在获取...",
-    GamePlaceId = "游戏ID: ",
-    GamePlaceIdCopied = "游戏ID已复制!",
-    YouPlayedLabel = "你玩了: ",
-    YouPlayedLabel2 = " 秒",
-    YouPlayedLabel3 = " 分",
-    YouPlayedLabel4 = " 时🤓",
-    YouPlayedLabel5 = " 天🤔",
-    YouPlayedLabel6 = " 周😨",
-    YouPlayedLabel7 = " 月💀",
-    YouPlayedLabel8 = " 年👻",
-    AboutGameGroupbox = "关于游戏",
-    AimbotFOVRainbowSpeedSlider = "彩虹圆圈速度",
-}) or {
-    Oaklands = "😵 You are trying to run MFeee in Oaklands, but Oaklands has an UI anticheat, if you still run it, I can't guarantee that you won't be banned",
-    ScriptLoaded = "🤧 Script Already Loaded!",
-    ScriptLoading = "🤧 Script Loading!",
-    LibraryLoaded = "✅ UI Library Loaded",
-    ThemeManagerLoaded = "✅ Theme Manager Loaded",
-    SaveManagerLoaded = "✅ Save Manager Loaded",
-    UniversalsLoaded = "✅ Universal Modules Loaded",
-    ESPLibraryLoaded = "✅ ESP Module Loaded",
-    AimbotLoaded = "✅ Aimbot Module Loaded",
-    AssetsLoaded = "🥳 Assets Load Success",
-    GameNotLoaded = "🤒 Game Not Fully Loaded!",
-    MainWindowTitle = "Universal",
-    MainWindowFooter = "Alpha 0.3.8 | ",
-    MainTab = "Main",
-    PlayerTab = "Player",
-    CameraTab = "Camera",
-    AmbientTab = "Ambient",
-    ESPTab = "ESP",
-    AimbotTab = "Aimbot",
-    TrollTab = "Troll",
-    MISCTab = "MISC",
-    UISettingsTab = "UI Settings",
-    AboutTab = "About",
-    MainExecutorGruopbox = "Executor",
-    ExecutorNameText = "Name: ",
-    ExecutorUNC = "UNC: ",
-    UNCTesting = "Testing UNC",
-    UNCSuc = "UNC Test Successful",
-    UNCTest = "Test UNC",
-    SUNCTest = "Test sUNC",
-    SUNCTesting = "Testing sUNC, Please Wait a Few Seconds",
-    SUNCSuc = "SUNC Test Successful, Check Your sUNC Value in the Console",
-    SUNCWarn = "Crash Risk!",
-    MainAFKGroupbox = "AFK",
-    AntiAFKText = "Anti AFK",
-    AntiAFKNotifyText = "Anti AFK Notify",
-    AntiAFKNotify = "Anti AFK Once! Total Anti AFK ",
-    AntiAFKNotify2 = " Times",
-    AntiAFKSuffix = " s",
-    AntiAFKNumberText = "Anti AFK Interval(seconds)",
-    AntiAFKDropdownText = "Anti AFK Interaction",
-    DisconnectIdleConnections = "Disconnect Idle Connections",
-    Mousemoverel = "Mouse move relative",
-    Mousemoveabs = "Mouse move absolute",
-    Mouseleftclick = "Mouse leftclick",
-    Mouserightclick = "Mouse rightclick",
-    FPSCapToggle = "FPS Cap",
-    FPSCapSlider = "Target FPS",
-    MainOthersGroupbox = "More",
-    QuickLanguageChange = "更改语言",
-    NeedRestartToApply = "You Need to Restart to Apply the Change",
-    AntiKickToggleText = "Anti Kick(Client Only)",
-    AntiKickEgg = "This is Actually Cannot be Disabled",
-    CantAntiKick = "Your Executor Doesn't Support Anti Kick",
-    BoringClickLabel = "You Clicked ",
-    BoringClickLabel2 = " Times",
-    BoringClickButton = "Click Me!",
-    BoringClickInput = "Click Multiplier",
-    InputNumber = "Please Input a Number",
-    BoringClickResetButton = "Reset Clicks",
-    ResetedClickLabel = "You Lost ",
-    ResetedClickLabel2 = " Clicks",
-    PlayerMovementGroupbox = "Movement",
-    PlayerWalkSpeedToggle = "Walk Speed Override",
-    PlayerWalkSpeedSlider = "Walk Speed",
-    PlayerJumpPowerToggle = "Jump Power Override",
-    PlayerJumpPowerSlider = "Jump Power",
-    WorkspaceGravityToggle = "Gravity Override",
-    WorkspaceGravitySlider = "Gravity",
-    PlayerFeaturesGroupbox = "Features",
-    NoclipToggle = "Noclip",
-    NoclipKeyLabel = "Noclip Keybind",
-    NoclipKeybind = "Noclip",
-    VehicleNoclipKeyLabel = "Vehicle Noclip Keybind",
-    VehicleNoclipKeybind = "Vehicle Noclip",
-    VehicleNoclipToggle = "Vehicle Noclip",
-    VehicleNoclipNotify = "Vehicle Noclip Activated",
-    VehicleNoclipNotify2 = "Vehicle Noclip Deactivated",
-    AntiVoidToggle = "Anti Void Fall Damage",
-    AntiPlatformStandToggle = "Anti Platform Stand",
-    FlyGruopbox = "Body Movers",
-    FlyToggle = "Fly",
-    FlySpeedSlider = "Fly Speed",
-    FlyKeyLabel = "Fly Keybind",
-    FlyKeybind = "Fly",
-    VerticalFlySpeedMultiplierSlider = "Vertical Speed Multiplier",
-    Multiplier = " x",
-    FlyModeDropdown = "Fly Mode",
-    StandFly = "Stand Fly",
-    VFly = "Vehicle Fly",
-    SitFly = "Sit Fly",
-    FlyGyroToggle = "Fly Gyro",
-    QEFlyToggle = "Use QE Vertical Movement",
-    StopFlyOnDiedToggle = "Stop Fly On Died",
-    MenuGroupbox = "Menu",
-    KeybindMenuOpenToggle = "Open Keybind Menu",
-    ShowCustomCursorToggle = "Use Custom Cursor",
-    NotifySideToggle = "Left Side Notify",
-    Right = "Right",
-    Left = "Left",
-    NotifyRight = "Changed Notify Side to Right",
-    NotifyLeft = "Changed Notify Side to Left",
-    DPIScaleDropdown = "DPI Scale",
-    MenuKeyLabel = "Open Menu Keybind",
-    MenuKeybind = "",
-    UnloadButton = "Unload",
-    UnloadButtonToolTip = "Fully Unload?",
-    Unloaded = "😇 Script Unloaded",
-    ClickToMoveToggle = "Click To Move",
-    CameraCommonGruopbox = "Common",
-    FOVToggle = "FOV Override",
-    FOVSlider = "FOV",
-    MaxZoomToggle = "Max Zoom Override",
-    MaxZoomSlider = "Max Zoom",
-    MinZoomToggle = "Min Zoom Override",
-    MinZoomSlider = "Min Zoom",
-    UnlockThirdPersonToggle = "Unlock Third Person",
-    CameraNoclipToggle = "Camera Noclip",
-    AntiFollowCameraModeToggle = "Anti Follow Camera Mode",
-    CameraMoreGruopbox = "More",
-    AllowShiftLockToggle = "Allow Shift Lock",
-    AntiGameplayPausedToggle = "Anti Gameplay Paused",
-    CameraOffsetToggle = "Camera Offset",
-    AmbientGeneralGruopbox = "General",
-    FullBrightToggle = "Full Bright",
-    FullDarkToggle = "Full Dark(?)",
-    SuperFullBrightToggle = "Super Full Bright(Replace Sky)",
-    NoAtmosphereToggle = "No Fogs",
-    NoDepthOfFieldToggle = "No Depth Of Field",
-    NoBlurToggle = "No Blur",
-    NoBloomToggle = "No Bloom",
-    AmbientCustomGruopbox = "Custom",
-    AmbientColorToggle = "Ambient Color Override",
-    AmbientColorPicker = "Ambient Color",
-    BrightnessToggle = "Brightness Override",
-    BrightnessSlider = "Brightness",
-    ClockTimeToggle = "Clock Time Override",
-    ClockTimeSlider = "Clock Time",
-    OutdoorAmbientToggle = "Outdoor Ambient Override",
-    OutdoorAmbientColorPicker = "Outdoor Ambient Color",
-    ColorShiftBottomToggle = "Color Shift Bottom Override",
-    ColorShiftBottomColorPicker = "Color Shift Bottom Color",
-    ColorShiftTopToggle = "Color Shift Top Override",
-    ColorShiftTopColorPicker = "Color Shift Top Color",
-    DiffuseScaleToggle = "Diffuse Scale Override",
-    DiffuseScaleSlider = "Diffuse Scale",
-    SpecularScaleToggle = "Specular Scale Override",
-    SpecularScaleSlider = "Specular Scale",
-    ShadowSoftnessToggle = "Shadow Softness Override",
-    ShadowSoftnessSlider = "Shadow Softness",
-    GeographicLatitudeToggle = "Geographic Latitude Override",
-    GeographicLatitudeSlider = "Geographic Latitude",
-    TechnologyToggle = "Technology Override",
-    TechnologyDropdown = "Technology",
-    CameraOffsetWarn = "Camera Offset Can't Working When Camera Subject is Not Humanoid",
-    Compatibility = "Compatibility",
-    Voxel = "Voxel(First Light)",
-    ShadowMap = "ShadowMap(Second Light)",
-    Future = "Future(Third Light)",
-    Legacy = "Legacy",
-    Unified = "Unified",
-    ESPGlobalSettingsGroupbox = "Global Settings",
-    ESPAllToggle = "Enable ESP",
-    ESPTypeDropdown = "ESP Type",
-    Text = "Text",
-    SphereAdornment = "Sphere",
-    CylinderAdornment = "Cylinder",
-    Adornment = "Adornment",
-    SelectionBox = "Selection Box",
-    Highlight = "Highlight",
-    ESPTracerToggle = "Tracer",
-    ESPArrowToggle = "Arrow",
-    ESPRandomColorToggle = "Random Color",
-    ESPColorLabel = "ESP Color",
-    ESPColorPicker = "Selection Box Color",
-    ESPTransparencySlider = "Transparency",
-    ESPHighlightGroupbox = "Highlight Settings",
-    ESPFillColorLabel = "Fill Color",
-    ESPFillColorPicker = "Fill Color",
-    ESPOutlineColorLabel = "Outline Color",
-    ESPOutlineColorPicker = "Outline Color",
-    ESPFillTransparencySlider = "Fill Transparency",
-    ESPOutlineTransparencySlider = "Outline Transparency",
-    ESPTextGroupbox = "Text Settings",
-    ESPDisplayNameToggle = "Use Player's Display Name",
-    ESPHealthToggle = "Show Health",
-    ESPTextSizeSlider = "Text Size",
-    ESPThicknessSlider = "Thickness",
-    ESPTracerGroupbox = "Tracer Settings",
-    ESPTracerFromDropdown = "Tracer From",
-    Bottom = "Bottom",
-    Center = "Center",
-    Top = "Top",
-    Mouse = "Mouse",
-    ESPTracerThicknessSlider = "Tracer Thickness",
-    ESPTracerTransparencySlider = "Tracer Transparency",
-    ESPArrowGroupbox = "Arrow Settings",
-    ESPArrowCenterOffsetSlider = "Arrow Center Offset",
-    ESPHugeDistanceToggle = "Infinite ESP Distance",
-    ESPMaxDistanceSlider = "Max Distance",
-    NewVersion = "⚠️ New Version Available! Get the Latest Version on Github or Discord",
-    CreditsGroupbox = "Credits",
-    DeveloperLabel = "Developer: MaiFengYXD",
-    DeveloperLabel2 = "Another Developer: Github Copilot🐵",
-    AssistantLabel1 = "Assistant: Kimi AI",
-    AssistantLabel2 = "Assistant2: DeepSeek",
-    AssistantLabel3 = "Assistant3: Gemini",
-    AssistantLabel4 = "Assistant4: Grok",
-    AssistantLabel5 = "Assistant5: Qwen",
-    SpecialThanksGroupbox = "Special Thanks",
-    ObsidianLabel = "DeividComsono: UI Library",
-    AimbotLabel = "Exunys: Aimbot Module",
-    ESPLabel = "Mstudio45: ESP Module",
-    AndYouLabel = "And You: For Using This Script🥰",
-    AboutProjectGroupbox = "About Me",
-    MFeeeLabel = "MFeee~ Project",
-    AboutLabel = "MFeee~ Project aims to provide a completely free and open-source external UI with rich features, without cumbersome key systems. MFeee~ Project offers an effortless user experience, allowing you to enjoy immersive, silky-smooth control, etc.",
-    LicenseLabel = "MFeee~ Project series uses the CC0-1.0 public license, you can freely edit, republish, relicense the script",
-    LinksGroupbox = "Links",
-    DiscordLink = "Discord Invite Copied!",
-    GithubLink = "Github Page Copied!",
-    IssuesReportOnLabel = "Report Any Bugs on Github or Discord! I Accept Any Language(Recommended English), Any Suggestions. No Spamming!",
-    CantSetClipBoard = "Your Executor Doesn't Support Setclipboard or Toclipboard Function!",
-    ExecuteOnTeleportToggle = "Execute On Teleport",
-    LoadFaild = "❌ Load Thread Time Out, Load Faild!",
-    ESPMeToggle = "Self ESP",
-    ESPTeamCheckToggle = "Team Check",
-    ESPTeamColorToggle = "Team Color",
-    ESPTracerColorLabel = "Tracer Color",
-    ESPTracerColorPicker = "Tracer Color",
-    ESPArrowColorLabel = "Arrow Color",
-    ESPArrowColorPicker = "Arrow Color",
-    UseUpVectorFlyToggle = "Use Up Vector",
-    WeirdGruopbox = "Weird",
-    HipHeightToggle = "Hip Height Override",
-    HipHeightSlider = "Hip Height",
-    DoHipHeightAfterMeRespawnToggle = "Do Hip Height After Me Respawn",
-    MaxSlopeAngleToggle = "Max Slope Angle Override",
-    MaxSlopeAngleSlider = "Max Slope Angle",
-    AimbotSettingsGroupbox = "Settings",
-    EnableAimbotToggle = "Enable Aimbot",
-    AimbotKeyLabel = "Aimbot Trigger Key",
-    AimbotKeybind = "Aimbot",
-    AimbotToggleModeToggle = "Toggle Mode",
-    AimbotTeamCheckToggle = "Team Check",
-    AimbotAliveCheckToggle = "Alive Check",
-    AimbotWallCheckToggle = "Wall Check",
-    AimbotWallCheckTooltip = "Patched! Not Working Now",
-    AimbotOffsetToMoveDirectionToggle = "Offset to Move Direction",
-    AimbotOffsetIncrementSlider = "Offset Increment",
-    AimbotSensitivitySlider = "Smoothness",
-    AimbotSensitivity2Slider = "Mouse Move Relative Sensitivity",
-    AimbotLockModeDropdown = "Lock Mode",
-    CFrame = "CFrame",
-    Mousemoverel = "Mouse Move Relative",
-    AimbotLockPartDropdown = "Lock Part",
-    Head = "Head",
-    HumanoidRootPart = "HumanoidRootPart",
-    Torso = "[R6]Torso",
-    LeftArm = "[R6]Left Arm",
-    RightArm = "[R6]Right Arm",
-    LeftLeg = "[R6]Left Leg",
-    RightLeg = "[R6]Right Leg",
-    UpperTorso = "[R15]Upper Torso",
-    LowerTorso = "[R15]Lower Torso",
-    LeftUpperArm = "[R15]Left Upper Arm",
-    LeftLowerArm = "[R15]Left Lower Arm",
-    LeftHand = "[R15]Left Hand",
-    RightUpperArm = "[R15]Right Upper Arm",
-    RightLowerArm = "[R15]Right Lower Arm",
-    RightHand = "[R15]Right Hand",
-    LeftUpperLeg = "[R15]Left Upper Leg",
-    LeftLowerLeg = "[R15]Left Lower Leg",
-    LeftFoot = "[R15]Left Foot",
-    RightUpperLeg = "[R15]Right Upper Leg",
-    RightLowerLeg = "[R15]Right Lower Leg",
-    RightFoot = "[R15]Right Foot",
-    AimbotFOVGroupbox = "Circle",
-    EnableAimbotFOVToggle = "Enable Circle",
-    AimbotFOVRadiusSlider = "Circle Radius",
-    AimbotFOVNumSidesSlider = "Circle Sides",
-    AimbotFOVThicknessSlider = "Circle Thickness",
-    AimbotFOVTransparencySlider = "Circle Opacity",
-    AimbotFOVFilledToggle = "Filled Circle",
-    AimbotFOVRainbowColorToggle = "Rainbow Circle",
-    AimbotFOVRainbowOutlineColorToggle = "Rainbow Circle Outline",
-    AimbotFOVColorLabel = "Circle Color",
-    AimbotFOVColorPicker = "Circle Color",
-    AimbotFOVOutlineColorLabel = "Circle Outline Color",
-    AimbotFOVOutlineColorPicker = "Circle Outline Color",
-    AimbotFOVLockedColorLabel = "Locked Circle Color",
-    AimbotFOVLockedColorPicker = "Locked Circle Color",
-    AimbotDeveloperSettingsGroupbox = "Developer",
-    AimbotUpdateModeDropdown = "Update Mode",
-    RenderStepped = "RenderStepped",
-    Stepped = "Stepped",
-    Heartbeat = "Heartbeat",
-    AimbotTeamCheckMethodDropdown = "Team Check Method",
-    TeamColor = "Team Color",
-    Team = "Team",
-    AimbotRainbowSpeedSlider = "Rainbow Speed",
-    RivalsCFrameLockTitle = "Rivals CFrame Lock Warning",
-    RivalsCFrameLockDescription = "Rivals will detect the lock mode, if you use CFrame to aim, you will probably be banned, and it will affect the experience!",
-    AimbotInfiniteLockDistanceToggle = "Infinite Lock Distance",
-    VisibleAimbotFOVToggle = "Visible Circle",
-    NoCharacterWarn = "No Character Detected, Please Try to Respawn",
-    GodSuccess = "Local God Mode Enabled",
-    InvisSuccess = "Invisible Enabled, You are Now Invisible",
-    InvisibleFlingWarn = "Invisible Flinging, Can't Change Fling Mode",
-    TPWalkToggle = "TP Walk",
-    TPWalkSlider = "TP Walk Speed",
-    SpinToggle = "Spin",
-    SpinSpeedSlider = "Spin Speed",
-    ALilTrollGroupbox = "A Lil Troll",
-    GodButton = "Local God Mode",
-    InvisibleToggle = "Invisible",
-    InvisibleTransparencySlider = "Transparency(Only You Can See)",
-    FlingGroupbox = "Fling",
-    FlingToggle = "Fling",
-    SpinFling = "Spin Fling",
-    WalkFling = "Walk Fling",
-    InvisFlingButton = "Invisible Fling",
-    AntiFlingToggle = "Anti Fling",
-    AntiFlingMethodDropdown = "Anti Fling Method",
-    NoClipOthers = "No Clip Others",
-    RestoreVelocity = "Restore Velocity",
-    MixedAntiFlingMethod = "Both",
-    WalkFlingKeybind = "Fling",
-    ESPInstantApplyToggle = "Instant Apply(Laggy)",
-    IssuesReportOn = "Report Any Bug on Github or Discord!",
-    ContinueFlingOnDiedToggle = "Continue Fling On Relive",
-    ForceCheckboxToggle = "Force Checkbox",
-    CubicEaseInOut = "Ease In Out",
-    CubicEaseIn = "Ease In",
-    CubicEaseOut = "Ease Out",
-    Linear = "Linear",
-    NotifySoundDropdown = "Notify Sound",
-    None = "None",
-    ObsidianNotify = "Will Use Obsidian Notify Sound",
-    LinoriaNotify = "Will Use Linoria Notify Sound",
-    NoneNotify = "Will Disable Notify Sound",
-    AnimationModeDropdown = "Animation Mode",
-    CubicEaseIn = "Cubic Ease In",
-    CubicEaseOut = "Cubic Ease Out",
-    CubicEaseInOut = "Cubic Ease In Out",
-    QuarticEaseIn = "Quartic Ease In",
-    QuarticEaseOut = "Quartic Ease Out",
-    QuarticEaseInOut = "Quartic Ease In Out",
-    Linear = "Linear",
-    NoAnimation = "No Animation",
-    AnimationSpeedSlider = "Animation Duration",
-    InstantPromptToggle = "Instant Prompt",
-    PromptNoclipToggle = "Prompt Clip",
-    DistancePromptToggle = "Distant Prompt",
-    PromptDistanceMultiplierSlider = "Prompt Distance",
-    PlayerScaleToggle = "Player Scale",
-    PlayerScaleSlider = "Scale",
-    AdvancedGroupbox = "Advanced",
-    FlyPhysicsTab = "Fly Physics",
-    PhysicsFlyToggle = "Physics Fly",
-    SmoothGyroToggle = "Smooth Gyro",
-    SmoothGyroValueSlider = "Smoothness",
-    Smart = "Smart Mode",
-    ToclipboardOK = "⏺️ Toclipboard Exist",
-    ToclipboardNO = "❌ Toclipboard Not Exist",
-    QueueTeleportOK = "⏺️ Queueteleport Exist",
-    QueueTeleportNO = "❌ Queueteleport Not Exist",
-    Hookmetamethod = "✅ Hookmetamethod Available",
-    NoHookmetamethod = "❌ Hookmetamethod Unavailable",
-    Fireproximityprompt = "✅ Fireproximityprompt Available",
-    NoFireproximityprompt = "❌ Fireproximityprompt Unavailable",
-    AutoInteractionToggle = "Auto Interaction",
-    AutoInteractionKeybind = "Auto Interaction",
-    InstantPromptMethodDropdown = "Instant Prompt Method",
-    FirePP = "Fireproximityprompt",
-    HoldDuration = "HoldDuration = 0",
-    WhyYouAreUsingConsole = "Why You Are Using Console to Run This Script?",
-    MobileNotSupport = "😥 I'm Sorry, The Script's Mobile Experience is Under Optimization, But It Will Be Coming Soon!",
-    GayESPToggle = "Rainbow Color",
-    AutoInteractionMethodDropdown = "Auto Interaction Method",
-    AIFromCharacter = "From Character",
-    AIFromCamera = "From Camera",
-    ESPDisplayDistanceToggle = "Display Distance",
-    ESPShowTextToggle = "Show Text",
-    TimeOutLimiterSlider = "Loader Timeout Limite",
-    FastResetToggle = "Fast Reset(For obby games)",
-    FastResetKeybind = "Fast Reset",
-    ResetIntervalSlider = "Reset Interval",
-    FlyControllerDropdown = "Fly Vertical Controller",
-    QEFly = "Q / E",
-    LeftShiftDown = "Left Shift / Space",
-    LeftControlDown = "Left Ctrl / Space",
-    ConstraintsFlyTab = "Constraints Fly",
-    ConstraintsFlyToggle = "Use Constraints Fly",
-    ConstraintsMaxSpeedSlider = "Max Speed",
-    ConstraintsAccelerationSlider = "Acceleration",
-    ConstraintsTurnSpeedSlider = "Turn Speed",
-    ConstraintsResponsivenessSlider = "Responsiveness",
-    LookToCameraToggle = "Look To Camera",
-    ResetMethodDropdown = "Reset Method",
-    BreakJoints = "Break Joints",
-    StateDied = "Change State Died",
-    Health0 = "Health = 0",
-    All = "All",
-    InvisFlingNotify = "You Can Change Your Fling Mode in Troll Tab",
-    ConstraintsFlyingStateDropdown = "Change State When Flying",
-    NoChange = "No Change",
-    FallingDown = "Falling Down",
-    Ragdoll = "Ragdoll",
-    GettingUp = "Getting Up",
-    Jumping = "Jumping",
-    Swimming = "Swimming",
-    Freefall = "Freefall",
-    Flying = "Flying",
-    Landed = "Landed",
-    Running = "Running",
-    RunningNoPhysics = "Running(No Physics)",
-    StrafingNoPhysics = "Strafing(No Physics)",
-    Climbing = "Climbing",
-    Seated = "Seated",
-    PlatformStanding = "Platform Standing",
-    Died = "Died(Why?💀)",
-    Physics = "Physics",
-    GetConnectionsOK = "✅ GetConnections Available",
-    NoGetConnections = "❌ GetConnections Unavailable",
-    ESPTextModelDropdown = "Text Model",
-    Humanoid = "Humanoid",
-    RootPart = "HumanoidRootPart",
-    Character = "Character",
-    APlayerDropdown = "Select Player",
-    LockToPlayerToggle = "Lock To Player",
-    HeadSitPlayerToggle = "Head Sit Player",
-    SpamInput = "Spam Input",
-    SpamInputPlaceholder = "Any Characters, No Swearing Words",
-    SpamToggle = "Spam",
-    SpamSpeedSlider = "Spam Interval",
-    NoRenderToggle = "Disable 3D Renderer",
-    FreeCameraToggle = "Free Camera",
-    FreeCameraKeybind = "Free Camera",
-    FreecamSpeedSlider = "Freecam Speed",
-    CameraPlayerSelectorDropdown = "Select Player",
-    SpectatePlayerToggle = "Spectate",
-    UnSpectateWhenCharacterRemovingToggle = "Unspectate When Character Removing",
-    FixCameraButton = "Fix Camera",
-    LeftShiftMultiplierSlider = "Left Shift Multiplier",
-    SpaceMultiplierSlider = "Space Multiplier",
-    AntiFallingDownToggle = "Anti Falling Down",
-    SilentAimLoaded = "✅ Silent Aim Module Loaded",
-    GameName = "Game Name: ",
-    GameNaming = "Getting...",
-    GamePlaceId = "Game ID: ",
-    GamePlaceIdCopied = "Game ID Copied!",
-    YouPlayedLabel = "You Played: ",
-    YouPlayedLabel2 = " Seconds",
-    YouPlayedLabel3 = " Minutes",
-    YouPlayedLabel4 = " Hours🤓",
-    YouPlayedLabel5 = " Days🤔",
-    YouPlayedLabel6 = " Weeks😨",
-    YouPlayedLabel7 = " Months💀",
-    YouPlayedLabel8 = " Years👻",
-    AboutGameGroupbox = "About Game",
-    AimbotFOVRainbowSpeedSlider = "Rainbow Circle Speed",
-}
+local Repo = "https://raw.githubusercontent.com/"
+local MFRepo = (Repo .. "MaiFengYXD/ObsidianCN/main/")
+local ObsidianRepo = (Repo .. "deividcomsono/Obsidian/main/")
+local PastebinRepo = "https://pastebin.com/raw/"
+local CurrentVersion = "Alpha 0.3.8"
+local Library, ThemeManager, SaveManager, Universals, ESPLibrary, Aimbot, SilentAim, LatestVersion, SoundService, Heartbeat, ThisGamesName, PrintUI, NoGlobalText
+
+task.spawn(function()
+    local RichText, Time = getgenv().MFeeeLanguage == "Chinese" and "获取语言本地化" or "Getting Language Localization"
+    local function Handle(Object, Error, Normal)
+        if Object:IsA("TextLabel") and string.find(Object.Text, RichText) then
+            Time = string.match(Object.Text, "^(.-)%s-%-%-")
+            Object.Text = Error and `{Time} -- [nil%] {RichText}` or `{Time} -- [100%] {RichText}`
+            Object.TextColor3 = (Error and Color3.fromRGB(215, 90, 74)) or (Normal and Color3.new(1, 1, 1)) or Color3.fromRGB(0, 255, 0)
+            Object.Parent.image.Image = (Error and "rbxasset://textures/DevConsole/Error.png") or (Normal and "") or "rbxasset://textures/AudioDiscovery/done.png"
+        end
+    end
+    print(RichText)
+    local LogTemp = CoreGui.DescendantAdded:Connect(function(Object)
+        Handle(Object, false, not GlobalText)
+    end)
+    function NoGlobalText()
+        LogTemp:Disconnect()
+        for _, Object in pairs(CoreGui:GetDescendants()) do
+            Handle(Object, true)
+        end
+    end
+    local LoadStatus, CurrentText = 0
+    local function Handle2(Object)
+        if string.find(Object.Text, "99%%") then return end
+        Time = string.match(Object.Text, "^(.-)%s-%-%-")
+        Object.Text = `{Time} -- [{LoadStatus}%] {RichText}`
+        CurrentText.AncestryChanged:Once(function()
+            CurrentText = nil
+        end)
+    end
+    repeat
+        task.wait(.01)
+        LoadStatus += 1
+        if not CurrentText then
+            for _, Object in pairs(CoreGui:GetDescendants()) do
+                if Object:IsA("TextLabel") and string.find(Object.Text, RichText) then
+                    CurrentText = Object
+                    Handle2(Object)
+                end
+            end
+        else
+            Handle2(CurrentText)
+        end
+    until GlobalText
+    for _, Object in pairs(CoreGui:GetDescendants()) do
+        Handle(Object)
+    end
+end)
+GlobalText = loadstring(game:HttpGet(PastebinRepo .. "ELDu5xsW"))()
+if not GlobalText then
+    return NoGlobalText()
+end
 
 --|| Oaklands Check ||--
 
-Players = Cloneref(game:GetService("Players"))
-Speaker = Players.LocalPlayer
+local Players = Cloneref(game:GetService("Players"))
+local Speaker = Players.LocalPlayer
 if game.PlaceId == 9938675423 then
-    Speaker:Kick(GlobalText.Oaklands)
-    return
+    return Speaker:Kick(GlobalText.Oaklands)
+end
+
+--|| Loading Check ||--
+
+if not game:IsLoaded() then
+    print(GlobalText.GameNotLoaded)
+    game.Loaded:Wait()
 end
 
 --|| Device Check ||--
 
-UserInputService = Cloneref(game:GetService("UserInputService"))
-GuiService = Cloneref(game:GetService("GuiService"))
+local UserInputService = Cloneref(game:GetService("UserInputService"))
+local GuiService = Cloneref(game:GetService("GuiService"))
 if GuiService:IsTenFootInterface() then
     local Message = Instance.new("Message", CoreGui)
     Message.Text = GlobalText.WhyYouAreUsingConsole
-    wait(3)
-    Message:Destroy()
-    return
+    task.wait(3)
+    return Message:Destroy()
 elseif UserInputService.TouchEnabled and (not UserInputService.MouseEnabled or not UserInputService.KeyboardEnabled) then
     local Message = Instance.new("Message", CoreGui)
     Message.Text = GlobalText.MobileNotSupport
-    wait(3)
-    Message:Destroy()
-    return
+    task.wait(3)
+    return Message:Destroy()
 end
 
 --|| Loaded Check ||--
 
 if getgenv().MFeeeLoaded then
-    warn(GlobalText.ScriptLoaded)
-    return
+    return warn(GlobalText.ScriptLoaded)
 elseif getgenv().MFeeeLoading then
-    warn(GlobalText.ScriptLoading)
-    return
+    return warn(GlobalText.ScriptLoading)
 end
 
 --|| Start Loading ||--
@@ -1020,8 +169,8 @@ getgenv().MFeeeLoaded = false
 getgenv().MFeeeLoading = true
 
 --// Festivals and Emojis \\--
-Year = tonumber(os.date("%Y"))
-function EasterDate()
+local Year = tonumber(os.date("%Y"))
+local function EasterDate()
     local A = math.floor(Year / 100)
     local B = math.floor((13 + 8 * A) / 25)
     local C = (15 - B + A - math.floor(A / 4)) % 30
@@ -1032,7 +181,7 @@ function EasterDate()
     return (E == 29 and F == 6 and "04 19") or (E == 28 and F == 6 and "04 18") or (31 < G and ("04 %02d"):format(G - 31)) or ("03 %02d"):format(G)
 end
 
-function MotherDay()
+local function MotherDay()
     for Day = 8, 14 do
         if os.date("%w", os.time{year = Year, month = 5, day = Day}) == "0" then
             return ("05 %02d"):format(Day)
@@ -1040,7 +189,7 @@ function MotherDay()
     end
 end
 
-function FatherDay()
+local function FatherDay()
     for Day = 15, 21 do
         if os.date("%w", os.time{year = Year, month = 6, day = Day}) == "0" then
             return ("06 %02d"):format(Day)
@@ -1048,10 +197,12 @@ function FatherDay()
     end
 end
 
-EmojiList = (MFeeeLanguage == "Chinese" and ({
+local Valentine = ({"💚", "💛", "🧡", "❤️", "💗"})[math.random(5)]
+local AprilFools = ({"🃏", "🤡", "😂", "🤣", "😡", "🤬", "😇", "🔥💀🔥", "🔥", "💀", "🐀", "🤨", "🤓", "🤑", "🤮", "👽", "😈", "👿", "🤘", "👎", "🈲", "🔞", "😤", "😕", "😏", "😒", "♿", "😎", "🤗", "🤔", "🧐", "👀", "❌", "✅", "⚠️", "😓", "🥵", "🙄", "🙄💅", "💄🙄💅", "🆘", "🉑", "😭", "😱", "🥴", "🥴🥴", "🤢", "🥸", "🐽", "👾", "🛠️", "🧧", "🧧", "🧧", "🧧", "🧧", "🧧", "🍃", "🏭", "🏭", "🏭","🏭", "🏭", "🥮", "👩", "👩", "👨", "👶", "🏮", "🎇", "🌳", "🎃", "🎃", "🎃", "🎃", "💚", "💛", "🧡", "❤️", "💗", "🧨", "🥣", "🪦", "🪦", "🪦", "🎄", "🎄", "🥚"})[math.random(88)]
+local EmojiList = (MFeeeLanguage == "Chinese" and ({
     ["01 01"] = "🎇",
     ["01 26"] = "🥣", -- 2026
-    ["02 14"] = ({"💚", "💛", "🧡", "❤️", "💗"})[math.random(5)],
+    ["02 14"] = Valentine,
     ["02 16"] = "🧨", -- 2026
     ["02 17"] = "🧧", -- 2026
     ["02 18"] = "🧧", -- 2026
@@ -1063,7 +214,7 @@ EmojiList = (MFeeeLanguage == "Chinese" and ({
     ["03 08"] = "👩",
     ["03 12"] = "🌳",
     [EasterDate()] = "🥚",
-    ["04 01"] = ({"🃏", "🤡", "😂", "🤣", "😡", "🤬", "😇", "🔥💀🔥", "🔥", "💀", "🐀", "🤨", "🤓", "🤑", "🤮", "👽", "😈", "👿", "🤘", "👎", "🈲", "🔞", "😤", "😕", "😏", "😒", "♿", "😎", "🤗", "🤔", "🧐", "👀", "❌", "✅", "⚠️", "😓", "🥵", "🙄", "🙄💅", "💄🙄💅", "🆘", "🉑", "😭", "😱", "🥴", "🥴🥴", "🤢", "🥸", "🐽", "👾", "🛠️", "🧧", "🧧", "🧧", "🧧", "🧧", "🧧", "🍃", "🏭", "🏭", "🏭","🏭", "🏭", "🥮", "👩", "👩", "👨", "👶", "🏮", "🎇", "🌳", "🎃", "🎃", "🎃", "🎃", "💚", "💛", "🧡", "❤️", "💗", "🧨", "🥣", "🪦", "🪦", "🪦", "🎄", "🎄", "🥚"})[math.random(88)],
+    ["04 01"] = AprilFools,
     ["04 04"] = "🪦",
     ["04 05"] = "🪦",
     ["04 06"] = "🪦",
@@ -1085,11 +236,11 @@ EmojiList = (MFeeeLanguage == "Chinese" and ({
     ["12 25"] = "🎄"
 })[os.date("%m %d")]) or ({
     ["01 01"] = "🎇",
-    ["02 14"] = ({"💚", "💛", "🧡", "❤️", "💗"})[math.random(5)],
+    ["02 14"] = Valentine,
     ["03 08"] = "👩",
     ["03 12"] = "🌳",
     [EasterDate()] = "🥚",
-    ["04 01"] = ({"🃏", "🤡", "😂", "🤣", "😡", "🤬", "😇", "🔥💀🔥", "🔥", "💀", "🐀", "🤨", "🤓", "🤑", "🤮", "👽", "😈", "👿", "🤘", "👎", "🈲", "🔞", "😤", "😕", "😏", "😒", "♿", "😎", "🤗", "🤔", "🧐", "👀", "❌", "✅", "⚠️", "😓", "🥵", "🙄", "🙄💅", "💄🙄💅", "🆘", "🉑", "😭", "😱", "🥴", "🥴🥴", "🤢", "🥸", "🐽", "👾", "🛠️", "🧧", "🧧", "🧧", "🧧", "🧧", "🧧", "🍃", "🏭", "🏭", "🏭","🏭", "🏭", "🥮", "👩", "👩", "👨", "👶", "🏮", "🎇", "🌳", "🎃", "🎃", "🎃", "🎃", "💚", "💛", "🧡", "❤️", "💗", "🧨", "🥣", "🪦", "🪦", "🪦", "🎄", "🎄", "🥚"})[math.random(88)],
+    ["04 01"] = AprilFools,
     [MotherDay()] = "👩",
     ["06 01"] = "👶",
     [FatherDay()] = "👨",
@@ -1100,10 +251,10 @@ EmojiList = (MFeeeLanguage == "Chinese" and ({
     ["12 24"] = "🎄",
     ["12 25"] = "🎄"
 })[os.date("%m %d")]
-Emoji = EmojiList or ""
+local Emoji = EmojiList or ""
 
 --// Beautiful Arts \\--
-Arts = {
+local Arts = {
 --/ https://patorjk.com/software/taag \--
     [[
 
@@ -1289,146 +440,198 @@ $$ | \_/ $$ |$$ |      \$$$$$$$\ \$$$$$$$\ \$$$$$$$\
 print(Arts[math.random(18)])
 
 --// Environment Test \\--
-Workspace = Cloneref(game:GetService("Workspace"))
-QueueTeleport = (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) or queue_on_teleport
-Setclipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
+local Workspace = Cloneref(game:GetService("Workspace"))
+local QueueTeleport = (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) or queue_on_teleport
+local Setclipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set) or setrbxclipboard
+local GetConnections, Compare = getconnections or get_signal_cons, compareinstances or function(A, B) return A == B end
 
 print("————————————————————")
-print((QueueTeleport and GlobalText.QueueTeleportOK) or GlobalText.QueueTeleportNO)
-print((Setclipboard and GlobalText.ToclipboardOK) or GlobalText.ToclipboardNO)
+print(QueueTeleport and "⏺️ toclipboard" or "❌ toclipboard")
+print(Setclipboard and "⏺️ queue_on_teleport" or "❌ queue_on_teleport")
 
-if hookmetamethod then
-    pcall(function()
-        local Object = setmetatable({}, { __index = newcclosure(function() return false end), __metatable = "Locked!" })
-        local Ref = hookmetamethod(Object, "__index", function() return true end)
-        CanHookMM = Object.test ~= false and Ref() ~= true
-    end)
-else
-    CanHookMM = false
+local function EnvTest(Name, Function)
+    local Can, Error = pcall(Function)
+    print((Can and "✅ " .. Name) or (`❌ {Name}, {GlobalText.Because}:{Error:match("^:[^:]*:(.*)$")}`))
+    return Can
 end
 
-print((CanHookMM and GlobalText.Hookmetamethod) or GlobalText.NoHookmetamethod)
-
-if fireproximityprompt then
-    pcall(function()
-        local ProximityPrompt = Instance.new("ProximityPrompt", Workspace)
-        ProximityPrompt.MaxActivationDistance = math.huge
-        ProximityPrompt.RequiresLineOfSight = false
-        ProximityPrompt.Triggered:Once(function()
-            CanFirePP = true
-            ProximityPrompt:Destroy()
-        end)
-        fireproximityprompt(ProximityPrompt)
-        task.wait(.1)
+CanHookMM = EnvTest("hookmetamethod", function()
+    local Object = setmetatable({}, {
+        __index = newcclosure(function()
+            return false
+        end),
+        __metatable = "Locked!"
+    })
+    local Reference = hookmetamethod(Object, "__index", function()
+        return true
     end)
-else
-    CanFirePP = false
-end
-print((CanFirePP and GlobalText.Fireproximityprompt) or GlobalText.NoFireproximityprompt)
+    assert(Object.Test == true, GlobalText.EnvTestFail.HookMM1)
+    assert(Reference() == false, GlobalText.EnvTestFail.HookMM2)
+end)
 
-GetConnections = getconnections or get_signal_cons
-if GetConnections then
-    pcall(function()
-        local Types = { Enabled = "boolean" }
-        local Bindable = Instance.new("BindableEvent")
-        Bindable.Event:Once(function() end)
-        local Connection = GetConnections(Bindable.Event)[1]
-        for i, v in pairs(Types) do
-            CanGetCons = Connection[i] ~= nil and typeof(Connection[i]) == v
-        end
+CanFirePP = EnvTest("fireproximityprompt", function()
+    local Prompt = Instance.new("ProximityPrompt", Workspace)
+    Prompt.Triggered:Once(function()
+        Prompt = Prompt:Destroy() or true
     end)
-else
-    CanGetCons = false
-end
+    fireproximityprompt(Prompt)
+    assert(task.wait(.1) and Prompt, GlobalText.EnvTestFail.FirePP)
+end)
 
-print((CanGetCons and GlobalText.GetConnectionsOK) or GlobalText.NoGetConnections)
+CanGetCons = EnvTest("getconnections", function()
+    local Types = {
+        Enabled = "boolean",
+        ForeignState = "boolean",
+        LuaConnection = "boolean",
+        Function = "function",
+        Thread = "thread",
+        Fire = "function",
+        Defer = "function",
+        Disconnect = "function",
+        Disable = "function",
+        Enable = "function",
+    }
+    local Bindable = Instance.new("BindableEvent")
+    Bindable.Event:Once(function() end)
+    local Connection = GetConnections(Bindable.Event)[1]
+    for i, v in pairs(Types) do
+        assert(Connection[i] ~= nil, GlobalText.EnvTestFail.GetCons1 .. i .. GlobalText.EnvTestFail.GetCons11)
+        assert(type(Connection[i]) == v, GlobalText.EnvTestFail.GetCons2 .. i .. GlobalText.EnvTestFail.GetCons22 .. v .. GlobalText.EnvTestFail.GetCons222 .. type(Connection[i]))
+    end
+end)
+
+CanGetNM = EnvTest("getnamecallmethod", function()
+    pcall(function()
+        game:MFeee()
+    end)
+    assert(getnamecallmethod() == "MFeee", GlobalText.EnvTestFail.GetNM)
+end)
+
+CanHookFunc = EnvTest("hookfunction", function()
+    local Hook = hookfunction or replaceclosure
+    local function Original()
+        return true
+    end
+    local Reference = Hook(Original, function()
+        return false
+    end)
+    assert(Original() == false, GlobalText.EnvTestFail.HookFunc1)
+    assert(Reference() == true, GlobalText.EnvTestFail.HookFunc2)
+    assert(Original ~= Reference, GlobalText.EnvTestFail.HookFunc3)
+end)
+
+CanDraw = EnvTest("Drawing.new", function()
+    local Drawing = Drawing.new("Circle")
+    Drawing.Visible = false
+    assert(not Drawing:Remove(), GlobalText.EnvTestFail.Drawing)
+end)
+
+CanCP = EnvTest("compareinstances", function()
+    local Part = Instance.new("Part")
+    local Clone = Cloneref(Part)
+    assert(Part ~= Clone, GlobalText.EnvTestFail.CP1)
+    assert(Compare(Part, Clone), GlobalText.EnvTestFail.CP2)
+end)
+
+CanIDCC = EnvTest("iscclosure", function()
+    assert(iscclosure(print) == true, GlobalText.EnvTestFail.IDCC1)
+    assert(iscclosure(function() end) == false, GlobalText.EnvTestFail.IDCC2)
+end)
+
+CanNewCC = EnvTest("newcclosure", function()
+    local function Original()
+        return true
+    end
+    local Closure = newcclosure(Original)
+    assert(Closure() == true, GlobalText.EnvTestFail.NewCC1)
+    assert(Original ~= Closure, GlobalText.EnvTestFail.NewCC2)
+    assert(iscclosure(Closure), GlobalText.EnvTestFail.NewCC3)
+end)
+
+CanGetCS = EnvTest("getcallingscript", getcallingscript)
+
+CanCC = EnvTest("checkcaller", checkcaller)
 print("————————————————————")
 
 --// Load Obsidian and Modules \\--
-Repo = "https://raw.githubusercontent.com/"
-MFRepo = (Repo .. "MaiFengYXD/ObsidianCN/main/")
-ObsidianRepo = (Repo .. "deividcomsono/Obsidian/main/")
-PastebinRepo = "https://pastebin.com/raw/"
-CurrentVersion = "Alpha 0.3.8"
-Library = nil
-ThemeManager = nil
-SaveManager = nil
-Universals = nil
-Aimbot = nil
+function PrintUI()
+    if Library and ThemeManager and SaveManager then
+        print(GlobalText.LibraryLoaded)
+        PrintUI = function() end
+    end
+end
 
-task.spawn(function()
-    pcall(function()
-        Library = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Library%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "Library.lua"))()
-        if TimeOut and Library then
-            Library:Unload()
-        elseif Library then
-            Options = Library.Options
-            Toggles = Library.Toggles
-            Library.ForceCheckbox = false
-            Library.ShowToggleFrameInKeybinds = true
-            PrintUI()
-        end
+local function SpawnLoad(Function)
+    task.spawn(function()
+        pcall(Function)
     end)
-end)
-task.spawn(function()
-    pcall(function()
-        ThemeManager = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Addons/ThemeManager%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "addons/ThemeManager.lua"))()
+end
+
+SpawnLoad(function()
+    Library = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Library%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "Library.lua"))()
+    if TimeOut and Library then
+        Library:Unload()
+    elseif Library then
+        Options = Library.Options
+        Toggles = Library.Toggles
+        Library.ForceCheckbox = false
+        Library.ShowToggleFrameInKeybinds = true
         PrintUI()
-    end)
+    end
 end)
-task.spawn(function()
-    pcall(function()
-        SaveManager = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Addons/SaveManager%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "addons/SaveManager.lua"))()
-        PrintUI()
-    end)
+
+SpawnLoad(function()
+    ThemeManager = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Addons/ThemeManager%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "addons/ThemeManager.lua"))()
+    PrintUI()
 end)
-task.spawn(function()
-    pcall(function()
-        Universals = loadstring(game:HttpGet(PastebinRepo .. "ukLr0Pmm"))()--loadstring(game:HttpGet(Repo .. "MaiFengYXD/Universal-Modules/main/Universal%20Modules.lua"))()
-        if TimeOut and Universals then
-            Universals:Exit()
-        elseif Universals then
-            print(GlobalText.UniversalsLoaded)
-        end
-    end)
+
+SpawnLoad(function()
+    SaveManager = (MFeeeLanguage == "Chinese" and loadstring(game:HttpGet(MFRepo .. "Addons/SaveManager%20Chinese.lua"))()) or loadstring(game:HttpGet(ObsidianRepo .. "addons/SaveManager.lua"))()
+    PrintUI()
 end)
-task.spawn(function()
-    pcall(function()
-        ESPLibrary = loadstring(game:HttpGet(Repo .. "mstudio45/MSESP/refs/heads/main/source.luau"))()
-        if TimeOut and ESPLibrary then
-            ESPLibrary:Destroy()
-        elseif ESPLibrary then
-            print(GlobalText.ESPLibraryLoaded)
-        end
-    end)
+
+SpawnLoad(function()
+    Universals = loadstring(game:HttpGet(PastebinRepo .. "ukLr0Pmm"))()--loadstring(game:HttpGet(Repo .. "MaiFengYXD/Universal-Modules/main/Universal%20Modules.lua"))()
+    if TimeOut and Universals then
+        Universals:Exit()
+    elseif Universals then
+        print(GlobalText.UniversalsLoaded)
+    end
 end)
-task.spawn(function()
-    pcall(function()
-        Aimbot = loadstring(game:HttpGet(PastebinRepo .. "8A3dgm1q"))()
-        if TimeOut and Aimbot then
-            Aimbot:Exit()
-        elseif Aimbot then
-            Aimbot.Load()
-            print(GlobalText.AimbotLoaded)
-        end
-    end)
+
+SpawnLoad(function()
+    ESPLibrary = loadstring(game:HttpGet(Repo .. "mstudio45/MSESP/main/source.luau"))()
+    if TimeOut and ESPLibrary then
+        ESPLibrary:Destroy()
+    elseif ESPLibrary then
+        print(GlobalText.ESPLibraryLoaded)
+    end
 end)
-task.spawn(function()
-    pcall(function()
-        SilentAim = loadstring(game:HttpGet(PastebinRepo .. "MRygSimb"))()
-        if TimeOut and SilentAim then
-            SilentAim:Exit()
-        elseif SilentAim then
-            print(GlobalText.SilentAimLoaded)
-        end
-    end)
+
+SpawnLoad(function()
+    Aimbot = loadstring(game:HttpGet(PastebinRepo .. "8A3dgm1q"))()
+    if TimeOut and Aimbot then
+        Aimbot:Exit()
+    elseif Aimbot then
+        Aimbot.Load()
+        print(GlobalText.AimbotLoaded)
+    end
 end)
-task.spawn(function()
-    pcall(function()
-        LeastVersion = loadstring(game:HttpGet(PastebinRepo .. "BhnD85nE"))()
-    end)
+
+SpawnLoad(function()
+    SilentAim = loadstring(game:HttpGet(PastebinRepo .. "MRygSimb"))()
+    if TimeOut and SilentAim then
+        SilentAim:Exit()
+    elseif SilentAim then
+        print(GlobalText.SilentAimLoaded)
+    end
 end)
-task.spawn(function()
+
+SpawnLoad(function()
+    LatestVersion = loadstring(game:HttpGet(PastebinRepo .. "BhnD85nE"))("Universal")
+end)
+
+SpawnLoad(function()
     SoundService = Cloneref(game:GetService("SoundService"))
     local function Preload(Id)
         local Sound = Instance.new("Sound", SoundService)
@@ -1442,7 +645,8 @@ task.spawn(function()
     Preload("9113884125")
     Preload("15675032796")
 end)
-task.spawn(function()
+
+SpawnLoad(function()
     Heartbeat = RunService.Heartbeat
     ThisGamesName = Cloneref(game:GetService("MarketplaceService")):GetProductInfo(game.PlaceId).Name
     repeat
@@ -1452,7 +656,7 @@ task.spawn(function()
 end)
 
 makefolder("MFeee~ Project")
-TimeOutLimiteFilePath = "MFeee~ Project/TimeOutLimite.txt"
+local TimeOutLimiteFilePath, LoadTimer = "MFeee~ Project/TimeOutLimite.txt", 0
 if isfile(TimeOutLimiteFilePath) then
     TimeOutLimite = math.max(5, math.min(tonumber(readfile(TimeOutLimiteFilePath)) or 10, 60))
 else
@@ -1460,15 +664,8 @@ else
     TimeOutLimite = 10
 end
 
-function PrintUI()
-    if Library and ThemeManager and SaveManager then
-        print(GlobalText.LibraryLoaded)
-        PrintUI = function() return end
-    end
-end
-
 repeat
-    LoadTimer = (LoadTimer or 0) + Heartbeat:Wait()
+    LoadTimer += Heartbeat:Wait()
     if LoadTimer >= TimeOutLimite then
         TimeOut = true
         getgenv().MFeeeLoaded = false
@@ -1485,20 +682,21 @@ print(GlobalText.AssetsLoaded)
 
 --|| Variables ||--
 
-Teams = Cloneref(game:GetService("Teams"))
-ReplicatedStorage = Cloneref(game:GetService("ReplicatedStorage"))
-TextChatService = Cloneref(game:GetService("TextChatService"))
-Character = Speaker.Character
-Humanoid = Character and Character:FindFirstChild("Humanoid")
-Arsenal = (game.PlaceId == 286090429 and true) or false
-Rivals = (game.PlaceId == 17625359962 and true) or false
-ExecutorName, ExecutorVersion = identifyexecutor()
-NotifyAlert = true
-ObsidianNotify = true
-MFCons = {}
+local Teams = Cloneref(game:GetService("Teams"))
+local ReplicatedStorage = Cloneref(game:GetService("ReplicatedStorage"))
+local TextChatService = Cloneref(game:GetService("TextChatService"))
+local Lighting = Cloneref(game:GetService("Lighting"))
+local Character = Speaker.Character
+local Humanoid = Character and Character:FindFirstChild("Humanoid")
+local Arsenal = game.PlaceId == 286090429
+local Rivals = game.PlaceId == 17625359962
+local ExecutorName, ExecutorVersion = (identifyexecutor and identifyexecutor()) or (getexecutorname and getexecutorname()) or "Unknown", ""
+local NotifyAlert = true
+local ObsidianNotify = true
+local MFCons = {}
 
 --// Toclipboard Function \\--
-Toclipboard = function(Text)
+local Toclipboard = function(Text)
     if Setclipboard then
         Setclipboard(tostring(Text))
     else
@@ -1508,7 +706,7 @@ Toclipboard = function(Text)
 end
 
 --// Queue TP Function \\--
-if not MFeeeQueueTPSeted and QueueTeleport then
+if not getgenv().MFeeeQueueTPSeted and QueueTeleport then
     getgenv().MFeeeQueueTPSeted = true
     QueueTeleport([[
         local TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
@@ -1536,24 +734,29 @@ end
 
 --|| Main Window ||--
 
-MainWindow = Library:CreateWindow({
+local MainWindow = Library:CreateWindow({
     Title = GlobalText.MainWindowTitle .. Emoji,
-    Footer = GlobalText.MainWindowFooter .. Speaker.Name,
+    Footer = CurrentVersion .. " | " .. Speaker.DisplayName,
     Icon = 77335290652571,
     NotifySide = "Right",
     ShowCustomCursor = false,
-    Center = true
+    AutoShow = true,
+    Resizable = true,
+    Center = true,
+    TabPadding = 2,
+    MenuFadeTime = 0.5
 })
 
 --|| Tabs ||--
 
-Tabs = {
+local Tabs = {
     Main = MainWindow:AddTab(GlobalText.MainTab, "house"),
     Player = MainWindow:AddTab(GlobalText.PlayerTab, "user-round-cog"),
     Camera = MainWindow:AddTab(GlobalText.CameraTab, "camera"),
     Ambient = MainWindow:AddTab(GlobalText.AmbientTab, "sun"),
     ESP = MainWindow:AddTab(GlobalText.ESPTab, "eye"),
-    Aimbot = MainWindow:AddTab(GlobalText.AimbotTab, "crosshair"),
+    Aimbot = MainWindow:AddTab(GlobalText.AimbotTab, "circle-plus"),
+    SilentAim = MainWindow:AddTab(GlobalText.SilentAimTab, "crosshair"),
     Troll = MainWindow:AddTab(GlobalText.TrollTab, "banana"),
     MISC = MainWindow:AddTab(GlobalText.MISCTab, "captions"),
     UI = MainWindow:AddTab(GlobalText.UISettingsTab, "settings"),
@@ -1609,6 +812,7 @@ AntiAFKToggle = MainAFKGroupbox:AddToggle("AntiAFKToggle", {
 AntiAFKNotify = MainAFKGroupbox:AddToggle("AntiAFKNotify", {
     Text = GlobalText.AntiAFKNotifyText,
     Default = false,
+    Disabled = CanGetCons,
     Callback = function(Enabled)
         Universals.UseAntiAFKNotify(Enabled)
     end
@@ -1620,7 +824,7 @@ AntiAFKSlider = MainAFKGroupbox:AddSlider("AntiAFKSlider", {
     Max = 300,
     Rounding = 0,
     Suffix = GlobalText.AntiAFKSuffix,
-    HideMax = true,
+    Disabled = CanGetCons,
     Callback = function(Number)
         AntiAFKEnabled = Enabled
         Universals.AntiAFKValue(Number)
@@ -1650,6 +854,8 @@ AntiAFKDropdown = MainAFKGroupbox:AddDropdown("AntiAFKDropdown", {
         elseif Method == GlobalText.Mouserightclick then
             Universals.AntiAFKMethod("4")
         end
+        AntiAFKSlider:SetDisabled(AntiIdle)
+        AntiAFKNotify:SetDisabled(AntiIdle)
         if AntiAFKEnabled then
             Universals.AntiAFK(false)
             Heartbeat:Wait()
@@ -1689,7 +895,7 @@ FPSCapSlider = MainAFKGroupbox:AddSlider("FPSCapSlider", {
 --|| Main Others Groupbox ||--
 
 MainOthersGroupbox = Tabs.Main:AddRightGroupbox(GlobalText.MainOthersGroupbox)
-QuickLanguageChange = MFeeeIAMNEW and MainOthersGroupbox:AddDropdown("QuickLanguageChange", {
+QuickLanguageChange = getgenv().MFeeeIAMNEW and MainOthersGroupbox:AddDropdown("QuickLanguageChange", {
     Text = GlobalText.QuickLanguageChange,
     Values = {
         "English",
@@ -1702,11 +908,12 @@ QuickLanguageChange = MFeeeIAMNEW and MainOthersGroupbox:AddDropdown("QuickLangu
         NotifySound(Language == "English" and "You Need to Restart to Apply the Change" or "重启脚本后生效", 5)
     end
 })
-QuickLanguageChangeDivider = MFeeeIAMNEW and QuickLanguageChange:AddDivider()
+QuickLanguageChangeDivider = getgenv().MFeeeIAMNEW and QuickLanguageChange:AddDivider()
 TPFilePath = "MFeee~ Project/ExecuteOnTeleport.txt"
+MFeeeIsFromTP = isfile(TPFilePath) and readfile(TPFilePath) == "true"
 ExecuteOnTeleportToggle = QueueTeleport and MainOthersGroupbox:AddToggle("ExecuteOnTeleportToggle", {
     Text = GlobalText.ExecuteOnTeleportToggle,
-    Default = MFeee_IsFromTP,
+    Default = MFeee_IsFromTP or MFeeeIsFromTP,
     Callback = function(Enabled)
         makefolder("MFeee~ Project")
         writefile(TPFilePath, Enabled and "true" or "false")
@@ -1715,9 +922,15 @@ ExecuteOnTeleportToggle = QueueTeleport and MainOthersGroupbox:AddToggle("Execut
 AntiKickToggle = MainOthersGroupbox:AddToggle("AntiKickToggle", {
     Text = GlobalText.AntiKickToggleText,
     Default = false,
-    Tooltip = GlobalText.AntiKickEgg,
     Callback = function(Enabled)
         Universals.AntiKick(Enabled)
+    end
+})
+AntiKickNotify = MainOthersGroupbox:AddToggle("AntiKickNotify", {
+    Text = GlobalText.AntiKickNotifyText,
+    Default = false,
+    Callback = function(Enabled)
+        AntiKickNotify = Enabled
     end
 })
 MainOthersGroupbox:AddDivider()
@@ -1903,6 +1116,13 @@ TPWalkSlider = PlayerMovementGroupbox:AddSlider("TPWalkSlider", {
         Universals.TPWalkValue(Number)
     end
 })
+NoAccelerationToggle = PlayerMovementGroupbox:AddToggle("NoAccelerationToggle", {
+    Text = GlobalText.NoAccelerationToggle,
+    Default = false,
+    Callback = function(Enabled)
+        Universals.NoAcceleration(Enabled)
+    end
+})
 
 --|| Player Features Groupbox ||--
 
@@ -2004,11 +1224,43 @@ AutoInteractionMethodDropdown = PlayerFeaturesGroupbox:AddDropdown("AutoInteract
         AIMethod = Method == GlobalText.AIFromCharacter and "Character" or "Camera"
     end
 })
+AutoInteractionIntervalSlider = PlayerFeaturesGroupbox:AddSlider("AutoInteractionIntervalSlider", {
+    Text = GlobalText.AutoInteractionIntervalSlider,
+    Default = 0.01,
+    Min = 0.01,
+    Max = 1,
+    Rounding = 2,
+    Suffix = " s",
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        AIInterval = Number
+    end
+})
 InstantPromptToggle = PlayerFeaturesGroupbox:AddToggle("InstantPromptToggle", {
     Text = GlobalText.InstantPromptToggle,
     Default = false,
     Callback = function(Enabled)
         Universals.InstantPrompt(Enabled)
+    end
+})
+InstantPromptMethodDropdown = PlayerFeaturesGroupbox:AddDropdown("InstantPromptMethodDropdown", {
+    Text = GlobalText.InstantPromptMethodDropdown,
+    Values = {
+        GlobalText.FirePP,
+        GlobalText.HoldDuration,
+    },
+    Default = (CanFirePP and GlobalText.FirePP) or GlobalText.HoldDuration,
+    DisabledValues = not CanFirePP and {GlobalText.FirePP},
+    DisabledTooltip = GlobalText.NoFireproximityprompt,
+    Multi = false,
+    Callback = function(Method)
+        IPMethod = Method == GlobalText.FirePP and "FirePP" or "HoldDuration"
+        if Toggles.InstantPromptToggle.Value then
+            Universals.InstantPrompt(false)
+            Heartbeat:Wait()
+            Universals.InstantPrompt(true)
+        end
     end
 })
 DistantPromptToggle = PlayerFeaturesGroupbox:AddToggle("DistantPromptToggle", {
@@ -2290,6 +1542,7 @@ LookToCameraToggle = ConstraintsFlyTab:AddToggle("LookToCameraToggle", {
     Text = GlobalText.LookToCameraToggle,
     Default = true,
     Callback = function(Enabled)
+        ConstraintsTurnSpeedSlider:SetDisabled(Enabled)
         LookToCamera = Enabled
     end
 })
@@ -2706,7 +1959,20 @@ FullDarkToggle = AmbientGeneralGruopbox:AddToggle("FullDarkToggle", {
     Text = GlobalText.FullDarkToggle,
     Default = false,
     Callback = function(Enabled)
+        if Enabled and FullWhiteToggle.Value then
+            FullWhiteToggle:SetValue(false)
+        end
         Universals.FullDark(Enabled)
+    end
+})
+FullWhiteToggle = AmbientGeneralGruopbox:AddToggle("FullWhiteToggle", {
+    Text = GlobalText.FullWhiteToggle,
+    Default = false,
+    Callback = function(Enabled)
+        if Enabled and FullDarkToggle.Value then
+            FullDarkToggle:SetValue(false)
+        end
+        Universals.FullWhite(Enabled)
     end
 })
 SuperFullBrightToggle = AmbientGeneralGruopbox:AddToggle("SuperFullBrightToggle", {
@@ -2758,7 +2024,7 @@ AmbientColorToggle = AmbientCustomGruopbox:AddToggle("AmbientColorToggle", {
     end
 }):AddColorPicker("AmbientColorPicker", {
     Title = GlobalText.AmbientColorPicker,
-    Default = game.Lighting.Ambient,
+    Default = Lighting.Ambient,
     Callback = function(Color)
         Universals.AmbientColor(Color)
     end
@@ -2772,7 +2038,7 @@ BrightnessToggle = AmbientCustomGruopbox:AddToggle("BrightnessToggle", {
 })
 BrightnessSlider = AmbientCustomGruopbox:AddSlider("BrightnessSlider", {
     Text = GlobalText.BrightnessSlider,
-    Default = math.round(game.Lighting.Brightness * 10) / 10 or 2,
+    Default = math.round(Lighting.Brightness * 10) / 10 or 2,
     Min = 0,
     Max = 5,
     Rounding = 1,
@@ -2792,7 +2058,7 @@ ClockTimeToggle = AmbientCustomGruopbox:AddToggle("ClockTimeToggle", {
 })
 ClockTimeSlider = AmbientCustomGruopbox:AddSlider("ClockTimeSlider", {
     Text = GlobalText.ClockTimeSlider,
-    Default = math.round(game.Lighting.ClockTime * 10) / 10 or 14,
+    Default = math.round(Lighting.ClockTime * 10) / 10 or 14,
     Min = 0,
     Max = 24,
     Rounding = 1,
@@ -2811,7 +2077,7 @@ OutdoorAmbientToggle = AmbientCustomGruopbox:AddToggle("OutdoorAmbientToggle", {
     end
 }):AddColorPicker("OutdoorAmbientColorPicker", {
     Title = GlobalText.OutdoorAmbientColorPicker,
-    Default = game.Lighting.OutdoorAmbient,
+    Default = Lighting.OutdoorAmbient,
     Callback = function(Color)
         Universals.OutdoorAmbientColor(Color)
     end
@@ -2825,7 +2091,7 @@ ColorShiftBottomToggle = AmbientCustomGruopbox:AddToggle("ColorShiftBottomToggle
     end
 }):AddColorPicker("ColorShiftBottomColorPicker", {
     Title = GlobalText.ColorShiftBottomColorPicker,
-    Default = game.Lighting.ColorShift_Bottom,
+    Default = Lighting.ColorShift_Bottom,
     Callback = function(Color)
         Universals.ColorShiftBottomColor(Color)
     end
@@ -2838,7 +2104,7 @@ ColorShiftTopToggle = AmbientCustomGruopbox:AddToggle("ColorShiftTopToggle", {
     end
 }):AddColorPicker("ColorShiftTopColorPicker", {
     Title = GlobalText.ColorShiftTopColorPicker,
-    Default = game.Lighting.ColorShift_Top,
+    Default = Lighting.ColorShift_Top,
     Callback = function(Color)
         Universals.ColorShiftTopColor(Color)
     end
@@ -2852,7 +2118,7 @@ DiffuseScaleToggle = AmbientCustomGruopbox:AddToggle("DiffuseScaleToggle", {
 })
 DiffuseScaleSlider = AmbientCustomGruopbox:AddSlider("DiffuseScaleSlider", {
     Text = GlobalText.DiffuseScaleSlider,
-    Default = math.round(game.Lighting.EnvironmentDiffuseScale * 100) or 0,
+    Default = math.round(Lighting.EnvironmentDiffuseScale * 100) or 0,
     Min = 0,
     Max = 100,
     Rounding = 0,
@@ -2873,7 +2139,7 @@ SpecularScaleToggle = AmbientCustomGruopbox:AddToggle("SpecularScaleToggle", {
 })
 SpecularScaleSlider = AmbientCustomGruopbox:AddSlider("SpecularScaleSlider", {
     Text = GlobalText.SpecularScaleSlider,
-    Default = math.round(game.Lighting.EnvironmentSpecularScale * 100) or 0,
+    Default = math.round(Lighting.EnvironmentSpecularScale * 100) or 0,
     Min = 0,
     Max = 100,
     Rounding = 0,
@@ -2894,7 +2160,7 @@ ShadowSoftnessToggle = AmbientCustomGruopbox:AddToggle("ShadowSoftnessToggle", {
 })
 ShadowSoftnessSlider = AmbientCustomGruopbox:AddSlider("ShadowSoftnessSlider", {
     Text = GlobalText.ShadowSoftnessSlider,
-    Default = math.round(game.Lighting.ShadowSoftness * 100) or 50,
+    Default = math.round(Lighting.ShadowSoftness * 100) or 50,
     Min = 0,
     Max = 100,
     Rounding = 0,
@@ -2915,7 +2181,7 @@ GeographicLatitudeToggle = AmbientCustomGruopbox:AddToggle("GeographicLatitudeTo
 })
 GeographicLatitudeSlider = AmbientCustomGruopbox:AddSlider("GeographicLatitudeSlider", {
     Text = GlobalText.GeographicLatitudeSlider,
-    Default = math.round(game.Lighting.GeographicLatitude) or 42,
+    Default = math.round(Lighting.GeographicLatitude) or 42,
     Min = -180,
     Max = 180,
     Rounding = 0,
@@ -2937,7 +2203,7 @@ TechnologyDropdown = AmbientCustomGruopbox:AddDropdown("TechnologyDropdown", {
         GlobalText.Legacy,
         GlobalText.Unified
     },
-    Default = game.Lighting.Technology.Name == "Voxel" and GlobalText.Voxel or game.Lighting.Technology.Name == "ShadowMap" and GlobalText.ShadowMap or game.Lighting.Technology.Name == "Future" and GlobalText.Future or game.Lighting.Technology.Name == "Compatibility" and GlobalText.Compatibility or game.Lighting.Technology.Name == "Legacy" and GlobalText.Legacy or game.Lighting.Technology.Name == "Unified" and GlobalText.Unified,
+    Default = Lighting.Technology.Name == "Voxel" and GlobalText.Voxel or Lighting.Technology.Name == "ShadowMap" and GlobalText.ShadowMap or Lighting.Technology.Name == "Future" and GlobalText.Future or Lighting.Technology.Name == "Compatibility" and GlobalText.Compatibility or Lighting.Technology.Name == "Legacy" and GlobalText.Legacy or Lighting.Technology.Name == "Unified" and GlobalText.Unified,
     Multi = false,
     Callback = function(Text)
         if Text == GlobalText.Voxel then
@@ -2953,249 +2219,175 @@ TechnologyDropdown = AmbientCustomGruopbox:AddDropdown("TechnologyDropdown", {
         elseif Text == GlobalText.Unified then
             Technology = Enum.Technology.Unified
         end
-        game.Lighting.Technology = Technology
+        Lighting.Technology = Technology
     end
 })
 
 --|| ESP Functions ||--
 
-ESPConnections = {
-    CA = {},
-    TC = {}
-}
-ESPElements = {}
-ESPVisible = true
-ESPDisplayName = true
-ESPTextModel = 2
+local ESPConnections = {CA = {}, CR = {}, TC = {}}
+local ESPElements = {}
+local ESPTextSize = 22
+local ESPVisible = true
+local ESPDisplayName = true
+local ESPTextModel = "HumanoidRootPart" :: ("HumanoidRootPart" | "Humanoid" | "Head")?
 
-function ESPConditions(Player)
-    if not AllowESP then
-        return false
-    elseif not ESPMe and Player == Speaker then
-        return false
-    elseif ESPTeamCheck and #Teams:GetTeams() > 1 and Player.Team == Speaker.Team then
-        return false
-    end
-    return true
+local White = Color3.new(1, 1, 1)
+local ESPMainColor, ESPSelectionBoxColor, ESPFillColor, ESPOutlineColor = White, White, White, White
+
+local function ESPConditions(Player)
+    return Player and not (AllowESP and (ESPMe or Player ~= Speaker) and (not ESPTeamColor or #Teams:GetTeams() < 2 or Player.TeamColor.Color ~= Speaker.TeamColor.Color))
 end
 
-function ESPHandlePlayer()
-    for _, Player in pairs(Players:GetPlayers()) do
-        if ESPConditions(Player) then
-            ESPHandleCharacter(Player)
-            ESPConnections.CA[Player] = (ESPConnections.CA[Player] and ESPConnections.CA[Player]:Disconnect()) or Player.CharacterAdded:Connect(function()
-                ESPHandleCharacter(Player)
-            end)
-            ESPConnections.TA = (ESPConnections.TA and ESPConnections.TA:Disconnect()) or Teams.ChildAdded:Connect(function()
-                ESPRestart()
-            end)
-            ESPConnections.TC[Player] = (ESPConnections.TC[Player] and ESPConnections.TC[Player]:Disconnect()) Player:GetPropertyChangedSignal("Team"):Connect(function()
-                ESPHandlePlayer()
-            end)
+local function ESPHandleCharacter(Character, Player)
+    local Player = Player or Players:GetPlayerFromCharacter(Character)
+    if ESPConditions(Player) then return end
+    local Color = ESPTeamColor and Player.TeamColor.Color or ESPMainColor
+    local TextModel = Character:WaitForChild(ESPTextModel)
+    local Humanoid = Character:WaitForChild("Humanoid")
+    local RootPart = Humanoid.RootPart
+    if ESPElements[Player] then
+        ESPElements[Player]:Destroy()
+    end
+    ESPElements[Player] = ESPLibrary:Add({
+        Name = ESPDisplayName and Player.DisplayName or Player.Name,
+        ESPType = ESPType or Arsenal and "Adornment" or "Highlight",
+        OutlineTransparency = ESPOutlineTransparency,
+        FillTransparency = ESPFillTransparency,
+        SurfaceColor = ESPSelectionBoxColor,
+        MaxDistance = ESPMaxDistance,
+        TextSize = ESPTextSize,
+        FillColor = Color,
+        Color = Color,
+        Model = Character,
+        Visible = ESPVisible,
+        OutlineColor = Color,
+        TextModel = TextModel,
+        Thickness = ESPMainThickness,
+        Transparency = ESPMainTransparency,
+        Tracer = {
+            Transparency = ESPTracerOpacity or 1,
+            Thickness = ESPTracerThickness or 2,
+            From = TracerFrom or "Bottom",
+            Enabled = ESPTracerEnabled,
+            Color = Color
+        },
+        Arrow = {
+            Color = Color,
+            Enabled = ESPArrowEnabled,
+            CenterOffset = ESPArrowCenterOffset
+        }
+    })
+end
+
+local function ESPHandlePlayer(Player)
+    if ESPConditions(Player) then return end
+    if Player.Character then
+        ESPHandleCharacter(Player.Character, Player)
+    end
+    ESPConnections.CA[Player] = (ESPConnections.CA[Player] and ESPConnections.CA[Player]:Disconnect()) or Player.CharacterAdded:Connect(ESPHandleCharacter)
+    ESPConnections.CR[Player] = (ESPConnections.CR[Player] and ESPConnections.CR[Player]:Disconnect()) or Player.CharacterRemoving:Connect(function()
+        if ESPElements[Player] then
+            ESPElements[Player]:Destroy()
         end
-    end
-end
-
-function ESPHandleCharacter(Player)
-    if ESPConditions(Player) then
-        local TeamColor = Player.TeamColor.Color
-        local Character = Player.Character or Player.CharacterAdded:Wait()
-        local Humanoid = Character:WaitForChild("Humanoid", math.huge)
-        local RootPart = Humanoid.RootPart
-        ESPElements[Player] = ESPLibrary:Add({
-            Name = ESPDisplayName and tostring(Player.DisplayName) or tostring(Player.Name),
-            Model = Character,
-            TextModel = ESPTextModel == 1 and Humanoid or ESPTextModel == 2 and RootPart or Character,
-            Visible = ESPVisible,
-            Color = ESPTeamColor and TeamColor or ESPMainColor or Color3.new(1, 1, 1),
-            MaxDistance = ESPMaxDistance or 5000,
-            TextSize = ESPTextSize or 22,
-            ESPType = ESPType or Arsenal and "Adornment" or "Highlight",
-            Thickness = ESPMainThickness or 0.1,
-            Transparency = ESPMainTransparency or 0.65,
-            SurfaceColor = ESPTeamColor and TeamColor or ESPSelectionBoxColor or Color3.new(1, 1, 1),
-            FillColor = ESPTeamColor and TeamColor or ESPFillColor or Color3.new(1, 1, 1),
-            OutlineColor = ESPTeamColor and TeamColor or ESPOutlineColor or Color3.new(1, 1, 1),
-            FillTransparency = ESPFillTransparency or 0.65,
-            OutlineTransparency = ESPOutlineTransparency or 0,
-            Tracer = {
-                Enabled = ESPTracerEnabled,
-                From = TracerFrom or "Bottom",
-                Transparency = ESPTracerOpacity or 1,
-                Thickness = ESPTracerThickness or 2,
-                Color = ESPTeamColor and TeamColor or ESPTracerColor or Color3.new(1, 1, 1)
-            },
-            Arrow = {
-                Enabled = ESPArrowEnabled,
-                Color = ESPTeamColor and TeamColor or ESPArrowColor or Color3.new(1, 1, 1),
-                CenterOffset = ESPArrowCenterOffset or 300
-            }
-        })
-    end
-end
-
-function ESPUpdate(Class)
-    task.spawn(function()
-        for _, Player in pairs(Players:GetPlayers()) do
-            if ESPConditions(Player) then
-                pcall(function()
-                    if Class == "ESPSelectionBoxColor" and not ESPTeamColor then
-                        ESPElements[Player].CurrentSettings.SurfaceColor = ESPSelectionBoxColor
-                        for _, Box in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
-                            if Box:IsA("SelectionBox") then
-                                Box.SurfaceColor3 = ESPSelectionBoxColor
-                            end
-                        end
-                        for _, Box in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
-                            if Box:IsA("SelectionBox") then
-                                Box.SurfaceColor3 = ESPSelectionBoxColor
-                            end
-                        end
-                    elseif Class == "ESPMainTransparency" then
-                        ESPElements[Player].CurrentSettings.Transparency = ESPMainTransparency
-                        for _, Element in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
-                            if Element:IsA("SphereHandleAdornment") or Element:IsA("CylinderHandleAdornment") or Element:IsA("BoxHandleAdornment") or Element:IsA("TextLabel") then
-                                Element.Transparency = ESPMainTransparency
-                            end
-                        end
-                        for _, Element in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
-                            if Element:IsA("SphereHandleAdornment") or Element:IsA("CylinderHandleAdornment") or Element:IsA("BoxHandleAdornment") or Element:IsA("TextLabel") then
-                                Element.Transparency = ESPMainTransparency
-                            end
-                        end
-                    elseif Class == "ESPFillColor" and not ESPTeamColor then
-                        ESPElements[Player].CurrentSettings.FillColor = ESPFillColor
-                        for _, Highlight in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
-                            if Highlight:IsA("Highlight") then
-                                Highlight.FillColor = ESPFillColor
-                            end
-                        end
-                        for _, Highlight in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
-                            if Highlight:IsA("Highlight") then
-                                Highlight.FillColor = ESPFillColor
-                            end
-                        end
-                    elseif Class == "ESPOutlineColor" and not ESPTeamColor then
-                        ESPElements[Player].CurrentSettings.OutlineColor = ESPOutlineColor
-                        for _, Highlight in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
-                            if Highlight:IsA("Highlight") then
-                                Highlight.OutlineColor = ESPOutlineColor
-                            end
-                        end
-                        for _, Highlight in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
-                            if Highlight:IsA("Highlight") then
-                                Highlight.OutlineColor = ESPOutlineColor
-                            end
-                        end
-                    elseif Class == "ESPFillTransparency" then
-                        ESPElements[Player].CurrentSettings.FillTransparency = ESPFillTransparency
-                        for _, Highlight in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
-                            if Highlight:IsA("Highlight") then
-                                Highlight.FillTransparency = ESPFillTransparency
-                            end
-                        end
-                        for _, Highlight in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
-                            if Highlight:IsA("Highlight") then
-                                Highlight.FillTransparency = ESPFillTransparency
-                            end
-                        end
-                    elseif Class == "ESPOutlineTransparency" then
-                        ESPElements[Player].CurrentSettings.OutlineTransparency = ESPOutlineTransparency
-                        for _, Highlight in pairs(ESPLibrary.ActiveFolder:GetDescendants()) do
-                            if Highlight:IsA("Highlight") then
-                                Highlight.OutlineTransparency = ESPOutlineTransparency
-                            end
-                        end
-                        for _, Highlight in pairs(ESPLibrary.StorageFolder:GetDescendants()) do
-                            if Highlight:IsA("Highlight") then
-                                Highlight.OutlineTransparency = ESPOutlineTransparency
-                            end
-                        end
-                    elseif Class == "TextSize" then
-                        ESPElements[Player].CurrentSettings.TextSize = ESPTextSize
-                        for _, Text in pairs(ESPLibrary.BillboardGUI:GetDescendants()) do
-                            if Text:IsA("TextLabel") then
-                                Text.TextSize = ESPTextSize
-                            end
-                        end
-                    elseif Class == "TracerColor" then
-                        ESPElements[Player].CurrentSettings.Tracer.Color = ESPTracerColor
-                        for _, Tracer in pairs(ESPLibrary.MainGUI:GetDescendants()) do
-                            if typeof(Tracer) == "Path2D" then
-                                Tracer.Color = ESPTracerColor
-                            end
-                        end
-                    elseif Class == "TracerThickness" then
-                        ESPElements[Player].CurrentSettings.Tracer.Thickness = ESPTracerThickness
-                        for _, Tracer in pairs(ESPLibrary.MainGUI:GetDescendants()) do
-                            if typeof(Tracer) == "Path2D" then
-                                Tracer.Thickness = ESPTracerThickness
-                            end
-                        end
-                    elseif Class == "TracerOpacity" then
-                        ESPElements[Player].CurrentSettings.Tracer.Transparency = ESPTracerOpacity
-                        for _, Tracer in pairs(ESPLibrary.MainGUI:GetDescendants()) do
-                            if typeof(Tracer) == "Path2D" then
-                                Tracer.Transparency = ESPTracerOpacity
-                            end
-                        end
-                    elseif Class == "ArrowColor" then
-                        ESPElements[Player].CurrentSettings.Arrow.Color = ESPArrowColor
-                        for _, Arrow in pairs(ESPLibrary.MainGUI:GetDescendants()) do
-                            if typeof(Arrow) == "ImageLabel" then
-                                Arrow.ImageColor3 = ESPArrowColor
-                            end
-                        end
-                    elseif Class == "ArrowCenterOffset" then
-                        ESPElements[Player].CurrentSettings.Arrow.CenterOffset = ESPArrowCenterOffset
-                    end
-                end)
-            end
-        end
+    end)
+    ESPConnections.TC[Player] = (ESPConnections.TC[Player] and ESPConnections.TC[Player]:Disconnect()) or Player:GetPropertyChangedSignal("TeamColor"):Connect(function()
+        if not Player.Character then return end
+        ESPHandleCharacter(Player.Character, Player)
     end)
 end
 
-function ESPClear()
-    ESPConnections.TA = ESPConnections.TA and ESPConnections.TA:Disconnect()
-    ESPConnections.TR = ESPConnections.TR and ESPConnections.TR:Disconnect()
-    for _, Object in pairs(ESPConnections) do
-        if typeof(Object) == "RBXScriptConnection" then
-            Object:Disconnect()
-        elseif typeof(Object) == "table" then
-            for _, Object2 in pairs(Object) do
-                Object2:Disconnect()
+local function ESPUpdateCore(Class, Player)
+    local function Update(Property, Value, TypeFilter, Folders, TeamCheck)
+        if TeamCheck and ESPTeamColor then return end
+        ESPElements[Player].CurrentSettings[Property] = Value
+        for _, Folder in pairs(Folders) do
+            for _, Object in pairs(Folder:GetDescendants()) do
+                if Object:IsA(TypeFilter) then
+                    Object[Property] = Value
+                end
             end
         end
     end
-    ESPLibrary:Clear()
-end
-
-function ESPRestart()
-    if AllowESP then
-        ESPLibrary:Clear()
-        Heartbeat:Wait()
-        ESPHandlePlayer()
+    if Class == "ESPSelectionBoxColor" then
+        Update("SurfaceColor3", ESPSelectionBoxColor, "SelectionBox", {ESPLibrary.ActiveFolder, ESPLibrary.StorageFolder}, true)
+    elseif Class == "ESPMainTransparency" then
+        Update("Transparency", ESPMainTransparency, "HandleAdornment,TextLabel", {ESPLibrary.ActiveFolder, ESPLibrary.StorageFolder})
+    elseif Class == "ESPFillColor" then
+        Update("FillColor", ESPFillColor, "Highlight", {ESPLibrary.ActiveFolder, ESPLibrary.StorageFolder}, true)
+    elseif Class == "ESPOutlineColor" then
+        Update("OutlineColor", ESPOutlineColor, "Highlight", {ESPLibrary.ActiveFolder, ESPLibrary.StorageFolder}, true)
+    elseif Class == "ESPFillTransparency" then
+        Update("FillTransparency", ESPFillTransparency, "Highlight", {ESPLibrary.ActiveFolder, ESPLibrary.StorageFolder})
+    elseif Class == "ESPOutlineTransparency" then
+        Update("OutlineTransparency", ESPOutlineTransparency, "Highlight", {ESPLibrary.ActiveFolder, ESPLibrary.StorageFolder})
+    elseif Class == "TracerColor" then
+        Update("Color", ESPTracerColor, "Path2D", {ESPLibrary.MainGUI})
+    elseif Class == "TracerThickness" then
+        Update("Thickness", ESPTracerThickness, "Path2D", {ESPLibrary.MainGUI})
+    elseif Class == "TracerOpacity" then
+        Update("Transparency", ESPTracerOpacity, "Path2D", {ESPLibrary.MainGUI})
+    elseif Class == "ArrowColor" then
+        Update("ImageColor3", ESPArrowColor, "ImageLabel", {ESPLibrary.MainGUI})
+    elseif Class == "ArrowCenterOffset" then
+        ESPElements[Player].CurrentSettings.Arrow.CenterOffset = ESPArrowCenterOffset
+    elseif Class == "TextSize" then
+        ESPElements[Player].CurrentSettings.TextSize = ESPTextSize
+        for _, Text in pairs(ESPLibrary.BillboardGUI:GetDescendants()) do
+            if Text:IsA("TextLabel") then
+                Text.TextSize = ESPTextSize
+            end
+        end
     end
 end
 
---|| Player Connections ||--
-
-PlayerConnections = {}
-PlayerConnections.PA = (PlayerConnections.PA and PlayerConnections.PA:Disconnect()) or Players.PlayerAdded:Connect(function(Player)
-    if ESPConditions(Player) then
-        ESPHandleCharacter(Player)
-        ESPConnections.CA[Player] = (ESPConnections.CA[Player] and ESPConnections.CA[Player]:Disconnect()) or Player.CharacterAdded:Connect(function()
-            ESPHandleCharacter(Player)
+local function ESPUpdate(Class)
+    for _, Player in pairs(Players:GetPlayers()) do
+        if ESPConditions(Player) then continue end
+        task.spawn(function()
+            ESPUpdateCore(Class, Player)
         end)
-        ESPConnections.TC[Player] = (ESPConnections.TC[Player] and ESPConnections.TC[Player]:Disconnect()) or Player.Team and Player.Team.Changed:Connect(ESPRestart)
-        ESPConnections.TA = (ESPConnections.TA and ESPConnections.TA:Disconnect()) or Teams.ChildAdded:Connect(ESPRestart)
-        ESPConnections.TR = (ESPConnections.TR and ESPConnections.TR:Disconnect()) or Teams.ChildRemoved:Connect(ESPRestart)
     end
-end)
+end
 
-PlayerConnections.PR = (PlayerConnections.PR and PlayerConnections.PR:Disconnect()) or Players.PlayerRemoving:Connect(function(Player)
+local function ESPClear()
+    local function Disconnect(Object)
+        for _, Connection in Object do
+            Connection:Disconnect()
+        end
+    end
+    Disconnect(ESPConnections.CA)
+    Disconnect(ESPConnections.CR)
+    Disconnect(ESPConnections.TC)
+    ESPLibrary:Clear()
+    ESPElements = {}
+end
+
+local function ESPRestart()
+    ESPClear()
+    Heartbeat:Wait()
+    for _, Player in pairs(Players:GetPlayers()) do
+        ESPHandlePlayer(Player)
+    end
+end
+
+ESPConnections.TA = (ESPConnections.TA and ESPConnections.TA:Disconnect()) or Teams.ChildAdded:Connect(ESPRestart)
+ESPConnections.TR = (ESPConnections.TR and ESPConnections.TR:Disconnect()) or Teams.ChildRemoved:Connect(ESPRestart)
+ESPConnections.TS = (ESPConnections.TS and ESPConnections.TS:Disconnect()) or Speaker:GetPropertyChangedSignal("TeamColor"):Connect(ESPRestart)
+
+ESPConnections.PA = Players.PlayerAdded:Connect(ESPHandlePlayer)
+ESPConnections.PR = Players.PlayerRemoving:Connect(function(Player)
+    ESPElements[Player] = ESPElements[Player] and ESPElements[Player]:Destroy()
     ESPConnections.CA[Player] = ESPConnections.CA[Player] and ESPConnections.CA[Player]:Disconnect()
     ESPConnections.TC[Player] = ESPConnections.TC[Player] and ESPConnections.TC[Player]:Disconnect()
+end)
+
+task.spawn(function()
+    while task.wait(3) and (getgenv().MFeeeLoaded or getgenv().MFeeeLoading) do
+        if not AllowESP then
+            ESPClear()
+        end
+    end
 end)
 
 --|| ESP Global Settings Groupbox ||--
@@ -3207,7 +2399,9 @@ ESPAllToggle = ESPGlobalSettingsGroupbox:AddToggle("ESPAllToggle", {
     Callback = function(Enabled)
         AllowESP = Enabled
         if Enabled then
-            ESPHandlePlayer()
+            for _, Player in pairs(Players:GetPlayers()) do
+                ESPHandlePlayer(Player)
+            end
         else
             ESPClear()
         end
@@ -3531,6 +2725,10 @@ EnableAimbotToggle = AimbotSettingsGroupbox:AddToggle("EnableAimbotToggle", {
     Text = GlobalText.EnableAimbotToggle,
     Default = false,
     Callback = function(Enabled)
+        if Enabled and EnableSilentAimToggle.Value then
+            EnableSilentAimToggle:SetValue(false)
+            Heartbeat:Wait()
+        end
         Aimbot.Settings.Enabled = Enabled
     end
 }):AddKeyPicker("AimbotKeybind",{
@@ -3560,7 +2758,7 @@ AimbotInfiniteLockDistanceToggle = AimbotSettingsGroupbox:AddToggle("AimbotInfin
 AimbotSettingsGroupbox:AddDivider()
 AimbotTeamCheckToggle = AimbotSettingsGroupbox:AddToggle("AimbotTeamCheckToggle", {
     Text = GlobalText.AimbotTeamCheckToggle,
-    Default = false,
+    Default = true,
     Callback = function(Enabled)
         Aimbot.Settings.TeamCheck = Enabled
     end
@@ -3575,11 +2773,8 @@ AimbotAliveCheckToggle = AimbotSettingsGroupbox:AddToggle("AimbotAliveCheckToggl
 AimbotWallCheckToggle = AimbotSettingsGroupbox:AddToggle("AimbotWallCheckToggle", {
     Text = GlobalText.AimbotWallCheckToggle,
     Default = false,
-    Disabled = true,
-    Tooltip = GlobalText.AimbotWallCheckTooltip,
-    DisabledTooltip = GlobalText.AimbotWallCheckTooltip,
     Callback = function(Enabled)
-        Aimbot.Settings.WallCheck = false
+        Aimbot.Settings.WallCheck = Enabled
     end
 })
 AimbotSettingsGroupbox:AddDivider()
@@ -3736,6 +2931,7 @@ EnableAimbotFOVToggle = AimbotFOVGroupbox:AddToggle("EnableAimbotFOVToggle", {
     Text = GlobalText.EnableAimbotFOVToggle,
     Default = false,
     Callback = function(Enabled)
+        AimbotInfiniteLockDistanceToggle:SetDisabled(Enabled)
         Aimbot.FOVSettings.Enabled = Enabled
     end
 })
@@ -3894,6 +3090,349 @@ AimbotFOVRainbowSpeedSlider = AimbotDeveloperSettingsGroupbox:AddSlider("AimbotF
     end
 })
 
+--|| Silent Aim General Groupbox ||--
+
+SilentAimGeneralGroupbox = Tabs.SilentAim:AddLeftGroupbox(GlobalText.SilentAimGeneralGroupbox)
+EnableSilentAimToggle = SilentAimGeneralGroupbox:AddToggle("EnableSilentAimToggle", {
+    Text = GlobalText.EnableSilentAimToggle,
+    Default = false,
+    Callback = function(Enabled)
+        if Enabled and EnableAimbotToggle.Value then
+            EnableAimbotToggle:SetValue(false)
+            Heartbeat:Wait()
+        end
+        SilentAim.Go(Enabled)
+    end
+})
+SilentAimWallCheckToggle = SilentAimGeneralGroupbox:AddToggle("SilentAimWallCheckToggle", {
+    Text = GlobalText.SilentAimWallCheckToggle,
+    Default = true,
+    Callback = function(Enabled)
+        SilentAim.WallCheck = Enabled
+    end
+})
+SilentAimTeamCheckToggle = SilentAimGeneralGroupbox:AddToggle("SilentAimTeamCheckToggle", {
+    Text = GlobalText.SilentAimTeamCheckToggle,
+    Default = true,
+    Disabled = true,
+    Callback = function()
+        NotifySound(GlobalText.SilentAimTeamCheck, 3)
+        print(GlobalText.SilentAimTeamCheck)
+    end
+})
+SilentAimForceFieldCheckToggle = SilentAimGeneralGroupbox:AddToggle("SilentAimForceFieldCheckToggle", {
+    Text = GlobalText.SilentAimForceFieldCheckToggle,
+    Default = true,
+    Disabled = true,
+    Callback = function()
+        NotifySound(GlobalText.SilentAimTeamCheck, 3)
+        print(GlobalText.SilentAimTeamCheck)
+    end
+})
+SilentAimAliveCheckToggle = SilentAimGeneralGroupbox:AddToggle("SilentAimAliveCheckToggle", {
+    Text = GlobalText.SilentAimAliveCheckToggle,
+    Default = true,
+    Disabled = true,
+    Callback = function(Enabled)
+        SilentAim.AliveCheck = Enabled
+    end
+})
+SilentAimGeneralGroupbox:AddDivider()
+SilentAimHitChanceSlider = SilentAimGeneralGroupbox:AddSlider("SilentAimHitChanceSlider", {
+    Text = GlobalText.SilentAimHitChanceSlider,
+    Default = 100,
+    Min = 0,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        SilentAim.HitChance = Number
+    end
+})
+SilentAimHeadShotChanceSlider = SilentAimGeneralGroupbox:AddSlider("SilentAimHeadShotChanceSlider", {
+    Text = GlobalText.SilentAimHeadShotChanceSlider,
+    Default = 100,
+    Min = 0,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        SilentAim.HeadshotChance = Number
+    end
+})
+SilentAimRangeSlider = SilentAimGeneralGroupbox:AddSlider("SilentAimRangeSlider", {
+    Text = GlobalText.SilentAimRangeSlider,
+    Default = 3000,
+    Min = 0,
+    Max = 10000,
+    Rounding = 0,
+    Suffix = " px",
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        SilentAim.Range = Number
+    end
+})
+SilentAimLockWhoDropdown = SilentAimGeneralGroupbox:AddDropdown("SilentAimLockWhoDropdown", {
+    Text = GlobalText.SilentAimLockWhoDropdown,
+    Values = {
+        GlobalText.Players,
+        GlobalText.NPCs
+    },
+    Default = GlobalText.Players,
+    Multi = true,
+    Callback = function(Who)
+        SilentAim.Players = table.find(Who, GlobalText.Players)
+        SilentAim.NPCs = table.find(Who, GlobalText.NPCs)
+    end
+})
+SilentAimLockMethodDropdown = SilentAimGeneralGroupbox:AddDropdown("SilentAimLockMethodDropdown", {
+    Text = GlobalText.SilentAimLockMethodDropdown,
+    Values = {
+        GlobalText.FindPartOnRay,
+        GlobalText.ViewportPointToRay,
+        GlobalText.Raycast,
+        GlobalText.Ray
+    },
+    DisabledValues = {
+        GlobalText.FindPartOnRay,
+        GlobalText.Raycast,
+        GlobalText.Ray
+    },
+    DisabledTooltip = GlobalText.SilentAimLockMethodDropdownDisabledTooltip,
+    Default = GlobalText.ViewportPointToRay,
+    Multi = false,
+})
+SilentAimGeneralGroupbox:AddDivider()
+SilentAimProjectileToggle = SilentAimGeneralGroupbox:AddToggle("SilentAimProjectileToggle", {
+    Text = GlobalText.SilentAimProjectileToggle,
+    Default = false,
+    Callback = function(Enabled)
+        SilentAim.Projectile.Enabled = Enabled
+    end
+})
+SilentAimProjectileSpeedSlider = SilentAimGeneralGroupbox:AddSlider("SilentAimProjectileSpeedSlider", {
+    Text = GlobalText.SilentAimProjectileSpeedSlider,
+    Default = 1000,
+    Min = 10,
+    Max = 3000,
+    Rounding = 0,
+    Suffix = "",
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        SilentAim.Projectile.Speed = Number
+    end
+})
+SilentAimProjectileGravitySlider = SilentAimGeneralGroupbox:AddSlider("SilentAimProjectileGravitySlider", {
+    Text = GlobalText.SilentAimProjectileGravitySlider,
+    Default = math.round(Workspace.Gravity * 10) / 10,
+    Min = 0,
+    Max = 1000,
+    Rounding = 0,
+    Suffix = "",
+    Compact = false,
+    HideMax = false,
+    Callback = function(Number)
+        SilentAim.Projectile.Gravity = Number
+    end
+})
+
+--|| Silent Aim FOV Groupbox ||--
+
+SilentAimFOVGroupbox = Tabs.SilentAim:AddRightGroupbox(GlobalText.SilentAimFOVGroupbox)
+EnableSilentAimFOVToggle = SilentAimFOVGroupbox:AddToggle("EnableSilentAimFOVToggle", {
+    Text = GlobalText.EnableSilentAimFOVToggle,
+    Default = false,
+    Callback = function(Enabled)
+        SilentAim.TheCircle.Enabled = Enabled
+    end
+})
+SilentAimFOVVisibleToggle = SilentAimFOVGroupbox:AddToggle("SilentAimFOVVisibleToggle", {
+    Text = GlobalText.SilentAimFOVVisibleToggle,
+    Default = true,
+    Callback = function(Enabled)
+        SilentAim.TheCircle.Visible = Enabled
+    end
+})
+SilentAimFOVOutlineVisibleToggle = SilentAimFOVGroupbox:AddToggle("SilentAimFOVOutlineVisibleToggle", {
+    Text = GlobalText.SilentAimFOVOutlineVisibleToggle,
+    Default = true,
+    Callback = function(Enabled)
+        SilentAim.TheCircle.OutlineVisible = Enabled
+    end
+})
+SilentAimFOVFilledToggle = SilentAimFOVGroupbox:AddToggle("SilentAimFOVFilledToggle", {
+    Text = GlobalText.SilentAimFOVFilledToggle,
+    Default = false,
+    Callback = function(Enabled)
+        SilentAim.TheCircle.Filled = Enabled
+    end
+})
+SilentAimFOVFromMouseToggle = SilentAimFOVGroupbox:AddToggle("SilentAimFOVFromMouseToggle", {
+    Text = GlobalText.SilentAimFOVFromMouseToggle,
+    Default = true,
+    Callback = function(Enabled)
+        SilentAim.TheCircle.FromMouse = Enabled
+    end
+})
+SilentAimFOVGroupbox:AddDivider()
+SilentAimFOVColorLabel = SilentAimFOVGroupbox:AddLabel(GlobalText.SilentAimFOVColorLabel):AddColorPicker("SilentAimFOVColorPicker", {
+    Title = GlobalText.SilentAimFOVColorPicker,
+    Default = Color3.fromRGB(255, 255, 255),
+    Callback = function(Color)
+        SilentAim.TheCircle.Color = Color
+    end
+})
+SilentAimFOVOutlineColorLabel = SilentAimFOVGroupbox:AddLabel(GlobalText.SilentAimFOVOutlineColorLabel):AddColorPicker("SilentAimFOVOutlineColorPicker", {
+    Title = GlobalText.SilentAimFOVOutlineColorPicker,
+    Default = Color3.fromRGB(0, 0, 0),
+    Callback = function(Color)
+        SilentAim.TheCircle.OutlineColor = Color
+    end
+})
+SilentAimRainbowColorToggle = SilentAimFOVGroupbox:AddToggle("SilentAimRainbowColorToggle", {
+    Text = GlobalText.SilentAimRainbowColorToggle,
+    Default = false,
+    Callback = function(Enabled)
+        SilentAim.TheCircle.Rainbow = Enabled
+    end
+})
+SilentAimRainbowOutlineColorToggle = SilentAimFOVGroupbox:AddToggle("SilentAimRainbowOutlineColorToggle", {
+    Text = GlobalText.SilentAimRainbowOutlineColorToggle,
+    Default = false,
+    Callback = function(Enabled)
+        SilentAim.TheCircle.RainbowOutline = Enabled
+    end
+})
+SilentAimFOVGroupbox:AddDivider()
+SilentAimFOVRadiusSlider = SilentAimFOVGroupbox:AddSlider("SilentAimFOVRadiusSlider", {
+    Text = GlobalText.SilentAimFOVRadiusSlider,
+    Default = 150,
+    Min = 0,
+    Max = 720,
+    Rounding = 0,
+    Suffix = " px",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        SilentAim.TheCircle.Radius = Number
+    end
+})
+SilentAimFOVNumSidesSlider = SilentAimFOVGroupbox:AddSlider("SilentAimFOVNumSidesSlider", {
+    Text = GlobalText.SilentAimFOVNumSidesSlider,
+    Default = 60,
+    Min = 3,
+    Max = 120,
+    Rounding = 0,
+    Suffix = "",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        SilentAim.TheCircle.NumSides = Number
+    end
+})
+SilentAimFOVThicknessSlider = SilentAimFOVGroupbox:AddSlider("SilentAimFOVThicknessSlider", {
+    Text = GlobalText.SilentAimFOVThicknessSlider,
+    Default = 2,
+    Min = 1,
+    Max = 10,
+    Rounding = 0,
+    Suffix = " px",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        SilentAim.TheCircle.Thickness = Number
+    end
+})
+SilentAimFOVTransparencySlider = SilentAimFOVGroupbox:AddSlider("SilentAimFOVTransparencySlider", {
+    Text = GlobalText.SilentAimFOVTransparencySlider,
+    Default = 35,
+    Min = 0,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        SilentAim.TheCircle.Transparency = Number / 100
+    end
+})
+SilentAimFOVGroupbox:AddDivider()
+SilentAimFOVOutlineThicknessSlider = SilentAimFOVGroupbox:AddSlider("SilentAimFOVOutlineThicknessSlider", {
+    Text = GlobalText.SilentAimFOVOutlineThicknessSlider,
+    Default = 2,
+    Min = 1,
+    Max = 10,
+    Rounding = 0,
+    Suffix = " px",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        SilentAim.TheCircle.OutlineThickness = Number
+    end
+})
+SilentAimFOVOutlineTransparencySlider = SilentAimFOVGroupbox:AddSlider("SilentAimFOVOutlineTransparencySlider", {
+    Text = GlobalText.SilentAimFOVOutlineTransparencySlider,
+    Default = 0,
+    Min = 0,
+    Max = 100,
+    Rounding = 0,
+    Suffix = " %",
+    Compact = true,
+    HideMax = true,
+    Callback = function(Number)
+        SilentAim.TheCircle.OutlineTransparency = Number / 100
+    end
+})
+
+--|| Silent Aim Advanced Groupbox ||--
+
+SilentAimAdvancedGroupbox = Tabs.SilentAim:AddRightGroupbox(GlobalText.SilentAimAdvancedGroupbox)
+IgnoredScriptsToggle = SilentAimAdvancedGroupbox:AddToggle("IgnoredScriptsToggle", {
+    Text = GlobalText.IgnoredScriptsToggle,
+    Default = false,
+    Callback = function(Enabled)
+        SilentAim.IgnoredScriptsEnabled = Enabled
+    end
+})
+IgnoredScriptsInput = SilentAimAdvancedGroupbox:AddInput("IgnoredScriptsInput", {
+    Text = GlobalText.IgnoredScriptsInput,
+    Default = "",
+    Numeric = false,
+    Finished = true,
+    ClearTextOnFocus = false,
+    Placeholder = GlobalText.IgnoredScriptsInputPlaceholder,
+    Callback = function(Text)
+        table.insert(SilentAim.IgnoredScripts, Text)
+        IgnoredScriptsListDropdown:AddValues(Text)
+    end
+})
+local SelectedIgnoredScript = ""
+IgnoredScriptsListDropdown = SilentAimAdvancedGroupbox:AddDropdown("IgnoredScriptsListDropdown", {
+    Text = GlobalText.IgnoredScriptsListDropdown,
+    Values = SilentAim.IgnoredScripts,
+    Default = "",
+    Multi = false,
+    Callback = function(Script)
+        SelectedIgnoredScript = Script
+    end
+})
+CleanIgnoredScriptsButton = SilentAimAdvancedGroupbox:AddButton("CleanIgnoredScriptsButton", {
+    Text = GlobalText.CleanIgnoredScriptsButton,
+    Callback = function()
+        local Script = table.find(SilentAim.IgnoredScripts, SelectedIgnoredScript)
+        if Script then
+            table.remove(SilentAim.IgnoredScripts, Script)
+        end
+        IgnoredScriptsListDropdown:SetValues(SilentAim.IgnoredScripts)
+    end
+})
+
 --|| A Lil Troll Groupbox ||--
 
 ALilTrollGroupbox = Tabs.Troll:AddLeftGroupbox(GlobalText.ALilTrollGroupbox)
@@ -4023,14 +3562,14 @@ SpamToggle = ALilTrollGroupbox:AddToggle("SpamToggle", {
         task.spawn(function()
             while Spamming and SpamText do
                 local Start = tick()
-                wait(SpamSpeed)
+                task.wait(SpamSpeed)
                 local End = tick()
                 local ActWait = End - Start
                 local Deviation = ActWait - SpamSpeed
                 if math.abs(Deviation) > 0.1 then
                     local WaitMore = -Deviation
                     if WaitMore > 0 then
-                        wait(WaitMore)
+                        task.wait(WaitMore)
                     end
                 end
                 if Spamming and SpamText then
@@ -4166,19 +3705,20 @@ ForceCheckboxToggle = MenuGroup:AddToggle("ForceCheckboxToggle", {
     Default = false,
     Callback = function(Enabled)
         Library.ForceCheckbox = Enabled
+        NotifySound(GlobalText.PLSRestart, 5)
     end
 })
-NotifySideToggle = MenuGroup:AddToggle("NotifySideToggle", {
+NotifySideDropdown = MenuGroup:AddDropdown("NotifySideDropdown", {
     Text = GlobalText.NotifySideToggle,
-    Default = false,
-    Callback = function(Enabled)
-        if Enabled then
-            Library.NotifySide = "Left"
-            NotifySound(GlobalText.NotifyLeft, 3)
-        else
-            Library.NotifySide = "Right"
-            NotifySound(GlobalText.NotifyRight, 3)
-        end
+    Values = {
+        GlobalText.Left,
+        GlobalText.Right
+    },
+    Default = GlobalText.Right,
+    Multi = false,
+    Callback = function(Side)
+        Library.NotifySide = Side == GlobalText.Left and "Left" or "Right"
+        NotifySound(Side == GlobalText.Left and GlobalText.NotifyLeft or GlobalText.NotifyRight, 3)
     end
 })
 NotifySoundDropdown = MenuGroup:AddDropdown("NotifySoundDropdown", {
@@ -4251,6 +3791,7 @@ UnloadButton = MenuGroup:AddButton({
     DoubleClick = true,
     Func = function()
         Aimbot:Exit()
+        SilentAim:Exit()
         Universals:Exit()
         ESPLibrary:Destroy()
         Library:Unload()
@@ -4264,7 +3805,6 @@ UnloadButton = MenuGroup:AddButton({
             end
         end
         Disconnect(ESPConnections)
-        Disconnect(PlayerConnections)
         Disconnect(MFCons)
         getgenv().MFeeeLoaded = false
         getgenv().MFeeeLoading = false
@@ -4297,29 +3837,31 @@ AndYouLabel = SpecialThanksGroupbox:AddLabel(GlobalText.AndYouLabel)
 
 AboutGameGroupbox = Tabs.About:AddRightGroupbox(GlobalText.AboutGameGroupbox)
 YouPlayedLabel = AboutGameGroupbox:AddLabel(GlobalText.YouPlayedLabel .. math.round(Workspace.DistributedGameTime * 10) / 10 .. GlobalText.YouPlayedLabel2)
-MFCons.YP = (MFCons.YP and MFCons.YP:Disconnect()) or RunService.Stepped:Connect(function()
-    local Time = math.round(Workspace.DistributedGameTime * 10) / 10
-    local Suffix = GlobalText.YouPlayedLabel2
-    if Time > 31536000 then
-        Time = math.round(Time / 31536000 * 1e7) / 1e7
-        Suffix = GlobalText.YouPlayedLabel8
-    elseif Time > 2592000 then
-        Time = math.round(Time / 2592000 * 1e6) / 1e6
-        Suffix = GlobalText.YouPlayedLabel7
-    elseif Time > 604800 then
-        Time = math.round(Time / 604800 * 1e5) / 1e5
-        Suffix = GlobalText.YouPlayedLabel6
-    elseif Time > 86400 then
-        Time = math.round(Time / 86400 * 1e4) / 1e4
-        Suffix = GlobalText.YouPlayedLabel5
-    elseif Time > 3600 then
-        Time = math.round(Time / 3600 * 1e3) / 1e3
-        Suffix = GlobalText.YouPlayedLabel4
-    elseif Time > 60 then
-        Time = math.round(Time / 60 * 1e2) / 1e2
-        Suffix = GlobalText.YouPlayedLabel3
+task.spawn(function()
+    while (getgenv().MFeeeLoaded or getgenv().MFeeeLoading) and task.wait(.05) do
+        local Time = math.round(Workspace.DistributedGameTime * 10) / 10
+        local Suffix = GlobalText.YouPlayedLabel2
+        if Time > 31536000 then
+            Time = math.round(Time / 31536000 * 1e7) / 1e7
+            Suffix = GlobalText.YouPlayedLabel8
+        elseif Time > 2592000 then
+            Time = math.round(Time / 2592000 * 1e6) / 1e6
+            Suffix = GlobalText.YouPlayedLabel7
+        elseif Time > 604800 then
+            Time = math.round(Time / 604800 * 1e5) / 1e5
+            Suffix = GlobalText.YouPlayedLabel6
+        elseif Time > 86400 then
+            Time = math.round(Time / 86400 * 1e4) / 1e4
+            Suffix = GlobalText.YouPlayedLabel5
+        elseif Time > 3600 then
+            Time = math.round(Time / 3600 * 1e3) / 1e3
+            Suffix = GlobalText.YouPlayedLabel4
+        elseif Time > 60 then
+            Time = math.round(Time / 60 * 1e2) / 1e2
+            Suffix = GlobalText.YouPlayedLabel3
+        end
+        YouPlayedLabel:SetText(GlobalText.YouPlayedLabel .. Time .. Suffix)
     end
-    YouPlayedLabel:SetText(GlobalText.YouPlayedLabel .. Time .. Suffix)
 end)
 GameNameLabel = AboutGameGroupbox:AddLabel(GlobalText.GameName .. (ThisGamesName or GlobalText.GameNaming))
 GamePlaceIdButton = AboutGameGroupbox:AddButton({
@@ -4378,17 +3920,20 @@ ThemeManager:ApplyToTab(Tabs.UI)
 
 --|| End Loading ||--
 
-if not game:IsLoaded() then
-    print(GlobalText.GameNotLoaded)
-    NotifySound(GlobalText.GameNotLoaded, 5)
-end
-
-if LeastVersion ~= CurrentVersion then
-    print(GlobalText.NewVersion)
-    NotifySound(GlobalText.NewVersion, 5)
-end
+task.spawn(function()
+    if not LatestVersion then
+        repeat
+            task.wait()
+        until LatestVersion
+    end
+    if LatestVersion ~= CurrentVersion then
+        print(GlobalText.NewVersion)
+        NotifySound(GlobalText.NewVersion, 5)
+    end
+end)
 
 Options.FontFace:SetValue("Gotham")
+local Camera = Workspace.CurrentCamera
 if Camera.ViewportSize.X >= 3840 and Camera.ViewportSize.Y >= 2089 then
     Options.DPIScaleDropdown:SetValue("150%")
 elseif Camera.ViewportSize.X >= 2560 and Camera.ViewportSize.Y >= 1369 then

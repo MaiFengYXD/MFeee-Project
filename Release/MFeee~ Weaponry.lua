@@ -2233,9 +2233,9 @@ local function ESPRestart()
     end
 end
 
-ESPConnections.TA = (ESPConnections.TA and ESPConnections.TA:Disconnect()) or Teams.ChildAdded:Connect(ESPRestart)
-ESPConnections.TR = (ESPConnections.TR and ESPConnections.TR:Disconnect()) or Teams.ChildRemoved:Connect(ESPRestart)
-ESPConnections.TS = (ESPConnections.TS and ESPConnections.TS:Disconnect()) or Speaker:GetPropertyChangedSignal("TeamColor"):Connect(ESPRestart)
+ESPConnections.TA = Teams.ChildAdded:Connect(ESPRestart)
+ESPConnections.TR = Teams.ChildRemoved:Connect(ESPRestart)
+ESPConnections.TS = Speaker:GetPropertyChangedSignal("TeamColor"):Connect(ESPRestart)
 
 ESPConnections.PA = Players.PlayerAdded:Connect(ESPHandlePlayer)
 ESPConnections.PR = Players.PlayerRemoving:Connect(function(Player)
@@ -3351,7 +3351,7 @@ do
     end
 end
 
-CombatConnections.PR = (CombatConnections.PR and CombatConnections.PR:Disconnect()) or Players.PlayerRemoving:Connect(function(Player)
+CombatConnections.PR = Players.PlayerRemoving:Connect(function(Player)
     local Folder = Workspace.Hitboxes:FindFirstChild(tostring(Player.UserId))
     if Folder then
         Folder:Destroy()

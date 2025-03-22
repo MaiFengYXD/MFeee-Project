@@ -9,8 +9,8 @@ $$ |\$  /$$ |$$ |      $$   ____|$$   ____|$$   ____|
 $$ | \_/ $$ |$$ |      \$$$$$$$\ \$$$$$$$\ \$$$$$$$\ 
 \__|     \__|\__|       \_______| \_______| \_______| 
 
-Createor | MaiFengYXD
-License  | CC0-1.0
+Createor |  MaiFengYXD or MikeFeng
+License  |     CC0-1.0
 Version  | Alpha 0.3.8
 
 # Project Started on 2024-11-13 #
